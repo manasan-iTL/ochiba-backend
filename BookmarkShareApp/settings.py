@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'articles.apps.AriticlesConfig',
+    'articles.apps.ArticlesConfig',
     'accounts.apps.AccountsConfig',
 ]
 
@@ -107,7 +107,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'ja'
 
-TIME_ZONE = 'Aisa/Tokyo'
+TIME_ZONE = 'Asia/Tokyo'
 
 USE_I18N = True
 
