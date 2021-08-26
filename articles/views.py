@@ -1,3 +1,4 @@
+  
 from django.shortcuts import render
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -27,4 +28,3 @@ class ProfileEditView(LoginRequiredMixin, generic.UpdateView):
 
 class ProfileDetailView(LoginRequiredMixin, generic.DetailView):
     template_name = 'users/detail.html'
-
