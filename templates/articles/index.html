@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block main %}
+
+{% for post in post_list %}
+<p>{{ post.title }}</p>
+<p>{{ post.discription }}</p>
+    {% for object in post.object_set.all %}
+    <p>{{ object.title }}</p>
+    <a href="{{ object.url }}"><p>{{ object.url }}</p></a>
+    <p>{{ object.discription }}</p>
+    {% endfor %}
+{% endfor %}
+
+{% endblock %}
