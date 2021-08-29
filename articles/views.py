@@ -1,3 +1,4 @@
+
   
 from django.shortcuts import render
 from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView
@@ -32,3 +33,4 @@ class ProfileEditView(LoginRequiredMixin, UpdateView):
 
 class ProfileDetailView(LoginRequiredMixin, DetailView):
     template_name = 'users/detail.html'
+
