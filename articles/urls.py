@@ -4,6 +4,7 @@ from articles import views
 
 #app_name = 'diary'
 
+
 urlpatterns = [
     path('', views.IndexView.as_view(), name="index"),
     path('article-detail/<int:pk>/', views.ArticleDetailView.as_view(), name="article_detail"),

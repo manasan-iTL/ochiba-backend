@@ -1,3 +1,4 @@
+
   
 from django.db import models
 from django.db.models.query import QuerySet
@@ -253,3 +254,4 @@ class ProfileEditView(LoginRequiredMixin, UpdateView):
 
 class ProfileDetailView(LoginRequiredMixin, DetailView):
     template_name = 'users/detail.html'
+
