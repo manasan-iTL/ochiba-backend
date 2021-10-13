@@ -18,8 +18,8 @@ class Post(models.Model):
 class Object(models.Model):
     url = models.URLField()
     title = models.CharField("タイトル", max_length=100, blank=False, null=False)
-    discription = models.TextField("概要", blank=True, null=False)
+    discription = models.TextField("概要", blank=True, null=True)
     post_data = models.ForeignKey(Post, null=True, on_delete=models.SET_NULL)
 
     def __str__(self):
-        return self.title 
+        return self.title
