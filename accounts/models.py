@@ -8,6 +8,7 @@ from django.urls import reverse
 
 
 class UserManager(UserManager):
+    
     # use_in_migrations = True/
     def _create_user(self, username, email, password, **extra_fields):
         if not username:
@@ -69,7 +70,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
             'Unselect this instead of deleting accounts.'
         ),
     )
-    # date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
+    date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
 
     objects = UserManager()
 
