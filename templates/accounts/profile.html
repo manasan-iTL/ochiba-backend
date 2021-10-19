@@ -1,0 +1,32 @@
+{% extends "./accountbase.html" %}
+{% block content %}
+
+{% if user_data.is_authenticated %}
+<table class="table">
+    <tbody>
+        <tr>
+            <th>ユーザー名</th>
+            <td>{{ user_data.get_username }}</td>
+        </tr>
+        <tr>
+            <th>メール</th>
+            <td>{{ user.email }}</td>
+        </tr>
+        <tr>
+            <th>姓</th>
+            <td>{{ user_data.last_name }}</td>
+        </tr>
+        <tr>
+            <th>名</th>
+            <td>{{ user_data.first_name }}</td>
+        </tr>
+    </tbody>
+</table>
+<a href="{% url 'accounts:profile_edit' %}">プロフィール編集</a>
+{% else %}
+<h2>他のユーザーのアカウントです。</h2>
+<h2>{{ user_data.get_username }}</h2>
+
+{% endif %}
+{% endblock %}
+

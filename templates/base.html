@@ -25,12 +25,16 @@
             </form>
             <ul class="nav-list">
                 {% if user.is_authenticated %}
+                ログオンユーザ名： {{ user.get_username }} さん<br>
+                メールアドレス： {{ user.email }}<br>
+                セッション開始時刻: {{ user.last_login }}
                 <li><a href="{% url 'create_post' %}">記事新規作成</a></li>
                 <li><a href="{% url 'create_object' %}">オブジェクト新規作成</a></li>
-                <li>マイページ</li>
+                <li><a href="{% url 'accounts:profile' %}">プロフィール</a></li>
+                <li><a href="{% url 'account_logout' %}">ログアウト</a></li>
                 {% else %}
-                <li>ログイン</li>
-                <li>新規登録</li>
+                <li><a href="{% url 'account_login' %}">ログイン</a></li>
+                <li><a href="{% url 'account_signup' %}">新規登録</a></li>
                 {% endif %}
             </ul>
         </nav>
