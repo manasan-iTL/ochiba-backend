@@ -1,6 +1,5 @@
 
   
-from django.contrib.auth.models import User
 from django.db import models
 from django.db.models.query import QuerySet
 from django.forms import formsets
@@ -9,15 +8,9 @@ from django.views.generic import View, TemplateView, ListView, DetailView, Creat
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.decorators import method_decorator
 from django.views.decorators.http import require_POST
-
-from accounts.models import CustomUser
 from .models import Post, Object
-from .forms import PostForm, ObjectForm, ObjectCreateForm, SamplePostForm, ObjectCreateModel, ProfileEditForm
+from .forms import PostForm, ObjectForm, ObjectCreateForm, SamplePostForm, ObjectCreateModel
 # Create your views here.
-
-from django.shortcuts import get_object_or_404
-from accounts.helpers import get_current_user
-
 
 #トップ画面用view
 class IndexView(ListView):
@@ -29,7 +22,7 @@ class IndexView(ListView):
 
 
 #詳細画面用のView
-class ArticleDetailView(LoginRequiredMixin, DetailView):
+class ArticleDetailView(DetailView):
     model = Post
     template_name = "articles/detail.html"
 
@@ -41,7 +34,7 @@ PostやObjectを同時に新規作成・編集するクラス
 """
 PostとObjectを新規作成するクラス
 """
-class SampleCreateObjectView(View):
+class SampleCreateObjectView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
         form = PostForm(request.POST or None)
         formset = ObjectCreateForm()
@@ -133,7 +126,7 @@ class SampleUpdateObjectView(LoginRequiredMixin, View):
 """
 
 #Post単体を新規作成するクラス
-class CreatePostView(View):
+class CreatePostView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
         form = PostForm(request.POST or None)
         return render(request, "articles/create_post.html", {
@@ -153,14 +146,14 @@ class CreatePostView(View):
             return redirect('/')
 
 #Object単体を新規作成するクラス
-class CreateObjectView(CreateView):
+class CreateObjectView(LoginRequiredMixin, CreateView):
     model = Object
     form_class = ObjectForm
     template_name = "articles/create_object.html"
     success_url = "/"
 
 #Modelformsetによる実装　今回はinlineformsetでの実装を採用しているがこの方法でもおそらくできる
-class CreateObjectPostView(View):
+class CreateObjectPostView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
         form = PostForm(request.POST or None)
         formset = ObjectCreateModel(request.POST or None, queryset=Object.objects.none())
@@ -255,50 +248,4 @@ class ArticleDeleteView(View, LoginRequiredMixin):
         post_data.delete()
         return redirect('index')
 
-class ProfileEditView(LoginRequiredMixin, UpdateView):
-    template_name = 'accounts/edit.html'
 
-
-# class ProfileDetailView(View):
-#     def get(self, request, *args, **kwargs):
-#         user_data = CustomUser.objects.get(id=request.user.id)
-#         return render(request, 'accounts/profile.html', {
-#             'user' : user_data,
-#             # 'username' : request.user.name,
-#         })
-
-
-# class UserDetail(DetailView):
-#     model = CustomUser
-#     slug_field = "username"
-#     slug_url_kwarg = "username"
-#     template_name = 'accounts/profile.html'
-
-#     def get_object(self):
-#         object = get_object_or_404(CustomUser, username=self.kwargs.get("username"))
-#         if self.request.user.username == object.username:
-#             return object
-#         else:
-#             print("you are not the owner!!")
-
-# class ProfileDetailView(LoginRequiredMixin, DetailView):
-#     model = CustomUser
-#     template_name = 'accounts/profile.html'
-
-#     slug_field = 'username'
-#     slug_url_kwarg = 'username'
-
-#     def get_context_data(self, **kwargs):
-#         context = super(ProfileDetailView, self).get_context_data(**kwargs)
-#         username = self.kwargs['username']
-#         context['username'] = username
-#         context['user'] = get_current_user(self.request)
-
-#         return context
-
-# class ProfileUpdateView(LoginRequiredMixin, UpdateView):
-#     model = CustomUser
-#     form_class = ProfileEditForm
-#     template_name = 'accounts/edit.html'
-#     slug_field = 'username'
-#     slug_url_kwarg = 'username'

@@ -51,10 +51,13 @@ from PIL import Image
     #         raise ValidationError("このメールアドレスは既に使用されています")
 
 class ProfileEditForm(forms.Form):
+    username = forms.CharField(max_length=30, label='ユーザー名')
     first_name = forms.CharField(max_length=30, label='姓')
     last_name = forms.CharField(max_length=30, label='名')
     description = forms.CharField(label='自己紹介', widget=forms.Textarea(), required=False)
     image = forms.ImageField(required=False)
+    password = forms.CharField(max_length=30, label='パスワード')
+
 
 class SignupForm(SignupForm):
   first_name = forms.CharField(max_length=30, label='姓')

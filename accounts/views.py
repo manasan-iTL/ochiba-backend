@@ -46,10 +46,12 @@ class ProfileEditView(LoginRequiredMixin, View):
         form = ProfileEditForm(
             request.POST or None,
             initial={
+                'username': user_data.username,
                 'first_name': user_data.first_name,
                 'last_name': user_data.last_name,
                 'description': user_data.description,
-                'image': user_data.image
+                'image': user_data.image,
+                'password': user_data.password
             }
         )
 
