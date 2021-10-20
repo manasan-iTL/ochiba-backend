@@ -4,6 +4,8 @@ from allauth.account.forms import SignupForm
 from django.forms.fields import CharField
 from django.http import request
 from .models import CustomUser
+from PIL import Image
+
 
 # class CustomUserCreationForm(UserCreationForm):
 #   class Meta(UserCreationForm):
@@ -51,8 +53,8 @@ from .models import CustomUser
 class ProfileEditForm(forms.Form):
     first_name = forms.CharField(max_length=30, label='姓')
     last_name = forms.CharField(max_length=30, label='名')
-    # description = forms.CharField(label='自己紹介', widget=forms.Textarea(), required=False)
-    # image = forms.ImageField(required=False, )
+    description = forms.CharField(label='自己紹介', widget=forms.Textarea(), required=False)
+    image = forms.ImageField(required=False)
 
 class SignupForm(SignupForm):
   first_name = forms.CharField(max_length=30, label='姓')
