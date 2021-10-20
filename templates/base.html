@@ -17,9 +17,9 @@
             <img class="logo" src="" alt="ロゴ画像">
         </div>
         <nav class="local-nav">
-            <form action="" class="layout-form search-form">
+            <form method="GET" action="{% url 'search' %}" class="layout-form search-form">
                 <div>
-                    <input type="search">
+                    <input type="text" name="keyword" placeholder="検索">
                 </div>
                 <button type="submit">検索</button>
             </form>
