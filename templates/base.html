@@ -13,7 +13,7 @@
 </head>
 <body>
 
-    <header id="header">
+    <!-- <header id="header">
         <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
             <a href="{% url 'index' %}" class="navbar-brand">BookmarkShareApp</a>
             <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -35,7 +35,32 @@
                     <li class="nav-item">新規登録</li>
                     {% endif %}
                 </ul>
-            </div>
+            </div> -->
+    <header id="header" class="layout_header"> 
+        <div class="image">
+            <img class="logo" src="" alt="ロゴ画像">
+        </div>
+        <nav class="local-nav">
+            <form action="" class="layout-form search-form">
+                <div>
+                    <input type="search">
+                </div>
+                <button type="submit">検索</button>
+            </form>
+            <ul class="nav-list">
+                {% if user.is_authenticated %}
+                ログオンユーザ名： {{ user.username }} さん<br>
+                メールアドレス： {{ user.email }}<br>
+                セッション開始時刻: {{ user.last_login }}
+                <li><a href="{% url 'create_post' %}">記事新規作成</a></li>
+                <li><a href="{% url 'create_object' %}">オブジェクト新規作成</a></li>
+                <li><a href="{% url 'accounts:profile' user.username %}">プロフィール</a></li>
+                <li><a href="{% url 'account_logout' %}">ログアウト</a></li>
+                {% else %}
+                <li><a href="{% url 'account_login' %}">ログイン</a></li>
+                <li><a href="{% url 'account_signup' %}">新規登録</a></li>
+                {% endif %}
+            </ul>
         </nav>
     </header>
 

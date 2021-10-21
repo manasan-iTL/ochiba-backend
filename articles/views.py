@@ -14,11 +14,9 @@ from functools import reduce
 from operator import and_
 # Create your views here.
 
-
 '''
 トップ画面用view
 '''
-
 class IndexView(ListView):
     
     model = Post
@@ -161,7 +159,7 @@ class SearchView(View):
 """
 
 #Post単体を新規作成するクラス
-class CreatePostView(View):
+class CreatePostView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
         form = PostForm(request.POST or None)
         return render(request, "articles/create_post.html", {
@@ -181,14 +179,14 @@ class CreatePostView(View):
             return redirect('/')
 
 #Object単体を新規作成するクラス
-class CreateObjectView(CreateView):
+class CreateObjectView(LoginRequiredMixin, CreateView):
     model = Object
     form_class = ObjectForm
     template_name = "articles/create_object.html"
     success_url = "/"
 
 #Modelformsetによる実装　今回はinlineformsetでの実装を採用しているがこの方法でもおそらくできる
-class CreateObjectPostView(View):
+class CreateObjectPostView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
         form = PostForm(request.POST or None)
         formset = ObjectCreateModel(request.POST or None, queryset=Object.objects.none())
@@ -283,9 +281,4 @@ class ArticleDeleteView(View, LoginRequiredMixin):
         post_data.delete()
         return redirect('index')
 
-class ProfileEditView(LoginRequiredMixin, UpdateView):
-    template_name = 'users/edit.html'
-
-class ProfileDetailView(LoginRequiredMixin, DetailView):
-    template_name = 'users/detail.html'
 

@@ -8,6 +8,7 @@ from articles import views
 urlpatterns = [
     path('', views.IndexView.as_view(), name="index"),
     path('article-detail/<int:pk>/', views.ArticleDetailView.as_view(), name="article_detail"),
+    # path('<slug:slug>/article-detail/<int:pk>/', views.ArticleDetailView.as_view(), name="article_detail"),
     path('create-post/', views.CreatePostView.as_view(), name="create_post"),
     path('create-object/', views.CreateObjectView.as_view(), name="create_object"),
     path('test/', views.SampleCreateObjectView.as_view(), name="test"),
@@ -16,4 +17,6 @@ urlpatterns = [
     path('search', views.SearchView.as_view(), name="search"),
     path('article-post/<int:pk>/update', views.ArticleUpdateView.as_view(), name="article_update"),
     path('sample/', views.CreateObjectPostView.as_view(), name="test2"),
+    
+
 ]
