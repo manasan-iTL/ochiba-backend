@@ -1,15 +1,81 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/style_index.css' %}">
+{% endblock %}
+
 
 {% block main %}
 
-{% for post in post_list %}
-<p>{{ post.title }}</p>
-<p>{{ post.discription }}</p>
-    {% for object in post.object_set.all %}
-    <p>{{ object.title }}</p>
-    <a href="{{ object.url }}"><p>{{ object.url }}</p></a>
-    <p>{{ object.discription }}</p>
-    {% endfor %}
-{% endfor %}
 
+<div class="layout-index">
+    {% for post in post_list %}
+    <div class="card">
+        <div class="card-post">
+            <p>{{ post.title }}</p>
+            <p id='overflag{{ post.id }}'>{{ post.discription|truncatechars:20 }}</p>
+            <p>{{ post.created_at }}</p>
+        </div>
+        <hr>
+        <div class="card-object">
+            <p><a href="{{ post.object_set.first.url }}">{{ post.object_set.first.title }}</a></p>
+            <hr>
+        </div>
+        <div class="card-footer">
+            <a id='detail{{post.id}}' href="{% url 'article_detail' post.id %}" class="detail">詳細</a>
+            <!--<a href="{% url 'article_update' post.id %}">編集</a>-->
+            <a href="{% url 'object_update' post.id %}">編集</a>
+        </div> 
+    </div>
+    {% endfor %}
+
+    <!-- ここはページネーションの部分だが今はコメントアウトしている 
+        <nav>
+        <ul>
+             前へ
+            {% if page_obj.has_previous %}
+            <li><a href="?page={{ page_obj.previous_page_number }}">前へ</a></li>
+            {% endif %}
+ 
+            {% for i in page_obj.paginator.page_range %}
+            {% if page_obj.number == i %}
+            <li>{{ i }}</li>
+            {% else %}
+            <li><a href="?page={{ i }}">{{ i }}</a></li>
+            {% endif %}
+            {% endfor %}
+ 
+            - 次へ
+            {% if page_obj.has_next %}
+            <li><a href="?page={{ page_obj.next_page_number }}">次へ</a></li>
+            {% endif %}
+        </ul>
+    </nav> -->
+
+</div>
+    
 {% endblock %}
+
+{% block add_js %}
+<script>
+    $(function(){
+        let countwords; //文字数カウントを保存
+        let lastnumber; //overflagの最後の数字（id）を取得
+        let tolink;     //詳細画面へのリンクを取得
+
+        /*１，pタグのid="overflag〇"に該当する要素を全部取得し、ひとつずつ取り出す
+        　２，文字数カウント、idの取得、リンクの取得を行う
+        　３，文字数が19を超えていたら該当の要素の最後にリンクを追加*/
+        
+        $('p[id^=overflag]').each(function(){
+            countwords = $(this).text().length;
+            lastnumber = $(this).attr("id").slice(-1);
+            tolink = $('a'+'#'+ 'detail' + lastnumber).attr("href");
+            if (countwords >= 19){
+                $(this).append('<a href="' + tolink + '">続きを読む</a>')
+            } 
+        });
+    });
+</script>
+{% endblock %} 

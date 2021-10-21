@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block main %}
+    <div class="article-area">
+        <div class="article-header">
+            <h2>{{ post.title }}</h2>
+            <p>{{ post.discription }}</p>
+        </div>
+        <div class="article-body">
+            <ul class="object-items">
+                {% for object in post.object_set.all %}
+                    <li>
+                        <p>{{ object.title }}</p>
+                        <p><a href="{{ object.url }}">{{ object.url }}</a></p>
+                        <p>{{ object.discription }}</p>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <form action="{% url 'article_delete' post.id %}" method="post">
+            <button type="submit">削除する</button>
+            {% csrf_token %}
+        </form>
+    </div>
+{% endblock %}

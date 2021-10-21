@@ -1,0 +1,133 @@
+{% extends 'base.html' %}
+
+{% block main %}
+    <div>
+        <form action="" method="post">
+            <h2>記事</h2>
+            {{ form.as_p }}
+            <button type="submit" name="postdelete">削除</button>
+        
+            <h2>添付ファイル</h2>
+            {{ formset.management_form }}
+            <div id="object-form">
+                {% for file_form in formset %}
+                <div class="form-wrapper">
+                    {{ file_form.as_p }}
+                    <button type="button">削除する</button>
+                </div>
+                {% endfor %}
+            </div>
+              
+        
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary" name="save">保存</button>
+            <button id="add" type="button">オブジェクト追加</button> 
+        </form>
+    </div>
+{% endblock %}
+
+{% block add_js %}
+    <script>
+        $(function(){
+            let totalManagementElement = $('input#id_object_set-TOTAL_FORMS');
+            let currentObjectCount = parseInt(totalManagementElement.val()); 
+            const initialElement = $('input#id_object_set-INITIAL_FORMS');
+            const initialValue = parseInt(initialElement.val());
+            let invisibleCheckbox = [];
+
+            /*デフォルトの削除のチェックボックスを非表示にし、削除ボタンを作成して追加している*/
+
+            for (let i = 0; i < currentObjectCount; i++) {
+                invisibleCheckbox.push('input#id_object_set-' + i + '-DELETE');
+                console.log(invisibleCheckbox);
+                $('input#id_object_set-' + i + '-DELETE').css({
+                    'display':'none',
+                }); 
+                let saveElement = 'id_object_set-' + i + '-DELETE';
+                $("label[for='" + saveElement + "']").css({
+                    'display':'none',
+                });
+
+                let searchbuttonElement = $('input#id_object_set-' + i + '-DELETE').parent().next();
+                console.log(searchbuttonElement);
+                searchbuttonElement.attr('id','remove' + i);
+                
+            }
+            
+            /*オブジェクト追加ボタンを押したときの操作
+            　主に必要な要素を作成してそれを追加しているだけ
+            */
+            $('button#add').on('click', function(){
+
+                let formwrapper = $('<div></div>',{
+                    "class":"form-wrapper",
+                });
+                let discriptionLabel = $('<label>概要：</label>', {
+                   for:'id_object_set-' + currentObjectCount + '-discription',
+                });
+
+                let discriptionElement = $('<textarea>', {
+                    cols:'40',
+                    rows:'10',
+                    name:'object_set-' + currentObjectCount + '-discription',
+                    id:'id_object_set-' + currentObjectCount + '-discription',
+                });
+
+                let titleLabel = $('<label>タイトル：</label>', {
+                   for: 'id_object_set-' + currentObjectCount + '-title',
+                });
+
+                let titleElement = $('<input>', {
+                    type:'text',
+                    maxlength:'100',
+                    name:'object_set-' + currentObjectCount + '-title',
+                    id:'id_object_set-' + currentObjectCount + '-title',
+                });
+
+                let urlLabel = $('<label>URL：</label>', {
+                   for: 'id_object_set-' + currentObjectCount + '-url',
+                });
+
+                let urlElement = $('<input>', {
+                    type:'url',
+                    maxlength:'200',
+                    name:'object_set-' + currentObjectCount + '-url',
+                    id:'id_object_set-' + currentObjectCount + '-url',
+                });
+
+                let deleteobjElement = $('<button>削除する</button>');
+
+                let discriptionElementdiv = $('<div></div>', {"class":"form-control"}).append(discriptionLabel,discriptionElement);
+                let titleElementdiv = $('<div></div>', {"class":"form-control"}).append(titleLabel,titleElement);
+                let urlElementdiv = $('<div></div>', {"class":"form-control"}).append(urlLabel,urlElement);
+                $(deleteobjElement).attr({
+                    'id':'remove',
+                    'type':'button',
+                })
+                let ele = $(formwrapper).append(discriptionElementdiv,titleElementdiv,urlElementdiv,deleteobjElement);
+                $('div#object-form').append(ele);
+                
+
+                currentObjectCount += 1;
+                totalManagementElement.attr('value', currentObjectCount);
+            });
+
+            /*削除ボタン（DBに保存されていないObject）を押したときの操作*/
+            $(document).on('click','#remove', function(){
+                console.log($(this).html());
+                $('button#remove').parent('.form-wrapper').remove();
+            });
+
+            /*削除ボタン（DBに保存されているObject）を押したときの操作*/
+            for (let j = 0; j < currentObjectCount; j++){
+                $('.form-wrapper').on('click', '#remove'+ j, function(){
+                    console.log($(invisibleCheckbox[j]));
+                    $(invisibleCheckbox[j]).prop('checked', true);
+                    let tagetElement = $('#remove' + j).parent();
+                    console.log(tagetElement);
+                    tagetElement.css('display', 'none'); 
+                });
+            }
+        });
+    </script>
+{% endblock %}

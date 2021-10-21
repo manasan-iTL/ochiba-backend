@@ -2,6 +2,7 @@ from django.db import models
 from django.conf import settings
 from django.db.models.deletion import CASCADE, SET_NULL
 from django.db.models.fields import CharField
+from django.utils.text import slugify
 # Create your models here.
 
 class Post(models.Model):
@@ -11,15 +12,21 @@ class Post(models.Model):
     updated_at = models.DateTimeField(auto_now=True, editable=False, blank=False, null=False)
     status = models.BooleanField(default=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    # slug = models.SlugField(max_length=255, unique=True)
 
     def __str__(self):
         return self.title
 
+    # def save(self, *args, **kwargs):
+    #     if not self.slug:
+    #         self.slug = slugify(self.user)
+    #     super(Post, self).save(*args, **kwargs)
+
 class Object(models.Model):
     url = models.URLField()
     title = models.CharField("タイトル", max_length=100, blank=False, null=False)
-    discription = models.TextField("概要", blank=True, null=False)
+    discription = models.TextField("概要", blank=True, null=True)
     post_data = models.ForeignKey(Post, null=True, on_delete=models.SET_NULL)
 
     def __str__(self):
-        return self.title 
+        return self.title
