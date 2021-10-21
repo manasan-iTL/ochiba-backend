@@ -12,7 +12,6 @@ from .models import Post, Object
 from .forms import PostForm, ObjectForm, ObjectCreateForm, SamplePostForm, ObjectCreateModel
 # Create your views here.
 
-
 #トップ画面用view
 class IndexView(ListView):
     
@@ -23,7 +22,7 @@ class IndexView(ListView):
 
 
 #詳細画面用のView
-class ArticleDetailView(LoginRequiredMixin, DetailView):
+class ArticleDetailView(DetailView):
     model = Post
     template_name = "articles/detail.html"
 
@@ -35,7 +34,7 @@ PostやObjectを同時に新規作成・編集するクラス
 """
 PostとObjectを新規作成するクラス
 """
-class SampleCreateObjectView(View):
+class SampleCreateObjectView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
         form = PostForm(request.POST or None)
         formset = ObjectCreateForm()
@@ -127,7 +126,7 @@ class SampleUpdateObjectView(LoginRequiredMixin, View):
 """
 
 #Post単体を新規作成するクラス
-class CreatePostView(View):
+class CreatePostView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
         form = PostForm(request.POST or None)
         return render(request, "articles/create_post.html", {
@@ -147,14 +146,14 @@ class CreatePostView(View):
             return redirect('/')
 
 #Object単体を新規作成するクラス
-class CreateObjectView(CreateView):
+class CreateObjectView(LoginRequiredMixin, CreateView):
     model = Object
     form_class = ObjectForm
     template_name = "articles/create_object.html"
     success_url = "/"
 
 #Modelformsetによる実装　今回はinlineformsetでの実装を採用しているがこの方法でもおそらくできる
-class CreateObjectPostView(View):
+class CreateObjectPostView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
         form = PostForm(request.POST or None)
         formset = ObjectCreateModel(request.POST or None, queryset=Object.objects.none())
@@ -249,9 +248,4 @@ class ArticleDeleteView(View, LoginRequiredMixin):
         post_data.delete()
         return redirect('index')
 
-class ProfileEditView(LoginRequiredMixin, UpdateView):
-    template_name = 'users/edit.html'
-
-class ProfileDetailView(LoginRequiredMixin, DetailView):
-    template_name = 'users/detail.html'
 

@@ -1,10 +1,16 @@
 from django.db.models import fields
 from django.forms import widgets
 from django.forms.widgets import TextInput, Textarea, URLInput, Widget
+
+from accounts.models import CustomUser
 from .models import Object, Post
 from django import forms
 from django.db.models.base import Model
 from django.db.models.fields import CharField
+
+
+from django.core.exceptions import ValidationError #add
+from django.core.validators import validate_email #add
 
 class PostForm(forms.Form):
     title = forms.CharField(max_length=100, label='記事タイトル', required=True, widget = forms.TextInput(attrs={'placeholder':'ブックマークリストタイトル'}))
@@ -43,3 +49,35 @@ ObjectCreateModel = forms.modelformset_factory(
     Object, exclude=('post_data',), 
     extra=2, can_delete= True
 )
+
+class ProfileEditForm(forms.ModelForm):
+    name = forms.CharField(max_length=50, required=True, widget=forms.TextInput(attrs={'placeholder': "ユーザー名"}),)
+    email = forms.EmailField(required=True, widget=forms.EmailInput(attrs={'placeholder': "メールアドレス"}),)
+    username = forms.CharField(max_length=50, widget=forms.TimeInput(attrs={'placeholder': "ユーザーID"}),)
+    about_me = forms.CharField(widget=forms.Textarea(attrs={'size': 50}),)
+
+    class Meta:
+        model = CustomUser
+        fields = ('name', 'email', 'username', 'about_me',)
+
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.get('instance', None)
+        super().__init__(*args, **kwargs)
+
+    def clean_email(self):
+        email = self.cleaned_data["email"]
+
+        try:
+            validate_email(email)
+        except ValidationError:
+            raise ValidationError("正しいメールアドレスを指定してください")
+
+        try:
+            user = CustomUser.objects.get(email=email)
+        except CustomUser.DoesNotExist:
+            return email
+        else:
+            if self.user.email == email:
+                return email
+
+            raise ValidationError("このメールアドレスは既に使用されています")
