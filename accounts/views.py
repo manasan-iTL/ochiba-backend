@@ -13,22 +13,6 @@ from allauth.account.views import LoginView, LogoutView, SignupView
 from .helpers import get_current_user
 
 
-# class ProfileDetailView(LoginRequiredMixin, DetailView):
-#     model = CustomUser
-#     template_name = 'accounts/profile.html'
-
-#     slug_field = 'username'
-#     slug_url_kwarg = 'username'
-
-#     def get_context_data(self, **kwargs):
-#         context = super(ProfileDetailView, self).get_context_data(**kwargs)
-#         username = self.kwargs['username']
-#         context['username'] = username
-#         context['user'] = get_current_user(self.request)
-
-#         return context
-
-
 class ProfileView(LoginRequiredMixin, View):
     slug_field = 'username'
     slug_url_kwarg = 'username'
@@ -39,19 +23,15 @@ class ProfileView(LoginRequiredMixin, View):
         })
 
 class ProfileEditView(LoginRequiredMixin, View):
-    slug_field = 'username'
-    slug_url_kwarg = 'username'
     def get(self, request, *args, **kwargs):
         user_data = CustomUser.objects.get(id=request.user.id)
         form = ProfileEditForm(
             request.POST or None,
             initial={
-                'username': user_data.username,
                 'first_name': user_data.first_name,
                 'last_name': user_data.last_name,
                 'description': user_data.description,
-                'image': user_data.image,
-                'password': user_data.password
+                'image': user_data.image
             }
         )
 
@@ -68,9 +48,9 @@ class ProfileEditView(LoginRequiredMixin, View):
             user_data.last_name = form.cleaned_data['last_name']
             user_data.description = form.cleaned_data['description']
             if request.FILES.get('image'):
-                user_data.image = request.FILES['image']
+                user_data.image = request.FILES.get('image')
             user_data.save()
-            return redirect('accounts:profile', user_data.username) # slugとして渡す
+            return redirect('accounts:profile', request.user)
 
         return render(request, 'accounts/profile.html', {
             'form': form
