@@ -10,7 +10,6 @@ from .forms import ProfileEditForm, SignupForm
 from .models import CustomUser
 from django.views import View
 from allauth.account.views import LoginView, LogoutView, SignupView
-from .helpers import get_current_user
 
 
 class ProfileView(LoginRequiredMixin, View):

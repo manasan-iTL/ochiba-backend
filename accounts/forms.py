@@ -4,7 +4,6 @@ from allauth.account.forms import SignupForm
 from django.forms.fields import CharField
 from django.http import request
 from .models import CustomUser
-from PIL import Image
 
 class ProfileEditForm(forms.Form):
     # username = forms.CharField(max_length=30, label='ユーザー名')
