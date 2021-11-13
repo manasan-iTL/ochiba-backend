@@ -33,7 +33,7 @@ class IndexView(ListView):
 class ArticleDetailView(LoginRequiredMixin, DetailView):
     model = Post
     template_name = "articles/detail.html"
-    # Should match the value after ':' from url <slug:the_slug>
+    # Should match the value after ':' from url <slug:slug>
     slug_url_kwarg = 'slug'
     # Should match the name of the slug field on the model 
     slug_field = 'slug' # DetailView's default value: optional

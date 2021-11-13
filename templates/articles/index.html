@@ -29,6 +29,7 @@
             <a id='detail{{post.id}}' href="{% url 'article_detail' post.slug post.id %}" class="detail">詳細</a>
             <a href="{% url 'article_update' post.id %}">編集</a>
             <a href="{% url 'object_update' post.id %}">編集</a>
+            <a href="{% url 'accounts:profile' post.user.username %}">{{post.user.username}}</a>
         </div> 
     </div>
     {% endfor %}
