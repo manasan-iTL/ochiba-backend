@@ -90,7 +90,7 @@ WSGI_APPLICATION = 'BookmarkShareApp.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'bookmarkshares',
+        'NAME': 'bookmarkshare',
         'USER': 'postgres',
         'PASSWORD': '1531',
         'HOST': '',

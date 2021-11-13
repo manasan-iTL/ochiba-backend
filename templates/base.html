@@ -5,22 +5,44 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="{% static 'css/main.css' %}"> 
     {% block head %}
     {% endblock %}
     <title>BookmarkShareApp</title>
 </head>
 <body>
 
-    <header id="header" class="layout_header">
+    <!-- <header id="header">
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+            <a href="{% url 'index' %}" class="navbar-brand">BookmarkShareApp</a>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <form method="GET" action="{% url 'search' %}" class="form-inline mt-2 mt-md-0">
+                    <input type="text" name="keyword" placeholder="検索" class="form-control mr-sm-2">
+                    <button type="submit" class="btn btn-outline-success my-2 my-sm-0">検索</button>
+                </form>
+                <ul class="navbar-nav mr-auto">
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'create_post' %}">記事新規作成</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'create_object' %}">オブジェクト新規作成</a>
+                    </li>
+                    <li class="nav-item">マイページ</li>
+                    {% else %}
+                    <li class="nav-item">ログイン</li>
+                    <li class="nav-item">新規登録</li>
+                    {% endif %}
+                </ul>
+            </div> -->
+    <header id="header" class="layout_header"> 
         <div class="image">
             <img class="logo" src="" alt="ロゴ画像">
         </div>
         <nav class="local-nav">
-            <form action="" class="layout-form search-form">
-                <div>
-                    <input type="search">
-                </div>
+            <form method ="get" action="{% url 'search' %}" class="layout-form search-form">
+                <input type="text" name="keyword" placeholder="検索">
                 <button type="submit">検索</button>
             </form>
             <ul class="nav-list">
@@ -47,7 +69,7 @@
             {% endblock %}
         </aside>
 
-        <main class="main">
+        <main class="main" role="main">
             {% block main %}
             メインコンテンツ
             {% endblock %}
@@ -66,9 +88,12 @@
 
 
     <!-- JQueryの読み込み -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" 
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js" 
     integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" 
-    crossorigin="anonymous"></script>
+    crossorigin="anonymous"></script> -->
     {% block add_js %}
     {% endblock %}
 </body>

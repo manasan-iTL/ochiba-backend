@@ -1,7 +1,7 @@
 
   
 from django.db import models
-from django.db.models.query import QuerySet
+from django.db.models import Q
 from django.forms import formsets
 from django.shortcuts import render, redirect
 from django.views.generic import View, TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView
@@ -10,9 +10,13 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.http import require_POST
 from .models import Post, Object
 from .forms import PostForm, ObjectForm, ObjectCreateForm, SamplePostForm, ObjectCreateModel
+from functools import reduce
+from operator import and_
 # Create your views here.
 
-#トップ画面用view
+'''
+トップ画面用view
+'''
 class IndexView(ListView):
     
     model = Post
@@ -21,25 +25,35 @@ class IndexView(ListView):
     template_name = "articles/index.html"
 
 
-#詳細画面用のView
-class ArticleDetailView(DetailView):
+'''
+詳細画面用のView
+クラス汎用ベースビューのDetailViewを継承して作っている
+'''
+
+class ArticleDetailView(LoginRequiredMixin, DetailView):
     model = Post
     template_name = "articles/detail.html"
+    # Should match the value after ':' from url <slug:slug>
+    slug_url_kwarg = 'slug'
+    # Should match the name of the slug field on the model 
+    slug_field = 'slug' # DetailView's default value: optional
+
 
 """
 PostやObjectを同時に新規作成・編集するクラス
-今回はinlineformsetという機能を試用している
+今回はinlineformsetという機能を使用している
 """
 
 """
 PostとObjectを新規作成するクラス
 """
+
 class SampleCreateObjectView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
         form = PostForm(request.POST or None)
         formset = ObjectCreateForm()
 
-        return render(request, 'articles/test.html', {
+        return render(request, 'articles/new_postobj.html', {
             'form':form,
             'formset': formset,
         })
@@ -55,7 +69,7 @@ class SampleCreateObjectView(LoginRequiredMixin, View):
             post.discription = form.cleaned_data['discription']
             post.status = form.cleaned_data['status']
 
-            formset = ObjectCreateForm(request.POST, instance=post)
+            formset = ObjectCreateForm(request.POST, instance = post)
 
             if formset.is_valid():
                 post.save()
@@ -63,7 +77,7 @@ class SampleCreateObjectView(LoginRequiredMixin, View):
                 return redirect('/')
             
             else:
-                return render(request, 'articles/test.html', {
+                return render(request, 'articles/new_postobj.html', {
                     'form':form,
                     'formset':formset,
                 })
@@ -71,6 +85,7 @@ class SampleCreateObjectView(LoginRequiredMixin, View):
 """
 PostとObjectを編集（アップデート）するクラス
 """
+
 class SampleUpdateObjectView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
         post_data = Post.objects.get(id=self.kwargs['pk'])
@@ -83,7 +98,7 @@ class SampleUpdateObjectView(LoginRequiredMixin, View):
 
         formset = ObjectCreateForm(instance=post_data)
 
-        return render(request, 'articles/test.html', {
+        return render(request, 'articles/new_postobj.html', {
             'form':form,
             'formset': formset,
         })
@@ -115,10 +130,32 @@ class SampleUpdateObjectView(LoginRequiredMixin, View):
                     return redirect('/')
             
                 else:
-                    return render(request, 'articles/test.html', {
+                    return render(request, 'articles/new_postobj.html', {
                         'form':form,
                         'formset':formset,
                     })
+
+class SearchView(View):
+    def get(self, request, *args, **kwargs):
+        post_list = Post.objects.order_by('-id')
+        keyword = request.GET.get('keyword')
+
+        if keyword:
+            exclusion = set([' ','　'])
+            query_list = ''
+
+            for word in keyword:
+                if not word in exclusion:
+                    query_list += word
+            query = reduce(and_, [Q(title__icontains=q)|Q(discription__icontains=q) for q in query_list])
+            post_list = post_list.filter(query)
+
+        return render(request, 'articles/index.html', {
+            'post_list':post_list,
+            'keyword':keyword,
+        })
+
+
 
 """
 ここから下は今の段階では使っていないが、使うかもしれない機能を実装してある。

@@ -10,14 +10,13 @@ from .forms import ProfileEditForm, SignupForm
 from .models import CustomUser
 from django.views import View
 from allauth.account.views import LoginView, LogoutView, SignupView
-from .helpers import get_current_user
 
 
 class ProfileView(LoginRequiredMixin, View):
     slug_field = 'username'
     slug_url_kwarg = 'username'
     def get(self, request, *args, **kwargs):
-        user_data = CustomUser.objects.get(id=request.user.id)
+        user_data = CustomUser.objects.get(username=self.kwargs['username'])
         return render(request, 'accounts/profile.html', {
             'user_data': user_data,
         })
