@@ -12,14 +12,14 @@ from django.views import View
 from allauth.account.views import LoginView, LogoutView, SignupView
 from articles.models import Post, Object
 
-
 class ProfileView(LoginRequiredMixin, View):
     slug_field = 'username'
     slug_url_kwarg = 'username'
     def get(self, request, *args, **kwargs):
-        user_data = CustomUser.objects.get(id=request.user.id)
+        user_data = CustomUser.objects.get(username=self.kwargs['username'])
         post_data = Post.objects.filter(status=True).all
         post_unpub_data = Post.objects.filter(status=False).all
+
         return render(request, 'accounts/profile.html', {
             'user_data': user_data,
             'post_data': post_data,

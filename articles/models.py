@@ -1,3 +1,4 @@
+from re import DEBUG
 from django.db import models
 from django.conf import settings
 from django.db.models.deletion import CASCADE, SET_NULL
@@ -12,15 +13,15 @@ class Post(models.Model):
     updated_at = models.DateTimeField(auto_now=True, editable=False, blank=False, null=False)
     status = models.BooleanField(default=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    # slug = models.SlugField(max_length=255, unique=True)
+    slug = models.SlugField(max_length=255, null=True, blank=True)
 
     def __str__(self):
         return self.title
 
-    # def save(self, *args, **kwargs):
-    #     if not self.slug:
-    #         self.slug = slugify(self.user)
-    #     super(Post, self).save(*args, **kwargs)
+    def save(self, *args, **kwargs):
+        if not self.id:
+            self.slug = slugify(self.user.username)
+        return super(Post,self).save(*args, **kwargs)
 
 class Object(models.Model):
     url = models.URLField()
