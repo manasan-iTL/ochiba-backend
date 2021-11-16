@@ -8,6 +8,14 @@
 
 {% block main %}
 
+{% if messages %}
+<ul>
+  {% for message in messages %}
+  <li>{{ message }}</li>
+  {% endfor %}
+</ul>
+{% endif %}
+
 {% if keyword %}
     <h2>検索キーワード:{{keyword}}</h2>
 {% endif %}

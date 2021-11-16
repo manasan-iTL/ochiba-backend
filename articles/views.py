@@ -4,6 +4,7 @@ from django.db import models
 from django.db.models import Q
 from django.forms import formsets
 from django.shortcuts import render, redirect
+from django.contrib import messages
 from django.views.generic import View, TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.decorators import method_decorator
@@ -89,19 +90,23 @@ PostとObjectを編集（アップデート）するクラス
 class SampleUpdateObjectView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
         post_data = Post.objects.get(id=self.kwargs['pk'])
-        form = PostForm(request.POST or None,
-        initial = {
-            'title':post_data.title,
-            'discription':post_data.discription,
-            'status':post_data.status,
-        })
+        if request.user != post_data.user:
+            messages.error(request, "あなたにはそのページへのアクセス権限がありません")
+            return redirect('index')
+        else:
+            form = PostForm(request.POST or None,
+            initial = {
+                'title':post_data.title,
+                'discription':post_data.discription,
+                'status':post_data.status,
+            })
 
-        formset = ObjectCreateForm(instance=post_data)
+            formset = ObjectCreateForm(instance=post_data)
 
-        return render(request, 'articles/new_postobj.html', {
-            'form':form,
-            'formset': formset,
-        })
+            return render(request, 'articles/new_postobj.html', {
+                'form':form,
+                'formset': formset,
+            })
     
     def post(self, request, *args, **kwargs):
 
