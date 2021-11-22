@@ -39,31 +39,32 @@
 </div>
 {% endif %}
 
-
-{% if user.username in request.get_full_path %}
-<h2>公開記事一覧</h2>
-{% for post in post_data %}
-<h2>{{ post.title }}</h2>
-<h2>{{ post.discription }}</h2>
-<h2>{{ post.object_set.first.title }}</h2>
-<h2>{{ post.object_set.first.url }}</h2>
-<h2>{{ post.object_set.first.discription }}</h2>
-{% endfor %}
-<h2>未公開記事一覧</h2>
-{% for unpub in post_unpub_data %}
-<h2>{{ unpub.title }}</h2>
-<h2>{{ unpub.discription }}</h2>
-{% endfor %}
-{% else %}
-{% for post in post_data %}
-<h2>公開記事一覧</h2>
-<h2>{{ post.title }}</h2>
-<h2>{{ post.discription }}</h2>
-<h2>{{ post.object_set.first.title }}</h2>
-<h2>{{ post.object_set.first.url }}</h2>
-<h2>{{ post.object_set.first.discription }}</h2>
-{% endfor %}
-{% endif %}
+<div style="word-break: break-all;">
+    {% if user.username in request.get_full_path %}
+    <h2>公開記事一覧</h2>
+    {% for post in post_data %}
+    <h2>{{ post.title }}</h2>
+    <h2>{{ post.discription }}</h2>
+    <h2>{{ post.object_set.first.title }}</h2>
+    <h2 >{{ post.object_set.first.url }}</h2>
+    <h2>{{ post.object_set.first.discription }}</h2>
+    {% endfor %}
+    <h2>未公開記事一覧</h2>
+    {% for unpub in post_unpub_data %}
+    <h2>{{ unpub.title }}</h2>
+    <h2>{{ unpub.discription }}</h2>
+    {% endfor %}
+    {% else %}
+    {% for post in post_data %}
+    <h2>公開記事一覧</h2>
+    <h2>{{ post.title }}</h2>
+    <h2>{{ post.discription }}</h2>
+    <h2>{{ post.object_set.first.title }}</h2>
+    <h2>{{ post.object_set.first.url }}</h2>
+    <h2>{{ post.object_set.first.discription }}</h2>
+    {% endfor %}
+    {% endif %}
+</div>
 
 {% endblock %}
 
