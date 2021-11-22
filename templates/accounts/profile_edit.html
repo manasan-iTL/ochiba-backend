@@ -2,58 +2,58 @@
 {% load widget_tweaks %}
 
 {% block main %}
-
+<div class="text-center my-5">
+    <h2>公開用プロフィール編集画面</h2>
+</div>
 {% if user.username in request.get_full_path %}
 <div class="">
-    <div class="">
-        <h5 class="">プロフィール</h5>
-        <form method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            <table class="">
-                <tbody>
-                    <!-- <tr>
-                        <th class="header">ユーザー名</th>
-                        <td class="data">
-                            {% render_field form.username class="form-control" placeholder="ユーザー名" %}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th class="header">パスワード</th>
-                        <td class="data">
-                            {% render_field form.password class="form-control" placeholder="パスワード" %}
-                        </td>
-                    </tr> -->
-                    <tr>
-                        <th class="header">プロフィール画像</th>
-                        <td class="data">
-                            {{ form.image }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th class="header">名前</th>
-                        <td class="">
-                            {% render_field form.first_name class="form-control" placeholder="姓" %}
-                            {% render_field form.last_name class="form-control" placeholder="名" %}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th class="header">自己紹介</th>
-                        <td class="data">
-                            {% render_field form.description class="form-control" placeholder="自己紹介" %}
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <div class="">
-                <button class="" type="submit">変更</button>
-            </div>
-        </form>
-    </div>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <table class="table">
+            <tbody>
+                <!-- <tr>
+                    <th class="header">ユーザー名</th>
+                    <td class="data">
+                        {% render_field form.username class="form-control" placeholder="ユーザー名" %}
+                    </td>
+                </tr>
+                <tr>
+                    <th class="header">パスワード</th>
+                    <td class="data">
+                        {% render_field form.password class="form-control" placeholder="パスワード" %}
+                    </td>
+                </tr> -->
+                <tr>
+                    <th class="header" style="width:30%">プロフィール画像</th>
+                    <td class="data" style="width:70%">
+                        {{ form.image }}
+                    </td>
+                </tr>
+                <tr>
+                    <th class="header">名前</th>
+                    <td class="">
+                        {% render_field form.first_name class="form-control" placeholder="姓" %}
+                        {% render_field form.last_name class="form-control" placeholder="名" %}
+                    </td>
+                </tr>
+                <tr>
+                    <th class="header">自己紹介</th>
+                    <td class="data">
+                        {% render_field form.description class="form-control" placeholder="自己紹介" %}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="col text-center">
+            <a class="btn btn-outline-dark mb-5" href="{% url 'accounts:profile' user_data.username %}">キャンセル</a>            
+            <button class="btn btn-outline-dark mb-5" type="submit">変更</button>
+        </div>
+    </form>
 </div>
 
 {% else %}
 <h2>他のユーザーのアカウントです。</h2>
-<h2>あなたのユーザー: {{ user.username }}</h2>
+<h2>あなたのユーザー: {{ user_data.username }}</h2>
 <h2>お探しのユーザー: {{ request.get_full_path }}</h2>
 {% endif %}
 
