@@ -3,7 +3,9 @@ from django.db import models
 from django.conf import settings
 from django.db.models.deletion import CASCADE, SET_NULL
 from django.db.models.fields import CharField
+from django.utils import html
 from django.utils.text import slugify
+from django.core.validators import FileExtensionValidator
 # Create your models here.
 
 class Post(models.Model):
@@ -31,3 +33,11 @@ class Object(models.Model):
 
     def __str__(self):
         return self.title
+
+class UploadFile(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    bukuma_file = models.FileField(
+        upload_to='files/html',
+        verbose_name='ブックマークファイル',
+        validators=[FileExtensionValidator(['html',])],
+        )

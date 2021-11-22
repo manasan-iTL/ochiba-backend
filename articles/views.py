@@ -1,5 +1,7 @@
 
   
+import re
+from django import forms
 from django.db import models
 from django.db.models import Q
 from django.forms import formsets
@@ -9,8 +11,8 @@ from django.views.generic import View, TemplateView, ListView, DetailView, Creat
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.decorators import method_decorator
 from django.views.decorators.http import require_POST
-from .models import Post, Object
-from .forms import PostForm, ObjectForm, ObjectCreateForm, SamplePostForm, ObjectCreateModel
+from .models import Post, Object, UploadFile
+from .forms import PostForm, ObjectForm, ObjectCreateForm, SamplePostForm, ObjectCreateModel, UploadFileForm
 from functools import reduce
 from operator import and_
 # Create your views here.
@@ -139,6 +141,26 @@ class SampleUpdateObjectView(LoginRequiredMixin, View):
                         'form':form,
                         'formset':formset,
                     })
+### ブックマークファイルアップロード ####
+                    
+class FileUploadView(LoginRequiredMixin, View):
+    def get(self, request, *args, **kwargs):
+        form = UploadFileForm()
+
+        return render(request, 'articles/file_upload.html', {'form':form})
+    
+    def post(self, request, *args, **kwargs):
+        form = UploadFileForm(request.POST, request.FILES)
+        print(request.POST)
+        print(request.FILES)
+        if form.is_valid():
+            file = UploadFile()
+            file.user = request.user
+            file.bukuma_file = form.cleaned_data['bukuma_file']
+            file.save()
+            return redirect('index')
+        else:
+            return render(request, 'articles/file_upload.html', {'form':form})
 
 class SearchView(View):
     def get(self, request, *args, **kwargs):
