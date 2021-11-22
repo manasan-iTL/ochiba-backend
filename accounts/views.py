@@ -1,6 +1,6 @@
 from django import views
 from django.core.validators import slug_re
-from django.shortcuts import render,redirect
+from django.shortcuts import render, redirect
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls.base import reverse  # 追加

@@ -2,26 +2,42 @@
 {% load static %}
 
 {% block main %}
-    <div class="article-area">
-        <div class="article-header">
-            <h2>{{ post.title }}</h2>
+<div class="layout-index bg-warning p-3">
+    <div class="card">
+        <div class="card-post mt-3">
+            <div class="text-center my-5">
+                <h2>{{ post.title }}</h2>
+            </div>
+        </div>
+        <div class="card-object mx-5 text-center">
             <p>{{ post.discription }}</p>
         </div>
-        <div class="article-body">
+        <div class="card-object mx-5">
             <ul class="object-items">
                 {% for object in post.object_set.all %}
-                    <li>
-                        <p>{{ object.title }}</p>
-                        <p><a href="{{ object.url }}">{{ object.url }}</a></p>
-                        <p>{{ object.discription }}</p>
-                    </li>
+                <li>
+                    <div class="card-object border border-dark">
+                        <a href="{{ object.url }}">
+                            <p class="font-weight-bold text-dark">{{ object.title }}</p>
+                            {% if object.discription.is_empty%}
+                                <p>NONE</p>
+                            {% endif %}
+                            <p class="text-muted">{{ object.discription }}</p>
+                        </a>
+                    </div>
+                </li>
                 {% endfor %}
             </ul>
+        </div> 
+        {% if user == post.user %}
+        <div class="text-center my-2">
+            <form action="{% url 'article_delete' post.id %}" method="post">
+                <button class="btn btn-outline-danger" type="submit">削除</button>
+                {% csrf_token %}
+            </form>
         </div>
-
-        <form action="{% url 'article_delete' post.id %}" method="post">
-            <button type="submit">削除する</button>
-            {% csrf_token %}
-        </form>
+      {% endif %}
     </div>
+    </div>
+</div>
 {% endblock %}
