@@ -32,6 +32,8 @@
         {% if user == post.user %}
         <div class="text-center my-2">
             <form action="{% url 'article_delete' post.id %}" method="post">
+                <!-- <a class="btn btn-outline-dark" href="{% url 'article_update' post.id %}">編集</a> -->
+                <a class="btn btn-outline-dark" href="{% url 'object_update' post.id %}">編集</a>
                 <button class="btn btn-outline-danger" type="submit">削除</button>
                 {% csrf_token %}
             </form>

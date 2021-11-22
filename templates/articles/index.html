@@ -76,7 +76,7 @@
 
         <div class="card-object text-center">
           {% if user == post.user %}
-            <a class="btn btn-outline-dark" href="{% url 'article_update' post.id %}">編集</a>
+            <!-- <a class="btn btn-outline-dark" href="{% url 'article_update' post.id %}">編集</a> -->
             <a class="btn btn-outline-dark" href="{% url 'object_update' post.id %}">編集</a>
           {% endif %}
           <a class="btn btn-outline-dark" id='detail{{post.id}}' href="{% url 'article_detail' post.slug post.id %}" class="detail">詳細</a>

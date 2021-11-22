@@ -40,15 +40,15 @@
                         </tr> -->
                         {{ file_form.as_table }}
                     </table>
-                </div>
-                <div class="text-center">
-                    <button type="submit" class="btn btn-outline-danger">オブジェクトを削除</button>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-outline-danger">オブジェクトを削除</button>
+                    </div>
                 </div>
                 {% endfor %}
             </div>
 
             {% csrf_token %}
-            <div class="col text-center my-2">
+            <div class="col text-center my-5">
                 <button id="add" type="button" class="btn btn-outline-dark">オブジェクト追加</button> 
             </div>
         </form>
