@@ -2,6 +2,14 @@
 {% load static %}
 
 {% block main %}
+    {% if messages %}
+    <ul>
+    {% for message in messages %}
+    <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+    {% endif %}
+    
     <div class="article-area">
         <div class="article-header">
             <h2>{{ post.title }}</h2>
@@ -19,9 +27,11 @@
             </ul>
         </div>
 
+        {% if request.user == post.user %}
         <form action="{% url 'article_delete' post.id %}" method="post">
             <button type="submit">削除する</button>
             {% csrf_token %}
         </form>
+        {% endif %}
     </div>
 {% endblock %}

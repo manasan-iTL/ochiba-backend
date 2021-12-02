@@ -4,17 +4,22 @@ import re
 from django import forms
 from django.db import models
 from django.db.models import Q
-from django.forms import formsets
+from django.db.models.query_utils import select_related_descend
+from django.forms import formset_factory
+from django.forms.models import inlineformset_factory
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.views.generic import View, TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.decorators import method_decorator
+from django.urls import reverse
 from django.views.decorators.http import require_POST
 from .models import Post, Object, UploadFile
 from .forms import PostForm, ObjectForm, ObjectCreateForm, SamplePostForm, ObjectCreateModel, UploadFileForm
+from scraype.scrayping import find_folders, search_url_text
 from functools import reduce
-from operator import and_
+from operator import and_, le, pos
+from urllib.parse import urlencode
 # Create your views here.
 
 '''
@@ -33,7 +38,7 @@ class IndexView(ListView):
 クラス汎用ベースビューのDetailViewを継承して作っている
 '''
 
-class ArticleDetailView(LoginRequiredMixin, DetailView):
+class ArticleDetailView(DetailView):
     model = Post
     template_name = "articles/detail.html"
     # Should match the value after ':' from url <slug:slug>
@@ -158,9 +163,74 @@ class FileUploadView(LoginRequiredMixin, View):
             file.user = request.user
             file.bukuma_file = form.cleaned_data['bukuma_file']
             file.save()
-            return redirect('index')
+            # url = UploadFile.objects.filter(user=request.user).order_by('id').last()
+            # folders = find_folders(url.bukuma_file)
+            return redirect('select_folder')
         else:
             return render(request, 'articles/file_upload.html', {'form':form})
+
+class SelectFolderView(LoginRequiredMixin, View):
+    def get(self, request, *args, **kwargs):
+        url = UploadFile.objects.filter(user=request.user).order_by('id').last()
+        folders = find_folders(url.bukuma_file)
+        print(folders)
+        return render(request, 'articles/select_folder.html', {'folders':folders})
+
+    def post(self, request, *args, **kwargs):
+        check = request.POST['select_folder']
+        redirect_url = reverse('file_edit')
+        parameters = urlencode({'param1':check})
+        url = f'{redirect_url}?{parameters}'
+        return redirect(url)
+        
+        # url = UploadFile.objects.filter(user=request.user).order_by('id').last()
+        # contents = search_url_text(url.bukuma_file,check)
+        # formset = ObjectCreateForm(initial=contents)
+        # return render(request, 'articles/select_folder.html',{'contents':contents, 'formset':formset})
+
+class FileEditView(LoginRequiredMixin,View):
+    def get(self, request, *args, **kwargs):
+        check = request.GET['param1']
+        url = UploadFile.objects.filter(user=request.user).order_by('id').last()
+        contents = search_url_text(url.bukuma_file,check)
+        FileEditForm = inlineformset_factory(
+           Post, Object, form=ObjectForm, extra=len(contents), can_delete=True
+        )
+        form = PostForm()
+        formset = FileEditForm(initial = contents)
+        print(contents)
+        return render(request, 'articles/new_postobj.html', {'form':form, 'formset':formset})
+    
+    def post(self, request, *args, **kwargs):
+        check = request.GET['param1']
+        url = UploadFile.objects.filter(user=request.user).order_by('id').last()
+        contents = search_url_text(url.bukuma_file,check)
+        FileEditForm = inlineformset_factory(
+        Post, Object, form=ObjectForm, extra=len(contents), can_delete=True
+        )
+        form = PostForm(request.POST or None)
+        
+        
+
+        if form.is_valid():
+            post = Post()
+            post.user = request.user
+            post.title = form.cleaned_data['title']
+            post.discription = form.cleaned_data['discription']
+            post.status = form.cleaned_data['status']
+            
+            formset = FileEditForm(request.POST or None, instance=post, initial = contents)
+            if formset.is_valid():
+                post.save()
+                for file in formset:
+                    file.has_changed()
+                    file.save()
+                return redirect('index')
+            else:
+                form = PostForm(request.POST or None)
+                formset = FileEditForm(initial = contents)
+                return render(request, 'articles/new_postobj.html', {'form':form, 'formset':formset})
+
 
 class SearchView(View):
     def get(self, request, *args, **kwargs):
@@ -309,7 +379,11 @@ class ArticleUpdateView(LoginRequiredMixin, View):
 class ArticleDeleteView(View, LoginRequiredMixin):
     def post(self, request, *args, **kwargs):
         post_data = Post.objects.get(id=self.kwargs['pk'])
-        post_data.delete()
-        return redirect('index')
+        if request.user == post_data.user:
+            post_data.delete()
+            return redirect('index')
+        else:
+            messages.error(request, "あなたにはそのページの編集権限がありません")
+            redirect('article_detail', pk=post_data.id)
 
 

@@ -7,7 +7,7 @@
             {{ form.as_p }}
             <button type="submit" name="postdelete">削除</button>
         
-            <h2>添付ファイル</h2>
+            <!-- <h2>添付ファイル</h2>
             {{ formset.management_form }}
             <div id="object-form">
                 {% for file_form in formset %}
@@ -16,9 +16,26 @@
                     <button type="button">削除する</button>
                 </div>
                 {% endfor %}
+            </div> -->
+            
+            <div class="row">
+                {% for form in formset %}
+                    <div class="col-sm-4">
+                    {{ form.non_field_errors }}
+                    {% for field in form.visible_fields %}
+                        <div class="form-group">
+                            <label for="{{ field.id_for_label }}">{{ field.label_tag }}</label>
+                            {{ field }}
+                            {{ field.errors }}
+                        </div>
+                    {% endfor %}
+                    {% for field in form.hidden_fields %}
+                        {{ field }}
+                    {% endfor %}
+                    </div>
+                {% endfor %}
             </div>
-              
-        
+            {{ formset.management_form }}
             {% csrf_token %}
             <button type="submit" class="btn btn-primary" name="save">保存</button>
             <button id="add" type="button">オブジェクト追加</button> 
