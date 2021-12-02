@@ -1,6 +1,6 @@
 from django import views
 from django.core.validators import slug_re
-from django.shortcuts import render,redirect
+from django.shortcuts import render, redirect
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls.base import reverse  # 追加
@@ -12,7 +12,7 @@ from django.views import View
 from allauth.account.views import LoginView, LogoutView, SignupView
 from articles.models import Post, Object
 
-class ProfileView(LoginRequiredMixin, View):
+class ProfileView(View):
     slug_field = 'username'
     slug_url_kwarg = 'username'
     def get(self, request, *args, **kwargs):

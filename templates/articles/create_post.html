@@ -1,24 +1,32 @@
 {% extends 'base.html' %}
 
 {% block main %}
-<h2>新規記事作成ページ</h2>
-
-<form method="POST">
-    {% csrf_token %}
-    {{ form.non_field_errors }}
-    {% for field in form %}
-        <div class="field">
-            {{ field.label_tag }}
-            {{ field }}
-            {% if field.help_text %}
-                <span class="helptext">{{ field.help_text }}</span>
-            {% endif %}
-            {{ field.errors }}
+<div class="text-center my-5">
+    <h2>新規記事作成ページ</h2>
+</div>
+<div>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        <table class="table">
+            <tbody>
+                <tbody>
+                    {% for field in form %}
+                    <tr>
+                        <th style="width:30%">{{ field.label_tag }}</th>
+                        <td style="width:70%">{{ field }}</td>
+                    </tr>
+                    {% if field.help_text %}
+                    <span class="helptext">{{ field.help_text }}</span>
+                    {% endif %}
+                    {{ field.errors }}
+                    {% endfor %}
+                </tbody>
+            </tbody>
+        </table>
+        <div class="text-center my-2">
+            <button class="btn btn-outline-dark" type="submit">送信</button>
         </div>
-    {% endfor %}
-
-    <div class="field">
-        <button type="submit">送信</button>
-    </div>
-</form>
+    </form>
+</div>
 {% endblock %}

@@ -30,7 +30,7 @@ class IndexView(ListView):
 クラス汎用ベースビューのDetailViewを継承して作っている
 '''
 
-class ArticleDetailView(LoginRequiredMixin, DetailView):
+class ArticleDetailView(DetailView):
     model = Post
     template_name = "articles/detail.html"
     # Should match the value after ':' from url <slug:slug>
