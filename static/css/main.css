@@ -11,7 +11,6 @@
 * {
     margin: 0;
     padding: 0;
-
     list-style: none;
 }
 
@@ -23,9 +22,12 @@
 
 /*  main aside部分のレイアウト　　　　　　　*/
 
+
+
 .container {
     display: flex;
     flex-direction: row;
+    /* background-color: rgb(246, 246, 244); */
 }
 
 .container .left-aside {
@@ -34,10 +36,13 @@
 
 .container .main {
     flex: 1;
+    background-color: blue;
+    /* background-color: rgb(246, 246, 244); */
 }
 
 .container .right-aside {
-    background-color: green;
+    background-color: yellow;
+    /* background-color: green; */
 }
 
 /*  footer部分のレイアウト  　　*/
