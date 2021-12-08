@@ -5,15 +5,29 @@
         <form action="" method="post">
             <h2>記事</h2>
             {{ form.as_p }}
-            <button type="submit" name="postdelete">削除</button>
-        
-            <!-- <h2>添付ファイル</h2>
+            <div class="col text-center">
+                <button class="btn btn-outline-danger" type="submit" name="postdelete">記事を削除</button>
+                <!-- <button type="submit" class="btn btn-outline-dark" name="save">保存</button> -->
+            </div> 
+            <hr>
+            
+            <!-- <div class="text-center my-5">
+                <h2>オブジェクト一覧</h2>
+            </div>
             {{ formset.management_form }}
             <div id="object-form">
                 {% for file_form in formset %}
-                <div class="form-wrapper">
-                    {{ file_form.as_p }}
-                    <button type="button">削除する</button>
+                <div class="form-group">
+                    <table class="table">
+                        <tr>
+                            <th style="width: 30%"></th>
+                            <td style="width: 70%"></td>
+                        </tr> -->
+                        <!-- {{ file_form.as_table }}
+                    </table>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-outline-danger">オブジェクトを削除</button>
+                    </div>
                 </div>
                 {% endfor %}
             </div> -->
@@ -37,8 +51,9 @@
             </div>
             {{ formset.management_form }}
             {% csrf_token %}
-            <button type="submit" class="btn btn-primary" name="save">保存</button>
-            <button id="add" type="button">オブジェクト追加</button> 
+            <div class="col text-center my-5">
+                <button id="add" type="button" class="btn btn-outline-dark">オブジェクト追加</button> 
+            </div>
         </form>
     </div>
 {% endblock %}
