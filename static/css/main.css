@@ -47,15 +47,15 @@ a {
     /* background-color: rgb(246, 246, 244); */
 }
 
-.container .right-aside {
+/* .container .right-aside {
     background-color: white;
-    /* background-color: green; */
-}
+} */
 
 .container .sticky-sidebar {
     position: -webkit-sticky;
 	position: sticky;
 	top: 0;
+    background-color: white;
 }
 
 /*  footer部分のレイアウト  　　*/
