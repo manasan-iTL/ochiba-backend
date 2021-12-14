@@ -21,13 +21,17 @@
 
 
 /*  main aside部分のレイアウト　　　　　　　*/
-
+body {
+    background-color: rgb(246, 246, 244);
+}
 
 
 .container {
     display: flex;
     flex-direction: row;
     /* background-color: rgb(246, 246, 244); */
+    margin: 200px, 200px;
+    padding: 0;
 }
 
 .container .left-aside {
@@ -36,7 +40,7 @@
 
 .container .main {
     flex: 1;
-    background-color: blue;
+    /* background-color: blue; */
     /* background-color: rgb(246, 246, 244); */
 }
 
