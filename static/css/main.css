@@ -25,6 +25,9 @@ body {
     background-color: rgb(246, 246, 244);
 }
 
+a {
+    text-decoration: none;
+}
 
 .container {
     display: flex;
@@ -34,9 +37,9 @@ body {
     padding: 0;
 }
 
-.container .left-aside {
+/* .container .left-aside {
     background-color: pink;
-}
+} */
 
 .container .main {
     flex: 1;
