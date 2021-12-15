@@ -1,29 +1,58 @@
 {% extends 'base.html' %}
 
 {% block main %}
-    <div>
-        <form action="" method="post">
-            <h2>記事</h2>
-            {{ form.as_p }}
-            <button type="submit" name="postdelete">削除</button>
+<div class="p-3 mx-3" style="background-color: white;">
+    <form action="" method="post">
+        <div class="text-center my-5">
+            <h2>記事編集ページ</h2>
+        </div>
+        <div>
+            <table class="table">
+                <!-- <div class="row justify-content-center">      
+                    <div class="col col-4">a</div>
+                    <div class="col col-8">b</div>
+                    {{ form.as_table }}
+                </div> -->
+                <!-- <tr>
+                    <th style="width: 30%"></th>
+                    <td style="width: 70%"></td>
+                </tr> -->
+                {{ form.as_table }}
+            </table>
+        </div>
+        <div class="col text-center">
+            <button class="btn btn-outline-danger" type="submit" name="postdelete">記事を削除</button>
+            <button type="submit" class="btn btn-outline-dark" name="save">保存</button>
+        </div> 
+        <hr>
         
-            <h2>添付ファイル</h2>
-            {{ formset.management_form }}
-            <div id="object-form">
-                {% for file_form in formset %}
-                <div class="form-wrapper">
-                    {{ file_form.as_p }}
-                    <button type="button">削除する</button>
+        <div class="text-center my-5">
+            <h2>オブジェクト一覧</h2>
+        </div>
+        {{ formset.management_form }}
+        <div id="object-form">
+            {% for file_form in formset %}
+            <div class="form-group">
+                <table class="table">
+                    <!-- <tr>
+                        <th style="width: 30%"></th>
+                        <td style="width: 70%"></td>
+                    </tr> -->
+                    {{ file_form.as_table }}
+                </table>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-outline-danger">オブジェクトを削除</button>
                 </div>
-                {% endfor %}
             </div>
-              
-        
-            {% csrf_token %}
-            <button type="submit" class="btn btn-primary" name="save">保存</button>
-            <button id="add" type="button">オブジェクト追加</button> 
-        </form>
-    </div>
+            {% endfor %}
+        </div>
+
+        {% csrf_token %}
+        <div class="col text-center my-5">
+            <button id="add" type="button" class="btn btn-outline-dark">オブジェクト追加</button> 
+        </div>
+    </form>
+</div>
 {% endblock %}
 
 {% block add_js %}

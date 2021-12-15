@@ -5,92 +5,81 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous"> -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Kurenaido&family=Zen+Maru+Gothic&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/main.css' %}"> 
+    <link rel="stylesheet" href="{% static 'css/sticky-footer.css' %}"> 
+    <link rel="stylesheet" href="{% static 'css/header.css' %}"> 
     {% block head %}
     {% endblock %}
     <title>BookmarkShareApp</title>
 </head>
 <body>
-
-    <!-- <header id="header">
-        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-            <a href="{% url 'index' %}" class="navbar-brand">BookmarkShareApp</a>
-            <div class="collapse navbar-collapse" id="navbarCollapse">
-                <form method="GET" action="{% url 'search' %}" class="form-inline mt-2 mt-md-0">
-                    <input type="text" name="keyword" placeholder="検索" class="form-control mr-sm-2">
-                    <button type="submit" class="btn btn-outline-success my-2 my-sm-0">検索</button>
-                </form>
-                <ul class="navbar-nav mr-auto">
+    <header class="header" style="background-color:  rgb(250, 199, 17);">
+        <nav class="navbar navbar-expand-lg">
+            <div class="container-fluid">
+                <div class="me-5">
+                    <a class="d-inline-flex" href="{%url 'index' %}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-bookmarks-fill" viewBox="0 0 16 16">
+                            <path d="M2 4a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v11.5a.5.5 0 0 1-.777.416L7 13.101l-4.223 2.815A.5.5 0 0 1 2 15.5V4z"/>
+                            <path d="M4.268 1A2 2 0 0 1 6 0h6a2 2 0 0 1 2 2v11.5a.5.5 0 0 1-.777.416L13 13.768V2a1 1 0 0 0-1-1H4.268z"/>
+                        </svg>
+                        <h3 class="m-auto">BookmarkShareApp</h3>
+                    </a>              
+                </div>
+                <div class="collapse navbar-collapse" id="">
+                    <div class="mr-5">
+                        <form class="d-flex form-inline" method ="get" action="{% url 'search' %}" >
+                            <input class="form-control" style="width: 300px;" type="text" name="keyword" placeholder="検索">
+                            <button class="btn btn-outline-primary mx-2" type="submit">検索</button>
+                        </form>
+                    </div>
+                </div>
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 text-nowrap">
                     {% if user.is_authenticated %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'create_post' %}">記事新規作成</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'create_object' %}">オブジェクト新規作成</a>
-                    </li>
-                    <li class="nav-item">マイページ</li>
+                    <li class="me-2"><a class="btn btn-outline-primary" href="{% url 'create_post' %}">記事新規作成</a></li>
+                    <!-- <li class="me-2"><a class="btn btn-outline-primary" href="{% url 'create_object' %}">オブジェクト新規作成</a></li> -->
+                    <li class="me-2"><a class="btn btn-outline-primary" href="{% url 'accounts:profile' user.username %}">プロフィール</a></li>
+                    <li class="me-2"><a class="btn btn-outline-primary" href="{% url 'account_logout' %}">ログアウト</a></li>
                     {% else %}
-                    <li class="nav-item">ログイン</li>
-                    <li class="nav-item">新規登録</li>
+                    <li class="me-2"><a class="btn btn-outline-primary" href="{% url 'account_login' %}">ログイン</a></li>
+                    <li class="me-2"><a class="btn btn-outline-primary" href="{% url 'account_signup' %}">新規登録</a></li>
                     {% endif %}
                 </ul>
-            </div> -->
-    <header id="header" class="layout_header"> 
-        <div class="image">
-            <img class="logo" src="" alt="ロゴ画像">
-        </div>
-        <nav class="local-nav">
-            <form method ="get" action="{% url 'search' %}" class="layout-form search-form">
-                <input type="text" name="keyword" placeholder="検索">
-                <button type="submit">検索</button>
-            </form>
-            <ul class="nav-list">
-                {% if user.is_authenticated %}
-                ログオンユーザ名： {{ user.username }} さん<br>
-                メールアドレス： {{ user.email }}<br>
-                セッション開始時刻: {{ user.last_login }}
-                <li><a href="{% url 'create_post' %}">記事新規作成</a></li>
-                <li><a href="{% url 'create_object' %}">オブジェクト新規作成</a></li>
-                <li><a href="{% url 'accounts:profile' user.username %}">プロフィール</a></li>
-                <li><a href="{% url 'account_logout' %}">ログアウト</a></li>
-                {% else %}
-                <li><a href="{% url 'account_login' %}">ログイン</a></li>
-                <li><a href="{% url 'account_signup' %}">新規登録</a></li>
-                {% endif %}
-            </ul>
+            </div>
         </nav>
     </header>
 
-    <div class="container">
-        <aside class="left-aside">
+    <div class="container my-3">
+        <aside class="left-aside" style="width: 150px;" >
             {% block left_aside %}
-            左サイド
             {% endblock %}
         </aside>
 
-        <main class="main" role="main">
+        <main class="main my-3" role="main">
             {% block main %}
-            メインコンテンツ
+            <!-- メインコンテンツ -->
             {% endblock %}
         </main>
 
-        <aside class="right-aside">
+        <aside class="right-aside my-3 p-2" style="width: 320px;">
             {% block right_aside %}
-            右サイド
+
             {% endblock %}
         </aside>
     </div>
 
     <footer class="footer">
-        <p>Copyright &copy; BookmarkShareApp 2021</p>
+        <p class="text-muted">Copyright &copy; BookmarkShareApp 2021</p>
     </footer>
 
 
     <!-- JQueryの読み込み -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
     <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js" 
     integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" 
     crossorigin="anonymous"></script> -->

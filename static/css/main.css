@@ -11,7 +11,6 @@
 * {
     margin: 0;
     padding: 0;
-
     list-style: none;
 }
 
@@ -19,88 +18,49 @@
 
 /*　　header部分のレイアウト　　　　*/
 
-.layout_header {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
-
-    height: 100px;
-    background-color: rgb(230, 154, 15);
-}
-
-.layout_header .image {
-    /*width:100%;*/
-    flex-grow: 1;
-}
-
-.layout_header .image .logo {
-    width: 100%;
-}
-
-.layout_header .local-nav {
-    flex-grow: 3;
-    display: flex;
-    flex-direction: row;
-    /*justify-content: flex-start;*/
-    align-items: center;
-}
-
-.layout_header .local-nav .layout-form {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
-}
-
-.layout_header .local-nav .nav-list {
-    flex-grow: 3;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-} 
-
-.layout_header .local-nav .nav-list li {
-    border: skyblue 2px solid;
-    border-radius: 5px;
-    background-color:whitesmoke;
-}
-
-.layout_header .local-nav .nav-list li:hover {
-    box-shadow: 0 0 8px gray;
-}
-
-.layout_header .local-nav .nav-list li a {
-    display: block;
-    text-decoration: none;
-    color: #333;
-}
 
 
 /*  main aside部分のレイアウト　　　　　　　*/
+body {
+    background-color: rgb(246, 246, 244);
+}
+
+a {
+    text-decoration: none;
+}
 
 .container {
     display: flex;
     flex-direction: row;
+    margin: 200px, 200px;
+    padding: 0;
 }
 
-.container .left-aside {
+/* .container .left-aside {
     background-color: pink;
-}
+} */
 
 .container .main {
     flex: 1;
+	top: 0;
+	left: 0;
+    /* background-color: rgb(246, 246, 244); */
 }
 
-.container .right-aside {
-    background-color: green;
+/* .container .right-aside {
+    background-color: white;
+} */
+
+.container .sticky-sidebar {
+    position: -webkit-sticky;
+	position: sticky;
+	top: 0;
+    background-color: white;
 }
 
 /*  footer部分のレイアウト  　　*/
-.footer {
+/* .footer {
     height: 30px;
     background-color: black;
     color: white;
-}
+} */
