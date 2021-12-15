@@ -3,6 +3,8 @@
 {% load i18n %}
 {% load account socialaccount %}
 
+{% block head_title %}{% trans "Sign In" %}{% endblock %}
+
 {% block main %}
 
 <div class="text-center">
@@ -13,25 +15,8 @@
     </svg>
     <h1 class="h3 my-3 font-weight-normal">BookmarkShareApp</h1>
   </div>
-  {% get_providers as socialaccount_providers %}
-  {% for provider in socialaccount_providers %}
-  <div class="d">
-    {% if provider.name == "Google" %}
-    <div class="mb-2">
-      <a class="btn btn-sm btn-block btn-outline-warning socialaccount_provider {{provider.id}}" href="{% provider_login_url provider.id process='login' scope=scope auth_params=auth_params %}"> Googleでサインアップ</a>
-    </div>
-    {% elif provider.name == "Twitter" %}
-    <div class="mb-2">
-      <a class="btn btn-sm btn-block btn-outline-primary socialaccount_provider {{provider.id}}" href="{% provider_login_url provider.id process='login' scope=scope auth_params=auth_params %}"> Twitterでサインアップ</a>
-    </div>
-    {% elif provider.name == "Github" %}
-    <div class="mb-2">
-      <a class="btn btn-sm btn-block btn-outline-dark socialaccount_provider {{provider.id}}" href="{% provider_login_url provider.id process='login' scope=scope auth_params=auth_params %}"> Githubでサインアップ</a>
-    </div>
-  </div>
-  {% endif %}
-  {% endfor %}
-  </div>
+  <!-- {% include "socialaccount/snippets/provider_list.html" with process="login"%} -->
+  <!-- http://127.0.0.1:8000/account/google/login/?process=login -->
 </div>
 
 
@@ -47,10 +32,34 @@
     </div>
     {% endfor %}
     <div class="my-3">
-      <button class="btn btn-block btn-outline-dark" style="width: 200px;" type="submit">{% trans "Sign Up" %}</button>
+      <button class="btn btn-block btn-outline-dark btn-sm" style="width: 180px;" type="submit">{% trans "Sign Up" %}</button>
     </div>
   </form>
+</div>
 
+
+<div class="text-center">
+  <p class="text-muted my-2">または</p>
+  {% get_providers as socialaccount_providers %}
+  {% for provider in socialaccount_providers %}
+  <div class="">
+    {% if provider.name == "Google" %}
+    <div class="my-2">
+      <a style="width: 180px;" class="btn btn-block btn-sm btn-outline-warning socialaccount_provider {{provider.id}}" href="{% provider_login_url provider.id process='login' scope=scope auth_params=auth_params %}"> Googleでサインアップ</a>
+    </div>
+    {% elif provider.name == "Twitter" %}
+    <div class="my-2">
+      <a style="width: 180px;" class="btn btn-block btn-sm btn-outline-primary socialaccount_provider {{provider.id}}" href="{% provider_login_url provider.id process='login' scope=scope auth_params=auth_params %}"> Twitterでサインアップ</a>
+    </div>
+    {% elif provider.name == "Github" %}
+    <div class="my-2">
+      <a style="width: 180px;" class="btn btn-block btn-sm btn-outline-dark socialaccount_provider {{provider.id}}" href="{% provider_login_url provider.id process='login' scope=scope auth_params=auth_params %}"> Githubでサインアップ</a>
+    </div>
+  </div>
+    {% endif %}
+  {% endfor %}
+  </div>
 </div>
 
 {% endblock %}
+
