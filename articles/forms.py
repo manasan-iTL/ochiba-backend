@@ -13,32 +13,26 @@ from django.core.exceptions import ValidationError #add
 from django.core.validators import FileExtensionValidator, validate_email #add
 
 class PostForm(forms.Form):
-    title = forms.CharField(max_length=100, label='記事タイトル', required=True, widget = forms.TextInput(attrs={'placeholder':'ブックマークリストタイトル'}))
-    discription = forms.CharField(label='記事の概要', widget=forms.Textarea(attrs={'placeholder':'このブックマークリストについて'}))
+    title = forms.CharField(max_length=100, label='記事タイトル', required=True, widget = forms.TextInput(attrs={'placeholder':'ブックマークリストタイトル','class':'form-item'}))
+    discription = forms.CharField(label='記事の概要', widget=forms.Textarea(attrs={'placeholder':'このブックマークリストについて','class':'form-item'}))
     status = forms.BooleanField(label='公開する', required=False)
-
-# class ObjectFileForm(forms.Form):
-#     title = forms.CharField(max_length=100, label='タイトル', required=True, widget = forms.TextInput(attrs={'placeholder':'ブックマークした記事のタイトルを入力'}))
-#     url = forms.URLField(max_length=100, label='URL', required=True, widget = forms.URLInput(attrs={'placeholder':'ブックマークした記事のタイトルを入力'}))
-#     discription = forms.CharField(max_length=100, label='メモ', required=False, widget = forms.Textarea(attrs={'placeholder':'ブックマークした記事の概要、メモを入力'}))
-
-#     def clean(self):
-#         cleaned_data = super(ObjectFileForm, self).clean()
-#         # if data is not provided for some fields and those fields have an
-#         # initial value, then set the values to initial value
-#         for name in self.fields:
-#             if not self[name].html_name in self.data and self.fields[name].initial is not None:
-#                 cleaned_data[name] = self.fields[name].initial
-#         return cleaned_data
 
 class ObjectForm(forms.ModelForm):
     class Meta:
         model = Object
         fields = ('url','title', 'discription', 'post_data')
+        labels = {
+            'url':'URL',
+            'title':'タイトル',
+            'discription':'概要'
+        }
         widgets = {
-            'url':URLInput(attrs={'placeholder':'ブックマークした記事のURLを入力'}),
-            'title':TextInput(attrs={'placeholder':'ブックマークした記事のタイトルを入力'}),
-            'discription':Textarea(attrs={'placeholder':'ブックマークした記事の概要、メモを入力'}),
+            'url':URLInput(attrs={'placeholder':'ブックマークした記事のURLを入力',
+                                  'class':'form-item'}),
+            'title':TextInput(attrs={'placeholder':'ブックマークした記事のタイトルを入力',
+                                     'class':'form-item'}),
+            'discription':Textarea(attrs={'placeholder':'ブックマークした記事の概要、メモを入力',
+                                          'class':'form-item'}),
         }
     
     def has_changed(self):
@@ -59,7 +53,7 @@ class UploadFileForm(forms.Form):
 
 ObjectCreateForm = forms.inlineformset_factory(
     Post, Object, form=ObjectForm, 
-    extra=0 ,max_num=100, can_delete=True
+    extra=1 ,max_num=100, can_delete=True
 )
 
 

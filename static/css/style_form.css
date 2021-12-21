@@ -1,0 +1,77 @@
+/*
+主にフォームに関するスタイリングをまとめる
+*/
+
+.edit-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 700px;
+    margin: 0 auto;
+}
+/* 
+.create-content {
+    width: 80%;
+    background-color: orange;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    
+} */
+
+.post-form {
+    border: 2px black solid;
+    width: 95%;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    background-color: white;
+}
+
+.post-field {
+    width: 60%;
+    height: calc(100%/3-10px);
+}
+
+.formset {
+    width:90%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    background-color: orange;
+}
+
+.object-form {
+    border: 2px black solid;
+    width: 95%;
+    max-height: 235px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    background-color: white;
+}
+
+.object-field {
+    width: 60%;
+    height: 45%;
+}
+
+.object-form .object-field:last-of-type {
+    width: 30%;
+    margin-top: 20%;
+    display: flex;
+    justify-content: center;
+}
+
+
+.form-item {
+    width: 100%;
+    height: 35px;
+}

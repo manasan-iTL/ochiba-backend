@@ -139,8 +139,12 @@ class SampleUpdateObjectView(LoginRequiredMixin, View):
                 if formset.is_valid():
                     post.save()
                     formset.save()
+                    # instances = formset.save(commit=False)
+                    # for file in formset.deleted_objects:
+                    #     file.delete()
+                    # for file in instances:
+                    #     file.save()
                     return redirect('/')
-            
                 else:
                     return render(request, 'articles/new_postobj.html', {
                         'form':form,
@@ -246,10 +250,12 @@ class SearchView(View):
                     query_list += word
             query = reduce(and_, [Q(title__icontains=q)|Q(discription__icontains=q) for q in query_list])
             post_list = post_list.filter(query)
+            count_post = len(post_list)
 
         return render(request, 'articles/index.html', {
             'post_list':post_list,
             'keyword':keyword,
+            'count_post':count_post
         })
 
 
