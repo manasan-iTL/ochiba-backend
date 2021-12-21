@@ -49,9 +49,9 @@
       </div>
     </div>
 </li> -->
-<div class="layout-index">
+<div class="layout-index p-3 mx-3 my-0" style="background-color: white;">
     {% for post in post_list %}
-    <div class="card">
+    <div class="card mx-0">
         <div class="card-object d-flex my-2">
           <div class="align-self-center mr-2">
             <a href="{% url 'accounts:profile' post.user.username %}">
@@ -118,6 +118,33 @@
 
 </div>
     
+{% endblock %}
+
+{% block left_aside %}
+<div class="btn-group-vertical my-4" style="width: 100%;" role="group" aria-label="Vertical radio toggle button group">
+    <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-latest" autocomplete="off" checked>
+    <label class="btn btn-outline-danger" for="vbtn-latest">最新</label>
+    <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-trend" autocomplete="off">
+    <label class="btn btn-outline-danger" for="vbtn-trend">トレンド</label>
+    <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-following" autocomplete="off" >
+    <label class="btn btn-outline-danger" for="vbtn-following">フォロー中</label>
+    <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-recomend" autocomplete="off" >
+    <label class="btn btn-outline-danger" for="vbtn-recommend">おすすめ</label>
+</div>
+{% endblock %}
+
+{% block right_aside %}
+<div class="sticky-sidebar">
+  <div class="mb-3 border border-dark" style="width: 300px; height: 250px;">
+      広告1
+  </div>
+  <div class="mb-3 border border-dark" style="width: 300px; height: 250px;">
+      広告2
+  </div>
+  <div class="mb-3 border border-dark" style="width: 300px; height: 250px;">
+      広告3
+  </div>
+</div>
 {% endblock %}
 
 {% block add_js %}

@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block main %}
-    <div class="edit-area">
+    <div class="edit-area p-3 mx-3" style="background-color: white;">
         <form action="" method="post" class="formset">
                 <div class="post-form">
                     <h2>新規記事</h2>
@@ -25,7 +25,7 @@
                         <button class="btn btn-outline-danger" type="submit" name="postdelete">記事を削除</button>
                     </div> 
                 </div>
-        <hr>
+                <hr>
             
             <!-- <div class="text-center my-5">
                 <h2>オブジェクト一覧</h2>
@@ -49,27 +49,28 @@
             </div> -->
             
             
-                {% for form in formset %}
-                    <div class="object-form">
-                    {{ form.non_field_errors }}
-                    {% for field in form.visible_fields %}
-                        <div class="object-field">
-                            <label for="{{ field.id_for_label }}">{{ field.label_tag }}</label>
-                            {{ field }}
-                            {{ field.errors }}
-                        </div>
-                    {% endfor %}
-                    {% for field in form.hidden_fields %}
+            {% for form in formset %}
+                <div class="object-form">
+                {{ form.non_field_errors }}
+                {% for field in form.visible_fields %}
+                    <div class="object-field">
+                        <label for="{{ field.id_for_label }}">{{ field.label_tag }}</label>
                         {{ field }}
-                    {% endfor %}
+                        {{ field.errors }}
                     </div>
                 {% endfor %}
+                {% for field in form.hidden_fields %}
+                    {{ field }}
+                {% endfor %}
+                </div>
+            {% endfor %}
             {{ formset.management_form }}
             {% csrf_token %}
             <div class="edit-footer col text-center my-5">
                 <button id="add" type="button" class="btn btn-outline-dark">オブジェクト追加</button>
                 <button type="submit" name="save" class="btn btn-outline-dark">保存</button> 
             </div>
+            {% endfor %}
         </form>
     </div>
 {% endblock %}

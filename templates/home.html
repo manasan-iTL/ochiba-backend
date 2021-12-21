@@ -1,0 +1,21 @@
+<!doctype html>
+ 
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+</head>
+<body>
+  {% if user_data.is_authenticated %}
+  <h5>
+    ログオンユーザ名： {{ user_data.username }} さん<br>
+    メールアドレス： {{ user_data.email }}<br>
+    セッション開始時刻: {{ user_data.last_login }}
+    <p><a href="{% url 'account_logout' %}">ログアウト</a></p>
+  </h5>
+  {% else %}
+  <h5>
+    <p><a href="{% url 'account_login' %}">ログイン</a></p>
+  </h5>
+{% endif %}
+</body>
+</html>
