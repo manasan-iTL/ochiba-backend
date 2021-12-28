@@ -47,12 +47,10 @@
         <a class="btn btn-outline-dark mb-5" href="{% url 'accounts:profile_edit' user_data.username %}">プロフィール編集</a>
     </div>
     {% endif %}
+</div>
 {% endblock %}
 
 {% block main_b %}
-
-
-
     <div style="word-break: break-all;">
         {% if user.username in request.get_full_path and user.username != '' %}
         <div class="text-center">
@@ -205,7 +203,6 @@
                 {% endfor %}
             </div>
             {% endfor %}
-            
         {% endif %}
     </div>
 

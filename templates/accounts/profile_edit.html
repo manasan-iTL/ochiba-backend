@@ -6,7 +6,7 @@
     <div class="text-center my-5">
         <h2>公開用プロフィール編集画面</h2>
     </div>
-et_full_path %}
+    {% if user.username in request.get_full_path %}
     <div class="">
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
