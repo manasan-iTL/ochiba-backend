@@ -1,4 +1,11 @@
 {% extends 'base_profile.html' %}
+
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/style_index.css' %}">
+{% endblock %}
+
 {% block main %}
 <div class="layout-index p-3" style="background-color: white;">
 
@@ -60,26 +67,93 @@
 
     <div style="word-break: break-all;">
         {% if user.username in request.get_full_path %}
-            {% for post in post_data %}
             <div id="publist" style="display: block;">
-                <h1>公開記事一覧</h1>
-                <p>{{ post.title }}</p>
-                <p>{{ post.discription }}</p>
-                <p>{{ post.object_set.first.title }}</p>
-                <p >{{ post.object_set.first.url }}</p>
-                <p>{{ post.object_set.first.discription }}</p>
+                <div class="layout-index p-3 mx-3 my-0" style="background-color: white;">
+                    {% for post in post_data %}
+                    <div class="card mx-0">
+                        <div class="card-object d-flex my-2">
+                        <div class="align-self-center mr-2">
+                            <a href="{% url 'accounts:profile' post.user.username %}">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="gray" class="bi bi-person-circle" viewBox="0 0 16 16">
+                                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                                <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                            </svg>              <!-- <img src='{{ post.user.image }}' width="10" height="10"> -->
+                            </a>
+                        </div>
+                        <div>
+                            <p class="mb-0 font-weight-light"><a href="{% url 'accounts:profile' post.user.username %}">@{{post.user.username}}</a></p>
+                            <h2 class="mb-0 font-weight-bold"><a href="{% url 'article_detail' post.slug post.id %}">{{ post.title }}</a></h2>
+                        </div>
+                        </div>
+                        <div class="card-post">
+                            <p class="mb-0" id='overflag{{ post.id }}'>概要：{{ post.discription|truncatechars:30 }}</p>
+                            <small><p class="mb-0 ">更新：{{ post.created_at }}</p></small> 
+                        </div>
+                        <hr>
+                        <div class="card-object">
+                        <p class="mb-2"><a href="{{  post.object_set.all.0.url }}">{{ post.object_set.all.0.title }}</a></p>
+                        <p class="mb-2"><a href="{{  post.object_set.all.0.url }}">{{ post.object_set.all.1.title }}</a></p>
+                        <p class="mb-2"><a href="{% url 'article_detail' post.slug post.id %}">...</a></p>
+                
+                        <hr>
+                        </div>
+                
+                        <div class="card-object text-center">
+                        {% if user == post.user %}
+                            <!-- <a class="btn btn-outline-dark" href="{% url 'article_update' post.id %}">編集</a> -->
+                            <a class="btn btn-outline-dark" href="{% url 'object_update' post.id %}">編集</a>
+                        {% endif %}
+                        <a class="btn btn-outline-dark" id='detail{{post.id}}' href="{% url 'article_detail' post.slug post.id %}" class="detail">詳細</a>
+                        </div> 
+                    </div>
+                    {% endfor %}
+                </div>
             </div>
-            {% endfor %}
 
-            {% for unpub in post_unpub_data %}
             <div id="unpublist" style="display: none;">
-                <h1>未公開記事一覧</h1>
-                <p>{{ unpub.title }}</p>
-                <p>{{ unpub.discription }}</p>
+                <div class="layout-index p-3 mx-3 my-0" style="background-color: white;">
+                    {% for unpub in post_unpub_data %}
+                    <div class="card mx-0">
+                        <div class="card-object d-flex my-2">
+                        <div class="align-self-center mr-2">
+                            <a href="{% url 'accounts:profile' unpub.user.username %}">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="gray" class="bi bi-person-circle" viewBox="0 0 16 16">
+                                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                                <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                            </svg>              <!-- <img src='{{ post.user.image }}' width="10" height="10"> -->
+                            </a>
+                        </div>
+                        <div>
+                            <p class="mb-0 font-weight-light"><a href="{% url 'accounts:profile' unpub.user.username %}">@{{unpub.user.username}}</a></p>
+                            <h2 class="mb-0 font-weight-bold"><a href="{% url 'article_detail' unpub.slug unpub.id %}">{{ unpub.title }}</a></h2>
+                        </div>
+                        </div>
+                        <div class="card-post">
+                            <p class="mb-0" id='overflag{{ unpub.id }}'>概要：{{ unpub.discription|truncatechars:30 }}</p>
+                            <small><p class="mb-0 ">更新：{{ unpub.created_at }}</p></small> 
+                        </div>
+                        <hr>
+                        <div class="card-object">
+                        <p class="mb-2"><a href="{{  unpub.object_set.all.0.url }}">{{ unpub.object_set.all.0.title }}</a></p>
+                        <p class="mb-2"><a href="{{  unpub.object_set.all.0.url }}">{{ unpub.object_set.all.1.title }}</a></p>
+                        <p class="mb-2"><a href="{% url 'article_detail' unpub.slug unpub.id %}">...</a></p>
+                
+                        <hr>
+                        </div>
+                
+                        <div class="card-object text-center">
+                        {% if user == post.user %}
+                            <!-- <a class="btn btn-outline-dark" href="{% url 'article_update' post.id %}">編集</a> -->
+                            <a class="btn btn-outline-dark" href="{% url 'object_update' unpub.id %}">編集</a>
+                        {% endif %}
+                        <a class="btn btn-outline-dark" id='detail{{unpub.id}}' href="{% url 'article_detail' unpub.slug unpub.id %}" class="detail">詳細</a>
+                        </div> 
+                    </div>
+                    {% endfor %}
+                </div>
             </div>
-            {% endfor %}
+
         {% else %}
-    
             {% for post in post_data %}
             <h1>公開記事一覧2</h1>
             <p>{{ post.title }}</p>
