@@ -2,6 +2,7 @@
 
 {% block main %}
 <h2>フォルダ選択</h2>
+<p>URLメモを作りたいフォルダを1つ選択してください。</p>
 <form method="post" action="">
     {% for folder in folders %}
     <p>
@@ -10,26 +11,7 @@
     </p>
     {% endfor %}
     {% csrf_token %}
-    <button type="submit">選択</button>
+    <button type="submit" class="btn btn-outline-dark">選択</button>
 </form>
 
-<h2>選択したフォルダの要素</h2>
-{% for content in contents%}
-    <p>{{content.title}}{{content.url}}</p>
-{% endfor %}
-
-<form method="post">
-<h2>添付ファイル</h2>
-    {{ formset.management_form }}
-    <div id="object-form">
-        {% for file_form in formset %}
-            <div class="form-wrapper">
-                {{ file_form.as_p }}
-                <button type="button">削除する</button>
-            </div>
-        {% endfor %}
-    </div>
-{% csrf_token %}
-    <button type="submit" class="btn btn-primary" name="save">保存</button>
-</form>
 {% endblock %}

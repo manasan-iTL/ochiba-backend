@@ -1,10 +1,32 @@
 {% extends 'base.html' %}
 
 {% block main %}
-<h2>ファイルアップロード</h2>
+<h2>HTMLファイルアップロード</h2>
+<p>１ 各ブラウザのブックマークファイルをエクスポートする。各ブラウザのエクスポート手順は以下から。</p>
+<ul>
+    <li><a href="https://support.google.com/chrome/answer/96816?hl=ja">Google Chrome</a></li>
+    <li><a href="https://dynabook.com/assistpc/faq/pcdata2/018137.htm">Microsoft Edge</a></li>
+    <li><a href="https://support.mozilla.org/ja/kb/export-firefox-bookmarks-to-backup-or-transfer">Fire fox</a></li>
+    <li>他のブラウザを利用の方も同様にHTMLファイルをエクスポートしてください。</li>
+</ul>
+<p>２ ブックマークファイルのインポート</p>
+
 <form method = "POST" enctype="multipart/form-data">
     {% csrf_token %}
-    {{form}}
-    <button type="submit">保存</button>
+    <p>
+        {{ form.non_field_errors }}
+    </p>
+    {% for field in form %}
+        <div class="field">
+            {{ field.label_tag }}
+            {{ field }}
+            {% if field.help_text %}
+                <span class="helptext">{{ field.help_text }}</span>
+            {% endif %}
+            {{ field.errors }}
+        </div>
+    {% endfor %}
+
+    <button type="submit" class="btn btn-outline-dark">保存</button>
 </form>
 {% endblock %}
