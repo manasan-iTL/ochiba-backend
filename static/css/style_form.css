@@ -2,6 +2,10 @@
 主にフォームに関するスタイリングをまとめる
 */
 
+/*
+スタイルに関する記述
+*/
+
 .edit-area {
     display: flex;
     flex-direction: column;
@@ -75,3 +79,29 @@
     width: 100%;
     height: 35px;
 }
+
+/*
+マージン・パディングに関する記述
+*/
+
+.form-mytop {
+    margin-top: 10px;
+}
+
+.item-mytop {
+    margin-top: 20px;
+}
+
+.form-paddleft {
+    padding-left: 10px;
+}
+
+/*
+見た目に関する記述
+*/
+
+.textarea-height {
+    background-color: blue;
+    max-height: 100px;
+}
+

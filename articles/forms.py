@@ -32,7 +32,7 @@ class ObjectForm(forms.ModelForm):
             'title':TextInput(attrs={'placeholder':'ブックマークした記事のタイトルを入力',
                                      'class':'form-item'}),
             'discription':Textarea(attrs={'placeholder':'ブックマークした記事の概要、メモを入力',
-                                          'class':'form-item'}),
+                                          'class':'form-item textarea-height'}),
         }
     
     def has_changed(self):
