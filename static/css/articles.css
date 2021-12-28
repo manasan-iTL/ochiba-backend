@@ -1,0 +1,30 @@
+.layout-index.p-3.mx-3 .table {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.layout-index.p-3.mx-3 .form_body {
+  text-align: center;
+}
+
+.layout-index.p-3.mx-3 .form_label {
+  width: 52vh;
+  text-align: center;
+}
+
+.layout-index.p-3.mx-3 .form-item {
+  width: 35vw;
+}
+
+.layout-index.p-3.mx-3 .form_title {
+  text-align: left;
+}
+
+.layout-index.p-3.mx-3 .form_discription {
+  text-align: left;
+}
+
+.layout-index.p-3.mx-3 .form_status {
+  text-align: left;
+}
+/*# sourceMappingURL=articles.css.map */
