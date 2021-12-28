@@ -1,0 +1,69 @@
+{% extends "base_login.html" %}
+
+{% load i18n %}
+
+{% block content %}
+<div class="layout-index p-3 mx-3">
+  <div class="text-center my-5">
+      <h2>メールアドレス変更</h2>
+  </div>
+  <div class="text-center"> 
+      <main>
+          <div>
+              {% for emailaddress in user.emailaddress_set.all %}
+              {% if emailaddress.verified %}
+              <p>登録済みメールアドレス {{ emailaddress.email }}</p>
+              {% else %}
+              <form action="{% url 'account_email' %}" method="post">
+                  未登録メールアドレス
+                  {% csrf_token %}
+                  <input type="text" readonly name="email" value="{{emailaddress.email}}"/>
+                  <p class="my-3">
+                      メールアドレスを変更する場合は、上記メールアドレス宛に送信されたメールをご確認ください。
+                      <br>
+                      メールが届いていない場合は、「確認メールを再送する」ボタンをクリックしてください。			
+                  </p>
+                  <button class="btn btn-sm btn-outline-dark my-3" name="action_send" >確認メールを再送する</button>
+                  <!-- <button class="btn btn-sm btn-outline-dark" name="action_remove" >削除</button> -->
+              </form>
+              {% endif %}
+              {% endfor %}
+          </div>
+          {% if can_add_email %}
+          <form method="post" action="{% url 'account_email' %}" class="add_email">
+              {% csrf_token %}
+              <p>
+                  <label for="id_email">新しいメールアドレス</label>
+                  <input type="email" name="email" placeholder="メールアドレス" required="" id="id_email">
+              </p>
+              <p>メールアドレスを所有していることを確認するためにメールが送信されます。
+                <br>
+                確認が完了するとメールアドレスが更新されます。</p>
+              {% for error in form.errors.email %}
+              <p class="fw-bold">{{ error }}</p>
+              {% endfor %}
+              <button class="btn btn-sm btn-outline-dark" name="action_add" type="submit">確認メールを送信</button>
+          </form>
+          {% else %}
+          <!-- <p>変更する場合は、未確認となっているメールアドレスを削除してください。</p> -->
+          {% endif %}
+      </main>
+  </div>
+</div>  
+{% endblock %}
+
+{% block extra_body %}
+<script type="text/javascript">
+    (function() {
+        var message = "選択されたメールアドレスを削除しても良いですか？";
+        var actions = document.getElementsByName('action_remove');
+        if (actions.length) {
+            actions[0].addEventListener("click", function(e) {
+                if (! confirm(message)) {
+                    e.preventDefault();
+                }
+            });
+        }
+    })();
+</script>
+{% endblock %}
