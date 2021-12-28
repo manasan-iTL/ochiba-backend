@@ -52,27 +52,25 @@
     </header>
 
     <div class="container my-3">
-
         <main class="main my-3" role="main">
             {% block main %}
             {% endblock %}
         </main>
     </div>
 
-    <div class="container my-3" style="background-color: bisque;">
-        <!-- <aside class="left-aside" style="width: 150px;" >
-            {% block left_aside_ %}
+    <div class="container my-3 " style="background-color: bisque;">
+        <aside class="left-aside" style="width: 150px;" >
+            {% block left_aside %}
             {% endblock %}
-        </aside> -->
+        </aside>
+        <main class="my-3" role="main" style="width: 1000px;">
+            {% block main_b %}
+            {% endblock %}
+        </main>
         <aside class="right-aside p-2" style="width: 320px;">
             {% block right_aside %}
             {% endblock %}
         </aside> 
-        <main class="my-3" role="main" style="width: 800px;">
-            {% block main_b %}
-            <!-- メインコンテンツ -->
-            {% endblock %}
-        </main>
     </div>
 
 

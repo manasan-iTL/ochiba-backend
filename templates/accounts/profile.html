@@ -1,9 +1,9 @@
 {% extends 'base_profile.html' %}
 {% block main %}
-<div class="layout-index p-3 mx-3" style="background-color: white;">
+<div class="layout-index p-3" style="background-color: white;">
 
     <div class="text-center my-5">
-        <h2>プロフィール</h2>
+        <p>プロフィール</p>
     </div>
     <table class="table">
         <tbody>
@@ -35,49 +35,93 @@
             </tr>
         </tbody>
     </table>
-{% endblock %}
-
-{% block main_b %}
-
     {% if request.user.username == user_data.username %}
     <div class="col text-center">
         <a class="btn btn-outline-dark mb-5" href="{% url 'accounts:profile_edit' user_data.username %}">プロフィール編集</a>
     </div>
     {% endif %}
+{% endblock %}
+
+{% block main_b %}
+
+    <div class="btn-group my-5" role="group" aria-label="Basic radio toggle button group">
+        <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
+        <label class="btn btn-outline-dark" for="btnradio1">公開一覧</label>
+
+        <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off" >
+        <label class="btn btn-outline-dark" for="btnradio2">未公開一覧</label>
+
+        <!-- <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off">
+        <label class="btn btn-outline-dark" for="btnradio3">お気に入り</label>
+
+        <input type="radio" class="btn-check" name="btnradio" id="btnradio4" autocomplete="off">
+        <label class="btn btn-outline-dark" for="btnradio4">新規作成</label> -->
+    </div>
 
     <div style="word-break: break-all;">
         {% if user.username in request.get_full_path %}
-        <h2>公開記事一覧</h2>
-        {% for post in post_data %}
-        <h2>{{ post.title }}</h2>
-        <h2>{{ post.discription }}</h2>
-        <h2>{{ post.object_set.first.title }}</h2>
-        <h2 >{{ post.object_set.first.url }}</h2>
-        <h2>{{ post.object_set.first.discription }}</h2>
-        {% endfor %}
-        <h2>未公開記事一覧</h2>
-        {% for unpub in post_unpub_data %}
-        <h2>{{ unpub.title }}</h2>
-        <h2>{{ unpub.discription }}</h2>
-        {% endfor %}
+            {% for post in post_data %}
+            <div id="publist" style="display: block;">
+                <h1>公開記事一覧</h1>
+                <p>{{ post.title }}</p>
+                <p>{{ post.discription }}</p>
+                <p>{{ post.object_set.first.title }}</p>
+                <p >{{ post.object_set.first.url }}</p>
+                <p>{{ post.object_set.first.discription }}</p>
+            </div>
+            {% endfor %}
+
+            {% for unpub in post_unpub_data %}
+            <div id="unpublist" style="display: none;">
+                <h1>未公開記事一覧</h1>
+                <p>{{ unpub.title }}</p>
+                <p>{{ unpub.discription }}</p>
+            </div>
+            {% endfor %}
         {% else %}
-        {% for post in post_data %}
-        <h2>公開記事一覧</h2>
-        <h2>{{ post.title }}</h2>
-        <h2>{{ post.discription }}</h2>
-        <h2>{{ post.object_set.first.title }}</h2>
-        <h2>{{ post.object_set.first.url }}</h2>
-        <h2>{{ post.object_set.first.discription }}</h2>
-        {% endfor %}
+    
+            {% for post in post_data %}
+            <h1>公開記事一覧2</h1>
+            <p>{{ post.title }}</p>
+            <p>{{ post.discription }}</p>
+            <p>{{ post.object_set.first.title }}</p>
+            <p>{{ post.object_set.first.url }}</p>
+            <p>{{ post.object_set.first.discription }}</p>
+            {% endfor %}
+            
         {% endif %}
     </div>
-</div>
+
 {% endblock %}
 
 {% block right_aside %}
-
+<div class="sticky-sidebar">
   <div class="mb-3 border border-dark" style="width: 300px; height: 250px;">
       広告1
   </div>
+  <div class="mb-3 border border-dark" style="width: 300px; height: 250px;">
+      広告2
+  </div>
+  <div class="mb-3 border border-dark" style="width: 300px; height: 250px;">
+      広告3
+  </div>
+</div>
+{% endblock %}
 
+{% block add_js %}
+<script>
+    let btnradio1 = document.getElementById('btnradio1');
+    let btnradio2 = document.getElementById('btnradio2');
+    let publist = document.getElementById('publist');
+    let unpublist = document.getElementById('unpublist');
+
+    btnradio1.addEventListener('input', ()=> {
+        publist.style.display = 'block';
+        unpublist.style.display = 'none';
+    });
+    btnradio2.addEventListener('input', ()=> {
+        unpublist.style.display = 'block';
+        publist.style.display = 'none';
+    });
+</script>
 {% endblock %}

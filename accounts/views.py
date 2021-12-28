@@ -17,8 +17,8 @@ class ProfileView(View):
     slug_url_kwarg = 'username'
     def get(self, request, *args, **kwargs):
         user_data = CustomUser.objects.get(username=self.kwargs['username'])
-        post_data = Post.objects.filter(status=True).all
-        post_unpub_data = Post.objects.filter(status=False).all
+        post_data = Post.objects.filter(user=user_data,status=True).all
+        post_unpub_data = Post.objects.filter(user=user_data, status=False).all
 
         return render(request, 'accounts/profile.html', {
             'user_data': user_data,
