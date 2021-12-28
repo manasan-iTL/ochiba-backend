@@ -8,9 +8,18 @@
 
 {% block main %}
 
+{% if messages %}
+<ul>
+  {% for message in messages %}
+  <li>{{ message }}</li>
+  {% endfor %}
+</ul>
+{% endif %}
+
 {% if keyword %}
 <div class="text-center my-5">
   <h2>検索キーワード:{{keyword}}</h2>
+  <p>検索件数：{{count_post}}</p>
 </div>
 {% endif %}
 
@@ -76,7 +85,6 @@
 
         <div class="card-object text-center">
           {% if user == post.user %}
-            <!-- <a class="btn btn-outline-dark" href="{% url 'article_update' post.id %}">編集</a> -->
             <a class="btn btn-outline-dark" href="{% url 'object_update' post.id %}">編集</a>
           {% endif %}
           <a class="btn btn-outline-dark" id='detail{{post.id}}' href="{% url 'article_detail' post.slug post.id %}" class="detail">詳細</a>
