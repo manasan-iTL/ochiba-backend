@@ -44,7 +44,7 @@
               <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
                 <form class="d-flex form-inline navbar-form" style="height: 40px;" method ="get" action="{% url 'search' %}" >
                   <input class="form-control" style="width: 300px;" type="text" name="keyword" placeholder="検索">
-                  <button class="btn btn-outline-primary btn-block mx-2" type="submit">検索</button>
+                  <button class="btn btn-outline-primary btn-block mx-2"style="width: 60px;" type="submit">検索</button>
                 </form>
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                   {% if user.is_authenticated %}
@@ -90,6 +90,7 @@
     <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js" 
     integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" 
     crossorigin="anonymous"></script> -->
+    <script src="{% static 'js/offcanvas.js' %}"></script>
     {% block add_js %}
     {% endblock %}
 </body>

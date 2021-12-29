@@ -1,4 +1,5 @@
 {% extends 'header.html' %}
+{% load static %}
 
 {% block head %}
 {% endblock %}
@@ -25,16 +26,7 @@
         <p class="text-muted">Copyright &copy; BookmarkShareApp 2021</p>
     </footer>
 {% endblock %}
-
-    {% block add_js %}
-    <script>
-        (function () {
-        'use strict'
-        document.querySelector('[data-bs-toggle="offcanvas"]').addEventListener('click', function () {
-            document.querySelector('.offcanvas-collapse').classList.toggle('open')
-        })
-        })()
-    </script>
-    {% endblock %}
+{% block add_js %}
+{% endblock %}
 </body>
 </html>
