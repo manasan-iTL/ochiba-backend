@@ -18,26 +18,28 @@
                 <!-- <th class="header" style="width:30%">プロフィール画像</th> -->
                 <td class="data" style="width:70%">
                     {% if user_data.image %}
-                        <!-- 画像あり -->
                         <img src='{{ user_data.image.url }}' width="100" height="100">
                     {% else %}
-                        画像なし
+                        <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="gray" class="bi bi-person-circle" viewBox="0 0 16 16">
+                            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                            <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                        </svg>
                     {% endif %}
                 </td>
             </tr>
             
             <tr class="pro_un">
                 <!-- <th>ユーザー名</th> -->
-                <!-- <td>{{ user_data.username }}</td> -->
+                <td>{{ user_data.username }}</td>
             </tr>   
                 <!-- <tr class="pro_m"> 
                     <th>メール</th>
                     <td>{{ user_data.email }}</td>
                 </tr> -->
-                <tr class="pro_ln">
+                <!-- <tr class="pro_ln"> -->
                     <!-- <th>姓</th> -->
-                    <th>{{ user_data.last_name }}</th>
-                </tr>
+                    <!-- <th>{{ user_data.last_name }}</th> -->
+                <!-- </tr> -->
                 <!-- <tr class="pro_fn">
                     <th>名</th>
                     <td>{{ user_data.first_name }}</td>

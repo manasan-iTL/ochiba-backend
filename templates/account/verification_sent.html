@@ -1,12 +1,20 @@
-{% extends "account/base.html" %}
+{% extends "base_login.html" %}
 
 {% load i18n %}
 
-{% block head_title %}{% trans "Verify Your E-mail Address" %}{% endblock %}
 
 {% block content %}
-    <h1>{% trans "Verify Your E-mail Address" %}</h1>
-
-    <p>{% blocktrans %}We have sent an e-mail to you for verification. Follow the link provided to finalize the signup process. If you do not see the verification e-mail in your main inbox, check your spam folder. Please contact us if you do not receive the verification e-mail within a few minutes.{% endblocktrans %}</p>
-
+<div class="layout-index p-3 mx-3">
+  <div class="text-center my-5">
+    <h2>メールアドレス認証</h2>
+  </div>
+  <div class="text-center">    
+    <p>確認のためのメールを送信しています。記載されているリンクに従って、サインアップを完了してください。
+        <br>
+        メインの受信トレイに確認メールが表示されない場合は、迷惑メールフォルダを確認してください。
+        <br>
+        数分以内に確認メールが届かない場合は、<a href="mailto:info@example.com">info@example.com</a>にご連絡ください。
+    </p>
+  </div>
+</div>
 {% endblock %}
