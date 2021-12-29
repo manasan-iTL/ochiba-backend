@@ -187,13 +187,13 @@ ACCOUNT_EMAIL_SUBJECT_PREFIX = '' # メールの件名のプレフィックス
 ACCOUNT_MAX_EMAIL_ADDRESSES = 2 # 登録できるメールアドレスの上限。1だと変更できない。 
 ACCOUNT_USERNAME_BLACKLIST = [] # usernameとして使えない文字
 
-# # メール送信の設定 Gmailを使う。
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_HOST = 'smtp.gmail.com'
-# EMAIL_PORT = 587
-# EMAIL_HOST_USER = 'hoge@gmail.com'
-# EMAIL_HOST_PASSWORD = 'gmailのログインパスワード'
-# EMAIL_USE_TLS = True
+# メール送信の設定 Gmailを使う。
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'ochiba.customer@gmail.com'
+EMAIL_HOST_PASSWORD = 'ggyhexmgtcdhvdzg'
+EMAIL_USE_TLS = True
 
 # # ソーシャルアカウントでログイン・サインアップ時の設定
 # SOCIALACCOUNT_EMAIL_VERIFICATION = 'none' 
