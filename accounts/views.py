@@ -17,7 +17,7 @@ class ProfileView(View):
     slug_url_kwarg = 'username'
     def get(self, request, *args, **kwargs):
         user_data = CustomUser.objects.get(username=self.kwargs['username'])
-        post_data = Post.objects.filter(user=user_data,status=True).all
+        post_data = Post.objects.filter(user=user_data, status=True).all
         post_unpub_data = Post.objects.filter(user=user_data, status=False).all
 
         return render(request, 'accounts/profile.html', {
@@ -34,6 +34,7 @@ class ProfileEditView(LoginRequiredMixin, View):
             initial={
                 'first_name': user_data.first_name,
                 'last_name': user_data.last_name,
+                'username': user_data.username,
                 'description': user_data.description,
                 'image': user_data.image
             }
@@ -48,13 +49,14 @@ class ProfileEditView(LoginRequiredMixin, View):
         form = ProfileEditForm(request.POST or None)
         if form.is_valid():
             user_data = CustomUser.objects.get(id=request.user.id)
+            user_data.username = form.cleaned_data['username']
             user_data.first_name = form.cleaned_data['first_name']
             user_data.last_name = form.cleaned_data['last_name']
             user_data.description = form.cleaned_data['description']
             if request.FILES.get('image'):
                 user_data.image = request.FILES.get('image')
             user_data.save()
-            return redirect('accounts:profile', request.user)
+            return redirect('accounts:profile', user_data.username)
 
         return render(request, 'accounts/profile.html', {
             'form': form

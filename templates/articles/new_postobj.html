@@ -1,162 +1,80 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/style_form.css' %}">
+{% endblock %}
 
 {% block main %}
-<div class="p-3 mx-3" style="background-color: white;">
-    <form action="" method="post">
-        <div class="text-center my-5">
-            <h2>記事編集ページ</h2>
-        </div>
-        <div>
-            <table class="table">
-                <!-- <div class="row justify-content-center">      
-                    <div class="col col-4">a</div>
-                    <div class="col col-8">b</div>
-                    {{ form.as_table }}
-                </div> -->
-                <!-- <tr>
-                    <th style="width: 30%"></th>
-                    <td style="width: 70%"></td>
-                </tr> -->
-                {{ form.as_table }}
-            </table>
-        </div>
-        <div class="col text-center">
-            <button class="btn btn-outline-danger" type="submit" name="postdelete">記事を削除</button>
-            <button type="submit" class="btn btn-outline-dark" name="save">保存</button>
-        </div> 
-        <hr>
-        
-        <div class="text-center my-5">
-            <h2>オブジェクト一覧</h2>
-        </div>
-        {{ formset.management_form }}
-        <div id="object-form">
-            {% for file_form in formset %}
-            <div class="form-group">
-                <table class="table">
-                    <!-- <tr>
-                        <th style="width: 30%"></th>
-                        <td style="width: 70%"></td>
-                    </tr> -->
-                    {{ file_form.as_table }}
-                </table>
-                <div class="text-center">
-                    <button type="submit" class="btn btn-outline-danger">オブジェクトを削除</button>
+    <div class="edit-area form-mytop p-3 mx-3" style="background-color: white;">
+        <form action="" method="post" class="formset">
+                <div class="post-form form-mytop form-paddleft">
+                    <h2>新規記事</h2>
+                    {{ form.non_field_errors }}
+                    {% for field in form %}
+                        <div class="post-field item-mytop">
+                            {{ field.label_tag }}
+                            {{ field }}
+                            {% if field.help_text %}
+                                <span class="helptext">{{ field.help_text }}</span>
+                            {% endif %}
+                            {{ field.errors }}
+                        </div>
+                    {% endfor %}
+                    <div class="item-mytop">
+                        <button class="btn btn-outline-danger" type="submit" name="postdelete">記事を削除</button>
+                    </div> 
                 </div>
+                <hr>
+            
+            <!-- <div class="text-center my-5">
+                <h2>オブジェクト一覧</h2>
             </div>
+            {{ formset.management_form }}
+            <div id="object-form">
+                {% for file_form in formset %}
+                <div class="form-group">
+                    <table class="table">
+                        <tr>
+                            <th style="width: 30%"></th>
+                            <td style="width: 70%"></td>
+                        </tr> -->
+                        <!-- {{ file_form.as_table }}
+                    </table>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-outline-danger">オブジェクトを削除</button>
+                    </div>
+                </div>
+                {% endfor %}
+            </div> -->
+            
+            
+            {% for form in formset %}
+                <div class="object-form form-mytop form-paddleft">
+                {{ form.non_field_errors }}
+                {% for field in form.visible_fields %}
+                    <div class="object-field">
+                        <label for="{{ field.id_for_label }}">{{ field.label_tag }}</label>
+                        {{ field }}
+                        {{ field.errors }}
+                    </div>
+                {% endfor %}
+                {% for field in form.hidden_fields %}
+                    {{ field }}
+                {% endfor %}
+                </div>
             {% endfor %}
-        </div>
-
-        {% csrf_token %}
-        <div class="col text-center my-5">
-            <button id="add" type="button" class="btn btn-outline-dark">オブジェクト追加</button> 
-        </div>
-    </form>
-</div>
+            {{ formset.management_form }}
+            {% csrf_token %}
+            <div class="edit-footer col text-center my-5">
+                <button id="add" type="button" class="btn btn-outline-dark">オブジェクト追加</button>
+                <button type="submit" name="save" class="btn btn-outline-dark">保存</button> 
+            </div>
+        </form>
+    </div>
 {% endblock %}
 
 {% block add_js %}
-    <script>
-        $(function(){
-            let totalManagementElement = $('input#id_object_set-TOTAL_FORMS');
-            let currentObjectCount = parseInt(totalManagementElement.val()); 
-            const initialElement = $('input#id_object_set-INITIAL_FORMS');
-            const initialValue = parseInt(initialElement.val());
-            let invisibleCheckbox = [];
-
-            /*デフォルトの削除のチェックボックスを非表示にし、削除ボタンを作成して追加している*/
-
-            for (let i = 0; i < currentObjectCount; i++) {
-                invisibleCheckbox.push('input#id_object_set-' + i + '-DELETE');
-                console.log(invisibleCheckbox);
-                $('input#id_object_set-' + i + '-DELETE').css({
-                    'display':'none',
-                }); 
-                let saveElement = 'id_object_set-' + i + '-DELETE';
-                $("label[for='" + saveElement + "']").css({
-                    'display':'none',
-                });
-
-                let searchbuttonElement = $('input#id_object_set-' + i + '-DELETE').parent().next();
-                console.log(searchbuttonElement);
-                searchbuttonElement.attr('id','remove' + i);
-                
-            }
-            
-            /*オブジェクト追加ボタンを押したときの操作
-            　主に必要な要素を作成してそれを追加しているだけ
-            */
-            $('button#add').on('click', function(){
-
-                let formwrapper = $('<div></div>',{
-                    "class":"form-wrapper",
-                });
-                let discriptionLabel = $('<label>概要：</label>', {
-                   for:'id_object_set-' + currentObjectCount + '-discription',
-                });
-
-                let discriptionElement = $('<textarea>', {
-                    cols:'40',
-                    rows:'10',
-                    name:'object_set-' + currentObjectCount + '-discription',
-                    id:'id_object_set-' + currentObjectCount + '-discription',
-                });
-
-                let titleLabel = $('<label>タイトル：</label>', {
-                   for: 'id_object_set-' + currentObjectCount + '-title',
-                });
-
-                let titleElement = $('<input>', {
-                    type:'text',
-                    maxlength:'100',
-                    name:'object_set-' + currentObjectCount + '-title',
-                    id:'id_object_set-' + currentObjectCount + '-title',
-                });
-
-                let urlLabel = $('<label>URL：</label>', {
-                   for: 'id_object_set-' + currentObjectCount + '-url',
-                });
-
-                let urlElement = $('<input>', {
-                    type:'url',
-                    maxlength:'200',
-                    name:'object_set-' + currentObjectCount + '-url',
-                    id:'id_object_set-' + currentObjectCount + '-url',
-                });
-
-                let deleteobjElement = $('<button>削除する</button>');
-
-                let discriptionElementdiv = $('<div></div>', {"class":"form-control"}).append(discriptionLabel,discriptionElement);
-                let titleElementdiv = $('<div></div>', {"class":"form-control"}).append(titleLabel,titleElement);
-                let urlElementdiv = $('<div></div>', {"class":"form-control"}).append(urlLabel,urlElement);
-                $(deleteobjElement).attr({
-                    'id':'remove',
-                    'type':'button',
-                })
-                let ele = $(formwrapper).append(discriptionElementdiv,titleElementdiv,urlElementdiv,deleteobjElement);
-                $('div#object-form').append(ele);
-                
-
-                currentObjectCount += 1;
-                totalManagementElement.attr('value', currentObjectCount);
-            });
-
-            /*削除ボタン（DBに保存されていないObject）を押したときの操作*/
-            $(document).on('click','#remove', function(){
-                console.log($(this).html());
-                $('button#remove').parent('.form-wrapper').remove();
-            });
-
-            /*削除ボタン（DBに保存されているObject）を押したときの操作*/
-            for (let j = 0; j < currentObjectCount; j++){
-                $('.form-wrapper').on('click', '#remove'+ j, function(){
-                    console.log($(invisibleCheckbox[j]));
-                    $(invisibleCheckbox[j]).prop('checked', true);
-                    let tagetElement = $('#remove' + j).parent();
-                    console.log(tagetElement);
-                    tagetElement.css('display', 'none'); 
-                });
-            }
-        });
-    </script>
+    <script src="{% static 'js/formController.js' %}"></script>
+    <script src="{% static 'js/resizeTextarea.js' %}"></script>
 {% endblock %}

@@ -49,12 +49,15 @@
                   <li class="nav-item me-2">
                     <a class="btn btn-outline-primary" href="{% url 'accounts:profile' user.username %}">プロフィール</a>                  
                   </li>
-                  {% else %}
                   <li class="nav-item me-2">
                     <a class="btn btn-outline-primary" href="{% url 'account_logout' %}">ログアウト</a>
                   </li>
+                  {% else %}
                   <li class="nav-item me-2">
                     <a class="btn btn-outline-primary" href="{% url 'account_login' %}">ログイン</a>
+                  </li>
+                  <li class="nav-item me-2">
+                    <a class="btn btn-outline-primary" href="{% url 'account_signup' %}">新規登録</a>
                   </li>
                   {% endif %}
                 </ul>
@@ -63,24 +66,21 @@
           </nav>
     </header>
 
-
-    <div class="container my-3">
-      <div class="row">
-        <aside class="left-aside col-md-1" style="width: 150px;" >
+    <div class="container my-3" style="min-height: 100vh;">
+        <aside class="left-aside" style="width: 150px;" >
             {% block left_aside %}
             {% endblock %}
         </aside>
   
-        <main class="main my-3 col-md-9" role="main">
+        <main class="main my-3" role="main">
             {% block main %}
             {% endblock %}
         </main>
   
-        <aside class="right-aside my-3 p-2 col-md-2" style="width: 320px;">
+        <aside class="right-aside my-3 p-2" style="width: 320px;">
             {% block right_aside %}
             {% endblock %}
         </aside>
-      </div>
     </div>
 
     <footer class="footer">
@@ -103,6 +103,7 @@
         })
         })()
     </script>
+    <script src="{% static 'js/dialog.js' %}"></script>
     {% block add_js %}
     {% endblock %}
 </body>
