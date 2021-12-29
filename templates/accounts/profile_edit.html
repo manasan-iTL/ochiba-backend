@@ -7,38 +7,31 @@
         <h2>公開用プロフィール編集画面</h2>
     </div>
     {% if user.username in request.get_full_path %}
-    <div class="">
+    <div class="prof">
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <table class="table">
                 <tbody>
-                    <tr>
-                        <th class="header">ユーザー名</th>
-                        <td class="data">
-                            {% render_field form.username class="form-control" placeholder="ユーザー名" %}
-                        </td>
-                    </tr>
-                    
-                    <!-- <tr>
-                        <th class="header">パスワード</th>
-                        <td class="data">
-                            {% render_field form.password class="form-control" placeholder="パスワード" %}
-                        </td>
-                    </tr>  -->
-                    <tr>
+                    <tr class="prof_img">
                         <th class="header" style="width:30%">プロフィール画像</th>
                         <td class="data" style="width:70%">
                             {{ form.image }}
                         </td>
                     </tr>
                     <tr>
-                        <th class="header">名前</th>
-                        <td class="">
-                            {% render_field form.first_name class="form-control" placeholder="姓" %}
-                            {% render_field form.last_name class="form-control" placeholder="名" %}
+                        <th class="header">ユーザー名</th>
+                        <td class="data">
+                            {% render_field form.username class="form-control" placeholder="ユーザー名" %}
                         </td>
                     </tr>
-                    <tr>
+                    <tr class="prof_name">
+                        <th class="header">名前</th>
+                        <td class="">
+                            {% render_field form.first_name class="form-control form_name" placeholder="姓" %}
+                            {% render_field form.last_name class="form-control form_name" placeholder="名" %}
+                        </td>
+                    </tr>
+                    <tr class="prof_intro">
                         <th class="header">自己紹介</th>
                         <td class="data">
                             {% render_field form.description class="form-control" placeholder="自己紹介" %}
