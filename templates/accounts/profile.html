@@ -144,7 +144,7 @@
                         <div class="align-self-center mr-2">
                             <a href="{% url 'accounts:profile' unpub.user.username %}">
                             {% if unpub.user.image %}
-                                <img src='{{ unpub.user.image.url }}' width="60" height="60">
+                                <img src='{{ unpub.user.image.url }}' width="60" height="60" style="border-radius: 50%">
                             {% else %}
                             <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="gray" class="bi bi-person-circle" viewBox="0 0 16 16">
                                 <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
@@ -200,7 +200,7 @@
                     <div class="align-self-center mr-2">
                         <a href="{% url 'accounts:profile' post.user.username %}">
                         {% if post.user.image %}
-                            <img src='{{ post.user.image.url }}' width="60" height="60">
+                            <img src='{{ post.user.image.url }}' width="60" height="60" style="border-radius: 50%;">
                         {% else %}
                         <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="gray" class="bi bi-person-circle" viewBox="0 0 16 16">
                             <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
