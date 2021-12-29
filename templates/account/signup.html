@@ -1,4 +1,5 @@
 {% extends "base_login.html" %}
+{% load static %}
 
 {% load i18n %}
 {% load account socialaccount %}
@@ -23,9 +24,22 @@
 <div class="text-center">
   <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
     {% csrf_token %}
+    {% for error in form.non_field_errors %}
+      <div class="error-message">
+        <h3>Error!</h3>
+        <p class="is-validate">{{ error }}</p>
+      </div>
+    {% endfor %} 
     {% for field in form  %}
-    <div class="form-group field my-2" >   
-      {{ field }}
+    <div class="form-group field my-2" >
+      {{field}}
+      {% if field.errors %}
+      <ul class="errorlist">
+        {% for error in field.errors %}
+          <li>{{error}}</li>
+        {% endfor %}
+      </ul>
+      {% endif %}
       {% if redirect_field_value %}
       <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
       {% endif %}
@@ -61,5 +75,8 @@
   </div>
 </div>
 
+{% endblock %}
+{% block add_js %}
+<script src="{% static 'js/signupValidation.js' %}"></script>
 {% endblock %}
 
