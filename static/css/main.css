@@ -45,6 +45,8 @@ a {
 	top: 0;
 	left: 0;
     /* background-color: rgb(246, 246, 244); */
+    word-break: break-all;
+
 }
 
 /* .container .right-aside {
