@@ -40,15 +40,18 @@
                 </div>
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 text-nowrap">
                     {% if user.is_authenticated %}
-                    <li id = "modalButton" class="me-2 btn btn-outline-primary" style="position: relative;">記事作成</li>
-                    <ul id="modal" class="modal deactive item-paddtop"> 
-                        <li><a href="{% url 'create_post' %}">新規記事作成</a><hr></li>
-                        <li><a href="{% url 'create_object' %}">新規URLメモ作成</a><hr></li>
-                        <li><a href="{% url 'create_postobj' %}">新規記事・URLメモ作成</a><hr></li>
-                        <li><a href="{% url 'file_upload' %}">HTMLファイルから作成</a><hr></li>
-                        <li><a href="{% url 'create_post' %}">編集</a><hr></li>
-                        <li><a id="close" href="#">閉じる</a></li>
-                    </ul>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle me-2 btn btn-outline-primary" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">記事作成</a>
+                        <ul class="dropdown-menu">
+                          <li><a class="dropdown-item" href="{% url 'create_post' %}">新規記事作成</a></li>
+                          <!-- <li><a class="dropdown-item" href="{% url 'create_object' %}">新規URLメモ作成</a></li> -->
+                          <li><a class="dropdown-item" href="{% url 'create_postobj' %}">新規記事・URLメモ作成</a></li>
+                          <li><a class="dropdown-item" href="{% url 'file_upload' %}">HTMLファイルから作成</a></li>
+                          <!-- <li><a class="dropdown-item" href="{%url 'create_post' %}">編集</a></li> -->
+                          <li><hr class="dropdown-divider"></li>
+                          <li><a class="dropdown-item" href="#">閉じる</a></li>
+                        </ul>
+                    </li>
                     <!-- <li class="me-2"><a class="btn btn-outline-primary" href="{% url 'create_object' %}">オブジェクト新規作成</a></li> -->
                     <li class="me-2"><a class="btn btn-outline-primary" href="{% url 'accounts:profile' user.username %}">プロフィール</a></li>
                     <li class="me-2"><a class="btn btn-outline-primary" href="{% url 'account_logout' %}">ログアウト</a></li>
