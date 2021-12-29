@@ -1,0 +1,69 @@
+/*
+・このCSSファイルをあてるHTMLファイル
+    -base.html
+・注意事項
+このCSSファイルは全体の設定を担っているので容易に変更しないようにする。全体に影響がある時のみに変更し、
+変更する際は相談（LINE,slack）にコメントする
+*/
+
+/*全体の設定*/
+
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/*　文字サイズ・色・フォントの設定*/
+
+/*　　header部分のレイアウト　　　　*/
+
+
+
+/*  main aside部分のレイアウト　　　　　　　*/
+body {
+    background-color: rgb(246, 246, 244);
+}
+
+a {
+    text-decoration: none;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    margin: 200px, 200px;
+    padding: 0;
+}
+
+/* .container .left-aside {
+    background-color: pink;
+} */
+
+.container .main {
+    flex: 1;
+	top: 0;
+	left: 0;
+    /* background-color: rgb(246, 246, 244); */
+    word-break: break-all;
+
+}
+
+/* .container .right-aside {
+    background-color: white;
+} */
+
+.container .sticky-sidebar {
+    position: -webkit-sticky;
+	position: sticky;
+	top: 0;
+    background-color: white;
+}
+
+/*  footer部分のレイアウト  　　*/
+/* .footer {
+    height: 30px;
+    background-color: black;
+    color: white;
+} */
+

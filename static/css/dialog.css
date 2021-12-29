@@ -1,0 +1,30 @@
+/*
+記事編集のダイアログボックスに関するcssファイル。
+*/
+
+.modal {
+    display: block;
+    max-width:200px;
+    min-height: 350px;
+    background-color: #fff;
+    position: absolute;
+    top: 95%;
+    left: 73%;
+    z-index: 2;
+}
+
+.deactive {
+    display: none;
+}
+
+/* .active {
+    display: block;
+} */
+
+/*
+マージン・パディングに関する指定
+*/
+
+.item-paddtop {
+    padding-top: 10px;
+}

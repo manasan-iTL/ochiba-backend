@@ -1,0 +1,142 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+{% endblock %}
+
+
+{% block main %}
+
+{% if keyword %}
+<div class="text-center my-5">
+  <h2>検索キーワード:{{keyword}}</h2>
+  <p>検索件数：{{count_post}}</p>
+</div>
+{% endif %}
+
+<div class="layout-index p-3 mx-3 my-0" style="background-color: white;">
+    {% for post in post_list %}
+    <div class="card mx-0">
+        <div class="card-object d-flex my-2">
+          <div class="align-self-center mr-2">
+            <a href="{% url 'accounts:profile' post.user.username %}">
+              {% if post.user.image %}
+                <img src='{{ post.user.image.url }}' width="60" height="60" style="border-radius: 50%;">
+              {% else %}
+                <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="gray" class="bi bi-person-circle" viewBox="0 0 16 16">
+                  <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                  <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                </svg>
+              <img src='{{ post.user.image.url }}' width="60" height="60" style="border-radius: 50%;">
+              {% endif %}            
+            </a>
+          </div>
+          <div>
+            <p class="mb-0 font-weight-light"><a href="{% url 'accounts:profile' post.user.username %}">@{{post.user.username}}</a></p>
+            <h2 class="mb-0 font-weight-bold"><a href="{% url 'article_detail' post.slug post.id %}">{{ post.title }}</a></h2>
+            <!-- <p class="mb-0">ユーザー紹介</p> -->
+          </div>
+        </div>
+        <div class="card-post">
+            <p class="mb-0" id='overflag{{ post.id }}'>概要：{{ post.discription|truncatechars:30 }}</p>
+            <small><p class="mb-0 ">更新：{{ post.created_at }}</p></small> 
+        </div>
+        <hr>
+        <div class="card-object">
+          <p class="mb-2"><a href="{{  post.object_set.all.0.url }}">{{ post.object_set.all.0.title }}</a></p>
+          <p class="mb-2"><a href="{{  post.object_set.all.0.url }}">{{ post.object_set.all.1.title }}</a></p>
+          <p class="mb-2"><a href="{% url 'article_detail' post.slug post.id %}">...</a></p>
+          <!-- {% for object in post.object_set.all %}
+            <p class="mb-2"><a href="{{ object_set.first.url }}">{{ object.title }}</a></p>
+            <hr>
+          {% endfor %} -->
+          <hr>
+        </div>
+
+        <div class="card-object text-center">
+          {% if user == post.user %}
+            <a class="btn btn-outline-dark" href="{% url 'object_update' post.id %}">編集</a>
+          {% endif %}
+          <a class="btn btn-outline-dark" id='detail{{post.id}}' href="{% url 'article_detail' post.slug post.id %}" class="detail">詳細</a>
+        </div> 
+    </div>
+    {% endfor %}
+
+    <!-- ここはページネーションの部分だが今はコメントアウトしている 
+        <nav>
+        <ul>
+             前へ
+            {% if page_obj.has_previous %}
+            <li><a href="?page={{ page_obj.previous_page_number }}">前へ</a></li>
+            {% endif %}
+ 
+            {% for i in page_obj.paginator.page_range %}
+            {% if page_obj.number == i %}
+            <li>{{ i }}</li>
+            {% else %}
+            <li><a href="?page={{ i }}">{{ i }}</a></li>
+            {% endif %}
+            {% endfor %}
+ 
+            - 次へ
+            {% if page_obj.has_next %}
+            <li><a href="?page={{ page_obj.next_page_number }}">次へ</a></li>
+            {% endif %}
+        </ul>
+    </nav> -->
+
+</div>
+    
+{% endblock %}
+
+{% block left_aside %}
+<div class="btn-group-vertical my-4" style="width: 100%;" role="group" aria-label="Vertical radio toggle button group">
+    <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-latest" autocomplete="off" checked>
+    <label class="btn btn-outline-danger" for="vbtn-latest">最新</label>
+    <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-trend" autocomplete="off">
+    <label class="btn btn-outline-danger disabled" for="vbtn-trend">トレンド</label>
+    <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-following" autocomplete="off" >
+    <label class="btn btn-outline-danger disabled" for="vbtn-following">フォロー中</label>
+    <input type="radio" class="btn-check " name="vbtn-radio" id="vbtn-recommend" autocomplete="off" >
+    <label class="btn btn-outline-danger disabled" for="vbtn-recommend">おすすめ</label>
+</div>
+{% endblock %}
+
+{% block right_aside %}
+<div class="sticky-sidebar">
+  <div class="mb-3 border border-dark" style="width: 300px; height: 250px;">
+      広告1
+  </div>
+  <div class="mb-3 border border-dark" style="width: 300px; height: 250px;">
+      広告2
+  </div>
+  <div class="mb-3 border border-dark" style="width: 300px; height: 250px;">
+      広告3
+  </div>
+</div>
+{% endblock %}
+
+{% block add_js %}
+<script>
+    $(function(){
+        let countwords; //文字数カウントを保存
+        let lastnumber; //overflagの最後の数字（id）を取得
+        let tolink;     //詳細画面へのリンクを取得
+        let username; //記事の作成者
+
+        /*１，pタグのid="overflag〇"に該当する要素を全部取得し、ひとつずつ取り出す
+        　２，文字数カウント、idの取得、リンクの取得を行う
+        　３，文字数が19を超えていたら該当の要素の最後にリンクを追加*/
+        
+        $('p[id^=overflag]').each(function(){
+            countwords = $(this).text().length;
+            lastnumber = $(this).attr("id");
+            let reg = lastnumber.replace(/[^0-9^\.]/g,"");
+            tolink = $('a'+'#'+ 'detail' + reg).attr("href");
+            if (countwords >= 19){
+                $(this).append('<a href="' + tolink + '">続きを読む</a>')
+            } 
+        });
+    });
+</script>
+{% endblock %} 

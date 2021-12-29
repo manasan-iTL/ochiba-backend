@@ -1,0 +1,62 @@
+{% extends 'base_login.html' %}
+
+{% block main %}
+<div class="layout-index p-3 mx-3">
+    <div class="text-center my-5">
+        <h2>新規記事作成ページ</h2>
+    </div>
+    <div>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+            <table class="table">
+                <tbody>
+                    <tbody>
+                        <!-- {% for field in form %}
+                        <tr>
+                            <th style="width:30%">{{ field.label_tag }}</th>
+                            <td style="width:70%">{{ field }}</td>
+                        </tr>
+                        {% if field.help_text %}
+                        <span class="helptext">{{ field.help_text }}</span>
+                        {% endif %}
+                        {{ field.errors }}  
+                        {% endfor %} -->
+                        <!-- title, discription, status -->
+                        <tr class="form_body">
+                            <th class="form_label">{{ form.title.label_tag }}</th>
+                            <td class="form_title">{{ form.title }}</td>
+                        </tr>
+                        {% if form.title.help_text %}
+                        <span class="helptext">{{ form.title.help_text }}</span>
+                        {% endif %}
+                        {{ form.title.errors }} 
+
+                        <tr class="form_body">
+                            <th class="form_label">{{ form.discription.label_tag }}</th>
+                            <td class="form_discription">{{ form.discription }}</td>
+                        </tr>
+                        {% if form.discription.help_text %}
+                        <span class="helptext">{{ form.discription.help_text }}</span>
+                        {% endif %}
+                        {{ form.discription.errors }} 
+
+                        <tr class="form_body">
+                            <th class="form_label">{{ form.status.label_tag }}</th>
+                            <td class="form_status">{{ form.status }}</td>
+                        </tr>
+                        {% if form.status.help_text %}
+                        <span class="helptext">{{ form.status.help_text }}</span>
+                        {% endif %}
+                        {{ form.status.errors }} 
+
+                    </tbody>
+                </tbody>
+            </table>
+            <div class="text-center my-2">
+                <button class="btn btn-outline-dark" type="submit">送信</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

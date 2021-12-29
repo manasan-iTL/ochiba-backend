@@ -1,0 +1,20 @@
+/*
+・このファイルが当てるHTML
+    -index.html
+*/
+
+/*  indexのレイアウト部分　　*/
+
+.layout-index {
+    margin: 10px 50px 20px 50px;
+}
+
+.layout-index .card {
+    margin: 0 30px 10px 30px;
+    padding: 0 30px 0 30px;
+    border: black solid 3px;
+}
+
+.layout-index .card .card-object {
+    margin-bottom: 10px; 
+}

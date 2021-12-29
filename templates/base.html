@@ -1,0 +1,32 @@
+{% extends 'header.html' %}
+{% load static %}
+
+{% block head %}
+{% endblock %}
+
+{% block body %}
+    <div class="container my-3" style="min-height: 100vh;">
+        <aside class="left-aside" style="width: 150px;" >
+            {% block left_aside %}
+            {% endblock %}
+        </aside>
+  
+        <main class="main my-3" role="main">
+            {% block main %}
+            {% endblock %}
+        </main>
+  
+        <aside class="right-aside my-3 p-2" style="width: 320px;">
+            {% block right_aside %}
+            {% endblock %}
+        </aside>
+    </div>
+
+    <footer class="footer">
+        <p class="text-muted">Copyright &copy; BookmarkShareApp 2021</p>
+    </footer>
+{% endblock %}
+{% block add_js %}
+{% endblock %}
+</body>
+</html>

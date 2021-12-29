@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block main %}
+<form method="POST">
+    <div class="text-center my-5">
+        <h2>記事投稿ページ</h2>
+    </div>
+    <table class="table">
+        <tbody>
+            {{ form.as_table }}
+        </tbody>
+    </table>
+    <div class="text-center my-5">
+        <h2>オブジェクト一覧</h2>
+    </div>
+    <div>
+        {% for form in formset %}
+            <table class="table">
+                <tbody>
+                    {{ form.as_table }}
+                </tbody>
+            </table>
+        {% endfor %}
+    </div> 
+    {{ formset.management_form }}
+    {% csrf_token %}
+    <div class="text-center  my-2">
+        <button class="btn btn-outline-dark" type="submit">送信</button>
+    </div>
+</form>
+{% endblock %}

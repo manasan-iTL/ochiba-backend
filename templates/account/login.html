@@ -1,0 +1,87 @@
+{% extends "base_login.html" %}
+{% load static %}
+
+{% block head %}
+  <link rel="stylesheet" href="{% static 'css/validate.css' %}">
+{% endblock %}
+
+{% load i18n %}
+
+{% load account socialaccount %}
+
+{% block head_title %}{% trans "Sign In" %}{% endblock %}
+
+{% block main %}
+
+<div class="text-center">
+  <div class="mt-5 mb-3">
+    <svg xmlns="http://www.w3.org/2000/svg" width="72" height="72" fill="currentColor" class="bi bi-bookmarks-fill" viewBox="0 0 16 16">
+      <path d="M2 4a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v11.5a.5.5 0 0 1-.777.416L7 13.101l-4.223 2.815A.5.5 0 0 1 2 15.5V4z"/>
+      <path d="M4.268 1A2 2 0 0 1 6 0h6a2 2 0 0 1 2 2v11.5a.5.5 0 0 1-.777.416L13 13.768V2a1 1 0 0 0-1-1H4.268z"/>
+    </svg>
+    <h1 class="h3 my-3 font-weight-normal">BookmarkShareApp</h1>
+  </div>
+  <!-- {% include "socialaccount/snippets/provider_list.html" with process="login"%} -->
+  <!-- http://127.0.0.1:8000/account/google/login/?process=login -->
+</div>
+
+
+<div class="text-center">
+  <form class="loginform" method="POST" action="{% url 'account_login' %}">
+    {% csrf_token %}
+    {% if form.non_field_errors %}
+    <div class="error-message">
+      {% for error in form.non_field_errors %}
+        <h3>Error:</h3>
+        <p>{{ error }}</p>
+      {% endfor %}
+    </div>
+    {% endif %}
+    {% for field in form %}
+    <div class="form-group field my-2" >
+      {% if forloop.last %}   
+      {{field.label}}{{field}}
+      {% else %}
+      {{ field}}
+      
+      {% endif %}
+    </div>
+    {% endfor %}
+    {% if redirect_field_value %}
+    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+    {% endif %}
+    <div class="my-2">
+      <button class="btn btn-block btn-outline-dark btn-sm" style="width: 180px;" type="submit">{% trans "Sign In" %}</button>
+    </div>
+    <p style="font-size: small;"><a class="" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a></p>
+  </form>
+</div>
+
+<!-- <div class="text-center">
+  <p class="text-muted my-2">または</p>
+  {% get_providers as socialaccount_providers %}
+  {% for provider in socialaccount_providers %}
+  <div class="">
+    {% if provider.name == "Google" %}
+    <div class="my-2">
+      <a style="width: 180px;" class="btn btn-block btn-sm btn-outline-warning socialaccount_provider {{provider.id}}" href="{% provider_login_url provider.id process='login' scope=scope auth_params=auth_params %}"> Googleでサインイン</a>
+    </div>
+    {% elif provider.name == "Twitter" %}
+    <div class="my-2">
+      <a style="width: 180px;" class="btn btn-block btn-sm btn-outline-primary socialaccount_provider {{provider.id}}" href="{% provider_login_url provider.id process='login' scope=scope auth_params=auth_params %}"> Twitterでサインイン</a>
+    </div>
+    {% elif provider.name == "Github" %}
+    <div class="my-2">
+      <a style="width: 180px;" class="btn btn-block btn-sm btn-outline-dark socialaccount_provider {{provider.id}}" href="{% provider_login_url provider.id process='login' scope=scope auth_params=auth_params %}"> Githubでサインイン</a>
+    </div>
+  </div>
+    {% endif %}
+  {% endfor %}
+  </div>
+</div> -->
+
+{% endblock %}
+
+{% block add_js %}
+<script src="{% static 'js/loginValidation.js' %}"></script>
+{% endblock %}

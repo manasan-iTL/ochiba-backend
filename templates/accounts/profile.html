@@ -1,0 +1,277 @@
+{% extends 'base_profile.html' %}
+
+{% load static %}
+
+{% block head %}
+
+{% endblock %}
+
+{% block main %}
+<div class="profile_body">
+
+    <div class="text-center my-5">
+        <!-- <h2>プロフィール</h2> -->
+    </div>
+    <table class="table">
+        <tbody class="tbody">
+            <tr class="pro_img">
+                <!-- <th class="header" style="width:30%">プロフィール画像</th> -->
+                <td class="data" style="width:70%">
+                    {% if user_data.image %}
+                        <img src='{{ user_data.image.url }}' width="100" height="100">
+                    {% else %}
+                        <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="gray" class="bi bi-person-circle" viewBox="0 0 16 16">
+                            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                            <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                        </svg>
+                    {% endif %}
+                </td>
+            </tr>
+            
+            <tr class="pro_un">
+                <!-- <th>ユーザー名</th> -->
+                {% if user_data.username %}
+                    <td>{{ user_data.username }}</td>
+                {% else %}
+                    <td>
+                        <p class="text-muted">ユーザー名がまだありません</p>
+                    </td>
+                {% endif %}
+            </tr>   
+            <tr>
+                <!-- <th>自己紹介</th> -->
+                {% if user_data.description %}
+                    <td>{{ user_data.description | linebreaks }}</td>
+                {% else %}
+                    <td>
+                        <p class="text-muted">
+                            自己紹介がまだありません
+                            <br>
+                            <br>
+                            <br>
+                        </p>
+                    </td>
+                {% endif %}
+            </tr>
+            <!-- {% if request.user.username == user_data.username %}
+            <div class="col text-center">
+                <a class="btn btn-outline-dark mb-5" href="{% url 'accounts:profile_edit' user_data.username %}">プロフィール編集</a>
+            </div>
+            {% endif %} -->
+        </tbody>
+    </table>
+    {% if request.user.username == user_data.username %}
+    <div class="col text-center">
+        <a class="btn btn-outline-dark mb-5" href="{% url 'accounts:profile_edit' user_data.username %}">プロフィール編集</a>
+        <a class="btn btn-outline-dark mb-5" href="{% url 'account_email' %}">メールアドレスの変更</a>
+        <a class="btn btn-outline-dark mb-5" href="{% url 'account_reset_password' %}">パスワードのリセット</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block main_b %}
+    <div style="word-break: break-all;">
+        {% if user.username in request.get_full_path and user.username != '' %}
+        <div class="text-center">
+            <div class="btn-group my-5" role="group" aria-label="Basic radio toggle button group">
+                <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
+                <label class="btn btn-outline-dark" for="btnradio1">公開一覧</label>
+        
+                <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off" >
+                <label class="btn btn-outline-dark" for="btnradio2">未公開一覧</label>
+        
+                <!-- <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off">
+                <label class="btn btn-outline-dark" for="btnradio3">お気に入り</label>
+        
+                <input type="radio" class="btn-check" name="btnradio" id="btnradio4" autocomplete="off">
+                <label class="btn btn-outline-dark" for="btnradio4">新規作成</label> -->
+            </div>
+        </div>
+            <div id="publist" style="display: block;">
+                <div class="layout-index p-3 mx-3 my-0" style="background-color: white;">
+                    {% for post in post_data %}
+                    <div class="card mx-0">
+                        <div class="card-object d-flex my-2">
+                        <div class="align-self-center mr-2">
+                            <a href="{% url 'accounts:profile' post.user.username %}">
+                            {% if post.user.image %}
+                                <img src='{{ post.user.image.url }}' width="60" height="60" style="border-radius: 50%;">
+                            {% else %}
+                            <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="gray" class="bi bi-person-circle" viewBox="0 0 16 16">
+                                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                                <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                            </svg>
+                            {% endif %}
+                        </div>
+                        <div>
+                            <p class="mb-0 font-weight-light"><a href="{% url 'accounts:profile' post.user.username %}">@{{post.user.username}}</a></p>
+                            <h2 class="mb-0 font-weight-bold"><a href="{% url 'article_detail' post.slug post.id %}">{{ post.title }}</a></h2>
+                        </div>
+                        </div>
+                        <div class="card-post">
+                            <p class="mb-0" id='overflag{{ post.id }}'>概要：{{ post.discription|truncatechars:30 }}</p>
+                            <small><p class="mb-0 ">更新：{{ post.created_at }}</p></small> 
+                        </div>
+                        <hr>
+                        <div class="card-object">
+                        <p class="mb-2"><a href="{{  post.object_set.all.0.url }}">{{ post.object_set.all.0.title }}</a></p>
+                        <p class="mb-2"><a href="{{  post.object_set.all.0.url }}">{{ post.object_set.all.1.title }}</a></p>
+                        <p class="mb-2"><a href="{% url 'article_detail' post.slug post.id %}">...</a></p>
+                
+                        <hr>
+                        </div>
+                
+                        <div class="card-object text-center">
+                        {% if user == post.user %}
+                            <!-- <a class="btn btn-outline-dark" href="{% url 'article_update' post.id %}">編集</a> -->
+                            <a class="btn btn-outline-dark" href="{% url 'object_update' post.id %}">編集</a>
+                        {% endif %}
+                        <a class="btn btn-outline-dark" id='detail{{post.id}}' href="{% url 'article_detail' post.slug post.id %}" class="detail">詳細</a>
+                        </div> 
+                    </div>
+                    {% empty %}
+                    <h5 class="text-center my-2" style="font-weight: bold;">記事がまだありません。</h5>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div id="unpublist" style="display: none;">
+                <div class="layout-index p-3 mx-3 my-0" style="background-color: white;">
+                    {% for unpub in post_unpub_data %}
+                    <div class="card mx-0">
+                        <div class="card-object d-flex my-2">
+                        <div class="align-self-center mr-2">
+                            <a href="{% url 'accounts:profile' unpub.user.username %}">
+                            {% if unpub.user.image %}
+                                <img src='{{ unpub.user.image.url }}' width="60" height="60" style="border-radius: 50%">
+                            {% else %}
+                            <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="gray" class="bi bi-person-circle" viewBox="0 0 16 16">
+                                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                                <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                            </svg>
+                            {% endif %}
+                            </a>
+                        </div>
+                        <div>
+                            <p class="mb-0 font-weight-light"><a href="{% url 'accounts:profile' unpub.user.username %}">@{{unpub.user.username}}</a></p>
+                            <h2 class="mb-0 font-weight-bold"><a href="{% url 'article_detail' unpub.slug unpub.id %}">{{ unpub.title }}</a></h2>
+                        </div>
+                        </div>
+                        <div class="card-post">
+                            <p class="mb-0" id='overflag{{ unpub.id }}'>概要：{{ unpub.discription|truncatechars:30 }}</p>
+                            <small><p class="mb-0 ">更新：{{ unpub.created_at }}</p></small> 
+                        </div>
+                        <hr>
+                        <div class="card-object">
+                        <p class="mb-2"><a href="{{  unpub.object_set.all.0.url }}">{{ unpub.object_set.all.0.title }}</a></p>
+                        <p class="mb-2"><a href="{{  unpub.object_set.all.0.url }}">{{ unpub.object_set.all.1.title }}</a></p>
+                        <p class="mb-2"><a href="{% url 'article_detail' unpub.slug unpub.id %}">...</a></p>
+                
+                        <hr>
+                        </div>
+                
+                        <div class="card-object text-center">
+                        {% if user == post.user %}
+                            <!-- <a class="btn btn-outline-dark" href="{% url 'article_update' post.id %}">編集</a> -->
+                            <a class="btn btn-outline-dark" href="{% url 'object_update' unpub.id %}">編集</a>
+                        {% endif %}
+                        <a class="btn btn-outline-dark" id='detail{{unpub.id}}' href="{% url 'article_detail' unpub.slug unpub.id %}" class="detail">詳細</a>
+                        </div> 
+                    </div>
+                    {% empty %}
+                    <h5 class="text-center my-2" style="font-weight: bold;">記事がまだありません。</h5>
+                    {% endfor %}
+                </div>
+            </div>
+
+        {% else %}
+            <div class="text-center">
+                <div class="btn-group my-5" role="group" aria-label="Basic radio toggle button group">
+                    <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
+                    <label class="btn btn-outline-dark" for="btnradio1">公開一覧</label>
+                </div>
+            </div>
+            {% for post in post_data %}
+            <div class="layout-index p-3 mx-3 my-0" style="background-color: white;">
+                {% for post in post_data %}
+                <div class="card mx-0">
+                    <div class="card-object d-flex my-2">
+                    <div class="align-self-center mr-2">
+                        <a href="{% url 'accounts:profile' post.user.username %}">
+                        {% if post.user.image %}
+                            <img src='{{ post.user.image.url }}' width="60" height="60" style="border-radius: 50%;">
+                        {% else %}
+                        <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="gray" class="bi bi-person-circle" viewBox="0 0 16 16">
+                            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                            <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                        </svg>
+                        {% endif %}
+                        </a>
+                    </div>
+                    <div>
+                        <p class="mb-0 font-weight-light"><a href="{% url 'accounts:profile' post.user.username %}">@{{post.user.username}}</a></p>
+                        <h2 class="mb-0 font-weight-bold"><a href="{% url 'article_detail' post.slug post.id %}">{{ post.title }}</a></h2>
+                    </div>
+                    </div>
+                    <div class="card-post">
+                        <p class="mb-0" id='overflag{{ post.id }}'>概要：{{ post.discription|truncatechars:30 }}</p>
+                        <small><p class="mb-0 ">更新：{{ post.created_at }}</p></small> 
+                    </div>
+                    <hr>
+                    <div class="card-object">
+                    <p class="mb-2"><a href="{{  post.object_set.all.0.url }}">{{ post.object_set.all.0.title }}</a></p>
+                    <p class="mb-2"><a href="{{  post.object_set.all.0.url }}">{{ post.object_set.all.1.title }}</a></p>
+                    <p class="mb-2"><a href="{% url 'article_detail' post.slug post.id %}">...</a></p>
+            
+                    <hr>
+                    </div>
+            
+                    <div class="card-object text-center">
+                    {% if user == post.user %}
+                        <!-- <a class="btn btn-outline-dark" href="{% url 'article_update' post.id %}">編集</a> -->
+                        <a class="btn btn-outline-dark" href="{% url 'object_update' post.id %}">編集</a>
+                    {% endif %}
+                    <a class="btn btn-outline-dark" id='detail{{post.id}}' href="{% url 'article_detail' post.slug post.id %}" class="detail">詳細</a>
+                    </div> 
+                </div>
+                {% empty %}
+                <h5 class="text-center my-2" style="font-weight: bold;">記事がまだありません。</h5>
+                {% endfor %}
+            </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block right_aside %}
+<div class="sticky-sidebar" style="margin-top: 140px;">
+  <div class="mb-3 border border-dark" style="width: 300px; height: 250px;">
+      広告1
+  </div>
+  <div class="mb-3 border border-dark" style="width: 300px; height: 250px;">
+      広告2
+  </div>
+  <div class="mb-3 border border-dark" style="width: 300px; height: 250px;">
+      広告3
+  </div>
+</div>
+{% endblock %}
+
+{% block add_js %}
+<script>
+    let btnradio1 = document.getElementById('btnradio1');
+    let btnradio2 = document.getElementById('btnradio2');
+    let publist = document.getElementById('publist');
+    let unpublist = document.getElementById('unpublist');
+
+    btnradio1.addEventListener('input', ()=> {
+        publist.style.display = 'block';
+        unpublist.style.display = 'none';
+    });
+    btnradio2.addEventListener('input', ()=> {
+        unpublist.style.display = 'block';
+        publist.style.display = 'none';
+    });
+</script>
+{% endblock %}

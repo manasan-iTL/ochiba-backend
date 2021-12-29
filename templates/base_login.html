@@ -1,0 +1,20 @@
+{% extends 'header.html' %}
+{% load static %}
+
+{% block body %}
+
+        <main class="main my-3" role="main">
+            {% block main %}
+            {% endblock %}
+            {% block content %}
+            {% endblock %}
+            {% block extra_body %}
+            {% endblock %}
+  </main>
+
+    <footer class="footer">
+        <p class="text-muted">Copyright &copy; BookmarkShareApp 2021</p>
+    </footer>
+{% endblock %}
+{% block add_js %}
+{% endblock %}
