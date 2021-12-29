@@ -1,3 +1,4 @@
+{% extends 'base_origin.html' %}
 {% load static %}
 <!DOCTYPE html>
 <html lang="ja">
@@ -66,6 +67,7 @@
           </nav>
     </header>
 
+{% block body %}
     <div class="container my-3" style="min-height: 100vh;">
         <aside class="left-aside" style="width: 150px;" >
             {% block left_aside %}
@@ -86,6 +88,8 @@
     <footer class="footer">
         <p class="text-muted">Copyright &copy; BookmarkShareApp 2021</p>
     </footer>
+{% endblock %}
+
 
 
     <!-- JQueryの読み込み -->
