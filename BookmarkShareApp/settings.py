@@ -163,11 +163,12 @@ ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 ACCOUNT_EMAIL_REQUIRED = True
 
-# ログイン/ログアウト後の遷移先を設定
-LOGIN_REDIRECT_URL = '/'
-# LOGIN_URL = 'home'
-# ACCOUNT_LOGOUT_REDIRECT_URL = 'account_login'
-ACCOUNT_LOGOUT_REDIRECT_URL = '/'
+# ログインURLやリダイレクト先の設定
+LOGIN_URL = 'account_login'
+LOGIN_REDIRECT_URL = 'index'
+LOGOUT_REDIRECT_URL = 'index'
+ACCOUNT_LOGOUT_REDIRECT_URL = 'index'
+ACCOUNT_SIGNUP_REDIRECT_URL = 'index'
 
 # ログアウトリンクのクリック一発でログアウトする設定
 ACCOUNT_LOGOUT_ON_GET = True
@@ -181,3 +182,20 @@ DEFAULT_FROM_EMAIL = 'admin@example.com'
 #コンソール上にメッセージを表示
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' 
 
+# その他の設定
+ACCOUNT_EMAIL_SUBJECT_PREFIX = '' # メールの件名のプレフィックス
+ACCOUNT_MAX_EMAIL_ADDRESSES = 2 # 登録できるメールアドレスの上限。1だと変更できない。 
+ACCOUNT_USERNAME_BLACKLIST = [] # usernameとして使えない文字
+
+# # メール送信の設定 Gmailを使う。
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_PORT = 587
+# EMAIL_HOST_USER = 'hoge@gmail.com'
+# EMAIL_HOST_PASSWORD = 'gmailのログインパスワード'
+# EMAIL_USE_TLS = True
+
+# # ソーシャルアカウントでログイン・サインアップ時の設定
+# SOCIALACCOUNT_EMAIL_VERIFICATION = 'none' 
+# SOCIALACCOUNT_EMAIL_REQUIRED = False
+# SOCIALACCOUNT_USERNAME_REQUIRED = False

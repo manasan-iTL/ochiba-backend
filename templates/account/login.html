@@ -1,6 +1,12 @@
 {% extends "base_login.html" %}
+{% load static %}
+
+{% block head %}
+  <link rel="stylesheet" href="{% static 'css/validate.css' %}">
+{% endblock %}
 
 {% load i18n %}
+
 {% load account socialaccount %}
 
 {% block head_title %}{% trans "Sign In" %}{% endblock %}
@@ -21,14 +27,23 @@
 
 
 <div class="text-center">
-  <form class="" method="POST" action="{% url 'account_login' %}">
+  <form class="loginform" method="POST" action="{% url 'account_login' %}">
     {% csrf_token %}
-    {% for field in form  %}
+    {% if form.non_field_errors %}
+    <div class="error-message">
+      {% for error in form.non_field_errors %}
+        <h3>Error:</h3>
+        <p>{{ error }}</p>
+      {% endfor %}
+    </div>
+    {% endif %}
+    {% for field in form %}
     <div class="form-group field my-2" >
-      {% if forloop.last %}
-      {{field.label}}{{ field }}
+      {% if forloop.last %}   
+      {{field.label}}{{field}}
       {% else %}
-      {{ field }}
+      {{ field}}
+      
       {% endif %}
     </div>
     {% endfor %}
@@ -42,7 +57,7 @@
   </form>
 </div>
 
-<div class="text-center">
+<!-- <div class="text-center">
   <p class="text-muted my-2">または</p>
   {% get_providers as socialaccount_providers %}
   {% for provider in socialaccount_providers %}
@@ -63,6 +78,10 @@
     {% endif %}
   {% endfor %}
   </div>
-</div>
+</div> -->
 
+{% endblock %}
+
+{% block add_js %}
+<script src="{% static 'js/loginValidation.js' %}"></script>
 {% endblock %}

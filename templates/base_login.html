@@ -1,13 +1,15 @@
 {% extends 'base_origin.html' %}
 
 {% block body %}
+
         <main class="main my-3" role="main">
             {% block main %}
-            <!-- メインコンテンツ -->
             {% endblock %}
-        </main>
-
-    </div>
+            {% block content %}
+            {% endblock %}
+            {% block extra_body %}
+            {% endblock %}
+  </main>
 
     <footer class="footer">
         <p class="text-muted">Copyright &copy; BookmarkShareApp 2021</p>
