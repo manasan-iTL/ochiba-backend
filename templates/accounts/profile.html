@@ -56,10 +56,11 @@
     {% if request.user.username == user_data.username %}
     <div class="col text-center">
         <a class="btn btn-outline-dark mb-5" href="{% url 'accounts:profile_edit' user_data.username %}">プロフィール編集</a>
+        <a class="btn btn-outline-dark mb-5" href="{% url 'account_email' %}">メールアドレスの変更</a>
+        <a class="btn btn-outline-dark mb-5" href="{% url 'account_reset_password' %}">パスワードのリセット</a>
     </div>
     {% endif %}
 </div>
-=======
 {% endblock %}
 
 {% block main_b %}
