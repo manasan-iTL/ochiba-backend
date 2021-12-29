@@ -1,8 +1,5 @@
-{% extends 'base_origin.html' %}
-
-{% block head %}
-<link rel="stylesheet" href="profile.css">
-{% endblock %}
+{% extends 'header.html' %}
+{% load static %}
 
 {% block body %}
     <div class="container my-3">
@@ -31,4 +28,6 @@
     <footer class="footer">
         <p class="text-muted">Copyright &copy; BookmarkShareApp 2021</p>
     </footer>
+{% endblock %}
+{% block add_js %}
 {% endblock %}

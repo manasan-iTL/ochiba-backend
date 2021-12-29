@@ -3,6 +3,7 @@
 {% load static %}
 
 {% block head %}
+
 {% endblock %}
 
 {% block main %}
@@ -17,33 +18,40 @@
                 <!-- <th class="header" style="width:30%">プロフィール画像</th> -->
                 <td class="data" style="width:70%">
                     {% if user_data.image %}
-                        <!-- 画像あり -->
                         <img src='{{ user_data.image.url }}' width="100" height="100">
                     {% else %}
-                        画像なし
+                        <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="gray" class="bi bi-person-circle" viewBox="0 0 16 16">
+                            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                            <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                        </svg>
                     {% endif %}
                 </td>
             </tr>
             
             <tr class="pro_un">
                 <!-- <th>ユーザー名</th> -->
-                <!-- <td>{{ user_data.username }}</td> -->
+                {% if user_data.username %}
+                    <td>{{ user_data.username }}</td>
+                {% else %}
+                    <td>
+                        <p class="text-muted">ユーザー名がまだありません</p>
+                    </td>
+                {% endif %}
             </tr>   
-                <!-- <tr class="pro_m"> 
-                    <th>メール</th>
-                    <td>{{ user_data.email }}</td>
-                </tr> -->
-                <tr class="pro_ln">
-                    <!-- <th>姓</th> -->
-                    <th>{{ user_data.last_name }}</th>
-                </tr>
-                <!-- <tr class="pro_fn">
-                    <th>名</th>
-                    <td>{{ user_data.first_name }}</td>
-                </tr> -->
             <tr>
                 <!-- <th>自己紹介</th> -->
-                <td>{{ user_data.description | linebreaks }}</td>
+                {% if user_data.description %}
+                    <td>{{ user_data.description | linebreaks }}</td>
+                {% else %}
+                    <td>
+                        <p class="text-muted">
+                            自己紹介がまだありません
+                            <br>
+                            <br>
+                            <br>
+                        </p>
+                    </td>
+                {% endif %}
             </tr>
             <!-- {% if request.user.username == user_data.username %}
             <div class="col text-center">
@@ -122,6 +130,8 @@
                         <a class="btn btn-outline-dark" id='detail{{post.id}}' href="{% url 'article_detail' post.slug post.id %}" class="detail">詳細</a>
                         </div> 
                     </div>
+                    {% empty %}
+                    <h5 class="text-center my-2" style="font-weight: bold;">記事がまだありません。</h5>
                     {% endfor %}
                 </div>
             </div>
@@ -134,7 +144,7 @@
                         <div class="align-self-center mr-2">
                             <a href="{% url 'accounts:profile' unpub.user.username %}">
                             {% if unpub.user.image %}
-                                <img src='{{ unpub.user.image.url }}' width="60" height="60">
+                                <img src='{{ unpub.user.image.url }}' width="60" height="60" style="border-radius: 50%">
                             {% else %}
                             <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="gray" class="bi bi-person-circle" viewBox="0 0 16 16">
                                 <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
@@ -169,6 +179,8 @@
                         <a class="btn btn-outline-dark" id='detail{{unpub.id}}' href="{% url 'article_detail' unpub.slug unpub.id %}" class="detail">詳細</a>
                         </div> 
                     </div>
+                    {% empty %}
+                    <h5 class="text-center my-2" style="font-weight: bold;">記事がまだありません。</h5>
                     {% endfor %}
                 </div>
             </div>
@@ -188,7 +200,7 @@
                     <div class="align-self-center mr-2">
                         <a href="{% url 'accounts:profile' post.user.username %}">
                         {% if post.user.image %}
-                            <img src='{{ post.user.image.url }}' width="60" height="60">
+                            <img src='{{ post.user.image.url }}' width="60" height="60" style="border-radius: 50%;">
                         {% else %}
                         <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="gray" class="bi bi-person-circle" viewBox="0 0 16 16">
                             <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
@@ -223,6 +235,8 @@
                     <a class="btn btn-outline-dark" id='detail{{post.id}}' href="{% url 'article_detail' post.slug post.id %}" class="detail">詳細</a>
                     </div> 
                 </div>
+                {% empty %}
+                <h5 class="text-center my-2" style="font-weight: bold;">記事がまだありません。</h5>
                 {% endfor %}
             </div>
             {% endfor %}
@@ -231,7 +245,7 @@
 {% endblock %}
 
 {% block right_aside %}
-<div class="sticky-sidebar">
+<div class="sticky-sidebar" style="margin-top: 140px;">
   <div class="mb-3 border border-dark" style="width: 300px; height: 250px;">
       広告1
   </div>

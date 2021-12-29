@@ -7,6 +7,6 @@ app_name = 'accounts'
 urlpatterns = [
     path('home/', views.ProfileView.as_view(), name=''),
     path('<slug:username>/profile/', views.ProfileView.as_view(), name='profile'),
-    path('<slug:username>/profile/edit', views.ProfileEditView.as_view(), name='profile_edit'),
+    path('<slug:username>/profile/edit/', views.ProfileEditView.as_view(), name='profile_edit'),
 ]
 
