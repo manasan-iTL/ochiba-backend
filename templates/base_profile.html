@@ -1,5 +1,9 @@
 {% extends 'base_origin.html' %}
 
+{% block head %}
+<link rel="stylesheet" href="profile.css">
+{% endblock %}
+
 {% block body %}
     <div class="container my-3">
         <main class="main my-3" role="main">
@@ -21,10 +25,6 @@
             {% block right_aside %}
             {% endblock %}
         </aside> 
-        <main class="my-3" role="main" style="width: 800px;">
-            {% block main_b %}
-            {% endblock %}
-        </main>
     </div>
 
 
