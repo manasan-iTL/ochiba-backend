@@ -11,6 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Zen+Kurenaido&family=Zen+Maru+Gothic&display=swap" rel="stylesheet">    <link rel="stylesheet" href="{% static 'css/main.css' %}"> 
     <link rel="stylesheet" href="{% static 'css/sticky-footer.css' %}"> 
     <link rel="stylesheet" href="{% static 'css/header.css' %}"> 
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
     {% block head %}
     {% endblock %}
     <title>BookmarkShareApp</title>
@@ -58,11 +59,15 @@
         </main>
     </div>
 
-    <div class="container my-3" style="background-color: bisque;">
-        <!-- <aside class="left-aside" style="width: 150px;" >
-            {% block left_aside_ %}
+    <div class="container my-3">
+        <!-- <aside class="left-aside" style="width: 50px;" >
+            {% block left_aside %}
             {% endblock %}
         </aside> -->
+        <main class="my-3" role="main" style="width: 780px;">
+            {% block main_b %}
+            {% endblock %}
+        </main>
         <aside class="right-aside p-2" style="width: 320px;">
             {% block right_aside %}
             {% endblock %}

@@ -1,0 +1,40 @@
+/* Validate */
+
+.validate-error {
+    border: 1px solid #da3c4d;
+    outline: none;
+	box-shadow: 0 0 5px 1px rgba(218,60,65, .5);
+}
+
+.error-message {
+    border: 2px solid #990000;
+    background:#FFEBE8;
+    width: 40%;
+    margin: 0 auto;
+}
+
+.error-text {
+    font-size: 8px;
+    font-weight: bold;
+    color: #da3c4d;
+}
+
+.errorlist {
+    text-align: center;
+}
+
+.errorlist li {
+    font-size: 10px;
+    font-weight: bold;
+    color: #da3c4d;
+}
+
+input:focus {
+    border: 1px solid rgb(40, 162, 199);
+    box-shadow: 0 0 5px 1px rgba(8, 188, 233, 0.5);
+}
+
+input[type="email"] input[type="password"]:valid {
+    border: 1px solid rgb(49, 241, 59);
+    box-shadow: 0 0 5px 1px rgba(9, 243, 67, 0.5);
+}
