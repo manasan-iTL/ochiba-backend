@@ -2,7 +2,7 @@ from BookmarkShareApp.settings.development import DEBUG
 from .base import *
 import os
 
-DEBUG = True
+DEBUG = False
 
 SECRET_KEY = os.environ['SECRET_KEY']
 
