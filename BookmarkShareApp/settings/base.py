@@ -1,26 +1,10 @@
-try:
-    from .local_settings import *
-except ImportError:
-    pass
-
 from pathlib import Path
 import os
-import dj_database_url
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 print('BASE_DIR: ', BASE_DIR)
-
-DEBUG = False
-
-
-if not DEBUG:
-    SECRET_KEY = os.environ['SECRET_KEY']
-    import django_heroku #追加
-    django_heroku.settings(locals()) 
-
-ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -80,21 +64,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'BookmarkShareApp.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'name',
-        'USER': 'user',
-        'PASSWORD': '',
-        'HOST': 'host',
-        'PORT': '',
-    }
-}
-db_from_env = dj_database_url.config(conn_max_age=600, ssl_require=True)
-DATABASES['default'].update(db_from_env)
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -178,24 +148,13 @@ ACCOUNT_LOGOUT_ON_GET = True
 # django-allauthが送信するメールの件名に自動付与される接頭辞をブランクにする設定
 ACCOUNT_EMAIL_SUBJECT_PREFIX = ''
 
-# デフォルトのメール送信元を設定
-DEFAULT_FROM_EMAIL = 'admin@example.com'
-
-#コンソール上にメッセージを表示
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' 
 
 # その他の設定
 ACCOUNT_EMAIL_SUBJECT_PREFIX = '' # メールの件名のプレフィックス
 ACCOUNT_MAX_EMAIL_ADDRESSES = 2 # 登録できるメールアドレスの上限。1だと変更できない。 
 ACCOUNT_USERNAME_BLACKLIST = [] # usernameとして使えない文字
 
-# メール送信の設定 Gmailを使う。
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'ochiba.customer@gmail.com'
-EMAIL_HOST_PASSWORD = 'ggyhexmgtcdhvdzg'
-EMAIL_USE_TLS = True
+
 
 # # ソーシャルアカウントでログイン・サインアップ時の設定
 # SOCIALACCOUNT_EMAIL_VERIFICATION = 'none' 
