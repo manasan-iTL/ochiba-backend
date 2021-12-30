@@ -28,6 +28,4 @@ urlpatterns = [
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # 追加
 
-from map.views import my_customized_server_error
-handler500 = my_customized_server_error
 
