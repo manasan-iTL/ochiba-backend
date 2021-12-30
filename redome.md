@@ -6,6 +6,7 @@
  - psycopg2==2.9.1
  - django-widget-tweaks == 1.4.8
  - beautifulsoup4 == 4.10.0
+ - python-dotenv
 
 ## フロントエンド
  
