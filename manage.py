@@ -2,12 +2,10 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
-import dotenv
 
 
 def main():
     #.envから環境変数を読み込む
-    dotenv.load_dotenv()
     """Run administrative tasks."""
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'BookmarkShareApp.settings.development')
     try:
