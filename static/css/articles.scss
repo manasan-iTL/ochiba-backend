@@ -28,3 +28,13 @@
     text-align: left;
   }
 }
+
+.article {
+  padding: 0.5em 1em;
+  margin: 40px auto;
+  color: #000000;
+  background: #ede8e2e2;/*背景色*/
+  border-top: solid 6px rgb(85, 62, 23);
+  box-shadow: 0 3px 4px rgba(0, 0, 0, 0.32);/*影*/
+  max-width: 800px;
+}
