@@ -1,3 +1,4 @@
+@charset "UTF-8";
 .layout-index.p-3.mx-3 .table {
   margin-right: auto;
   margin-left: auto;
@@ -26,5 +27,18 @@
 
 .layout-index.p-3.mx-3 .form_status {
   text-align: left;
+}
+
+.article {
+  padding: 0.5em 1em;
+  margin: 40px auto;
+  color: #000000;
+  background: #ede8e2e2;
+  /*背景色*/
+  border-top: solid 6px #553e17;
+  -webkit-box-shadow: 0 3px 4px rgba(0, 0, 0, 0.32);
+          box-shadow: 0 3px 4px rgba(0, 0, 0, 0.32);
+  /*影*/
+  max-width: 800px;
 }
 /*# sourceMappingURL=articles.css.map */
