@@ -1,58 +1,32 @@
 {% extends 'base_login.html' %}
 
 {% block main %}
-<div class="layout-index p-3 mx-3">
-    <div class="text-center my-5">
-        <h2>新規記事作成ページ</h2>
-    </div>
-    <div>
-        <form method="POST">
+<div class="container">
+    <form method="POST">
+        <h2 class="text-center mt-4 mb-5">新規記事作成</h2>
             {% csrf_token %}
             {{ form.non_field_errors }}
-            <table class="table">
-                <tbody>
-                    <tbody>
-                        <!-- {% for field in form %}
-                        <tr>
-                            <th style="width:30%">{{ field.label_tag }}</th>
-                            <td style="width:70%">{{ field }}</td>
-                        </tr>
-                        {% if field.help_text %}
-                        <span class="helptext">{{ field.help_text }}</span>
-                        {% endif %}
-                        {{ field.errors }}  
-                        {% endfor %} -->
-                        <!-- title, discription, status -->
-                        <tr class="form_body">
-                            <th class="form_label">{{ form.title.label_tag }}</th>
-                            <td class="form_title">{{ form.title }}</td>
-                        </tr>
-                        {% if form.title.help_text %}
-                        <span class="helptext">{{ form.title.help_text }}</span>
-                        {% endif %}
-                        {{ form.title.errors }} 
+            {% for field in form %}
+            <div class="form-group">
+                <dl class="row">
+                    <dt class="col-lg-2"><label for="{{ field.id_for_label }}">{{ field.label }}</label></dt>
+                    <dd class="col-lg-8">{{ field }}</dd>
+                </dl>
 
-                        <tr class="form_body">
-                            <th class="form_label">{{ form.discription.label_tag }}</th>
-                            <td class="form_discription">{{ form.discription }}</td>
-                        </tr>
-                        {% if form.discription.help_text %}
-                        <span class="helptext">{{ form.discription.help_text }}</span>
-                        {% endif %}
-                        {{ form.discription.errors }} 
-
-                        <tr class="form_body">
-                            <th class="form_label">{{ form.status.label_tag }}</th>
-                            <td class="form_status">{{ form.status }}</td>
-                        </tr>
-                        {% if form.status.help_text %}
-                        <span class="helptext">{{ form.status.help_text }}</span>
-                        {% endif %}
-                        {{ form.status.errors }} 
-
-                    </tbody>
-                </tbody>
-            </table>
+                {% if field.help_text %}
+                <div>
+                    <p class="helptext">{{ field.help_text }}</p>
+                </div>
+                {% endif %}
+                {% if field.errors %}
+                <div class="invalid-feedback">
+                    {% for error in field.errors %}
+                        {{ error }}<br>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+            {% endfor %}
             <div class="text-center my-2">
                 <button class="btn btn-outline-dark" type="submit">送信</button>
             </div>

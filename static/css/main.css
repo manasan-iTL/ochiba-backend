@@ -29,7 +29,7 @@ a {
     text-decoration: none;
 }
 
-.container {
+.new-container {
     display: flex;
     flex-direction: row;
     margin: 200px, 200px;
@@ -40,7 +40,7 @@ a {
     background-color: pink;
 } */
 
-.container .main {
+.new-container .main {
     flex: 1;
 	top: 0;
 	left: 0;
@@ -53,7 +53,7 @@ a {
     background-color: white;
 } */
 
-.container .sticky-sidebar {
+.new-container .sticky-sidebar {
     position: -webkit-sticky;
 	position: sticky;
 	top: 0;
