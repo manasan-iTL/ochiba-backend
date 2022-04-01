@@ -21,7 +21,7 @@ $(function(){
         });
 
         let searchbuttonElement = $('input#id_object_set-' + i + '-DELETE').parent();
-        let createdeletebutton = $('<button><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/> <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/></svg></button>').attr({
+        let createdeletebutton = $('<button class"col-lg-2"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/> <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/></svg></button>').attr({
             "id":"remove" + i,
             "type":"button",
         });
@@ -39,23 +39,37 @@ $(function(){
         let formwrapper = $('<div></div>',{
             "class":"object-form form-mytop form-paddleft",
         });
-        let discriptionLabel = $('<label>概要:</label>', {
+        let discriptionLabel = $('<label>概要</label>', {
            for:'id_object_set-' + currentObjectCount + '-discription',
         });
 
         let discriptionElement = $('<textarea>', {
-            class:'form-item',
+            rows: '1',
+            cols:'40',
+            class:'form-control',
             placeholder:'ブックマークした記事の概要、メモを入力',
             name:'object_set-' + currentObjectCount + '-discription',
             id:'id_object_set-' + currentObjectCount + '-discription',
         });
 
-        let titleLabel = $('<label>タイトル:</label>', {
+        let discriptionDl = $('<dl>', {
+            class: "row"
+        })
+
+        let discriptionDt = $('<dt>', {
+            class: "col-lg-2"
+        })
+
+        let discriptionDd = $('<dd>', {
+            class: "col-lg-8"
+        })
+
+        let titleLabel = $('<label>タイトル</label>', {
            for: 'id_object_set-' + currentObjectCount + '-title',
         });
 
         let titleElement = $('<input>', {
-            class:'form-item',
+            class:'form-control',
             type:'text',
             placeholder:'ブックマークした記事のタイトルを入力',
             maxlength:'100',
@@ -63,12 +77,24 @@ $(function(){
             id:'id_object_set-' + currentObjectCount + '-title',
         });
 
-        let urlLabel = $('<label>URL:</label>', {
+        let titleDl = $('<dl>', {
+            class: "row"
+        })
+
+        let titleDt = $('<dl>', {
+            class: "col-lg-2"
+        })
+
+        let titleDd = $('<dl>', {
+            class: "col-lg-8"
+        })
+
+        let urlLabel = $('<label>URL</label>', {
            for: 'id_object_set-' + currentObjectCount + '-url',
         });
 
         let urlElement = $('<input>', {
-            class:'form-item',
+            class:'form-control',
             type:'url',
             placeholder:'ブックマークした記事のURLを入力',
             maxlength:'200',
@@ -76,17 +102,56 @@ $(function(){
             id:'id_object_set-' + currentObjectCount + '-url',
         });
 
+        let urlDl = $('<dl>', {
+            class: "row"
+        })
+
+        let urlDt = $('<dt>', {
+            class: "col-lg-2"
+        })
+
+        let urlDd = $('<dd>', {
+            class: "col-lg-8"
+        })
+
         let deleteobjElement = $('<button>' + trash_icon + '</button>');
         $(deleteobjElement).attr({
             'class':'addremove',
             'type':'button',
         })
-        let discriptionElementdiv = $('<div></div>', {"class":"object-field"}).append(discriptionLabel,discriptionElement);
-        let titleElementdiv = $('<div></div>', {"class":"object-field"}).append(titleLabel,titleElement);
-        let urlElementdiv = $('<div></div>', {"class":"object-field"}).append(urlLabel,urlElement);
-        let deleteElementdiv = $('<div></div>', {"class":"object-field"}).append(deleteobjElement)
+
+        let deleteDl = $('<dl>', {
+            class: "row"
+        })
+
+        let deleteDt = $('<dt>', {
+            class: "col-lg-2"
+        })
+
+        let deleteDd = $('<dd>', {
+            class: "col-lg-8"
+        })
+
+        let hr = $('<hr>');
+        /** <dt><dd>に要素を入れる */
+        discriptionDt.append(discriptionLabel);
+        discriptionDd.append(discriptionElement);
+        titleDt.append(titleLabel);
+        titleDd.append(titleElement);
+        urlDt.append(urlLabel);
+        urlDd.append(urlElement);
+        deleteDd.append(deleteobjElement);
+        /* <dl>に<dt><dd>を入れる*/
+        discriptionDl.append(discriptionDt,discriptionDd);
+        titleDl.append(titleDt, titleDd);
+        urlDl.append(urlDt, urlDd);
+        deleteDl.append(deleteDt,deleteDd);
+        let discriptionElementdiv = $('<div></div>', {"class":"form-group"}).append(discriptionDl);
+        let titleElementdiv = $('<div></div>', {"class":"form-group"}).append(titleDl);
+        let urlElementdiv = $('<div></div>', {"class":"form-group"}).append(urlDl);
+        let deleteElementdiv = $('<div></div>', {"class":"form-group"}).append(deleteDl)
         
-        let ele = $(formwrapper).append(urlElementdiv,titleElementdiv,discriptionElementdiv,deleteElementdiv);
+        let ele = $(formwrapper).append(urlElementdiv,titleElementdiv,discriptionElementdiv,deleteElementdiv, hr);
         $('.edit-footer').before(ele);
         
         countDeletebutton += 1;

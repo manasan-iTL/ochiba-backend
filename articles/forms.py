@@ -13,8 +13,8 @@ from django.core.exceptions import ValidationError #add
 from django.core.validators import FileExtensionValidator, validate_email #add
 
 class PostForm(forms.Form):
-    title = forms.CharField(max_length=100, label='記事タイトル', required=True, widget = forms.TextInput(attrs={'placeholder':'ブックマークリストタイトル','class':'form-item'}))
-    discription = forms.CharField(label='記事の概要', widget=forms.Textarea(attrs={'placeholder':'このブックマークリストについて','class':'form-item'}))
+    title = forms.CharField(max_length=100, label='記事タイトル', required=True, widget = forms.TextInput(attrs={'placeholder':'ブックマークリストタイトル','class':'form-control'}))
+    discription = forms.CharField(label='記事の概要', widget=forms.Textarea(attrs={'placeholder':'このブックマークリストについて','class':'form-control','rows':3}))
     status = forms.BooleanField(label='公開する', required=False)
 
 class ObjectForm(forms.ModelForm):
@@ -28,11 +28,12 @@ class ObjectForm(forms.ModelForm):
         }
         widgets = {
             'url':URLInput(attrs={'placeholder':'ブックマークした記事のURLを入力',
-                                  'class':'form-item'}),
+                                  'class':'form-control'}),
             'title':TextInput(attrs={'placeholder':'ブックマークした記事のタイトルを入力',
-                                     'class':'form-item'}),
+                                     'class':'form-control'}),
             'discription':Textarea(attrs={'placeholder':'ブックマークした記事の概要、メモを入力',
-                                          'class':'form-item textarea-height'}),
+                                          'class':'form-control textarea-height',
+                                          'rows':1}),
         }
     
     def has_changed(self):
