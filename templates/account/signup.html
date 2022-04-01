@@ -4,17 +4,20 @@
 {% load i18n %}
 {% load account socialaccount %}
 
+{% block head %}
+  <link rel="stylesheet" href="{% static 'css/validate.css' %}">
+{% endblock %}
+
 {% block head_title %}{% trans "Sign In" %}{% endblock %}
 
 {% block main %}
 
 <div class="text-center">
   <div class="mt-5 mb-3">
-    <svg xmlns="http://www.w3.org/2000/svg" width="72" height="72" fill="currentColor" class="bi bi-bookmarks-fill" viewBox="0 0 16 16">
-      <path d="M2 4a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v11.5a.5.5 0 0 1-.777.416L7 13.101l-4.223 2.815A.5.5 0 0 1 2 15.5V4z"/>
-      <path d="M4.268 1A2 2 0 0 1 6 0h6a2 2 0 0 1 2 2v11.5a.5.5 0 0 1-.777.416L13 13.768V2a1 1 0 0 0-1-1H4.268z"/>
-    </svg>
-    <h1 class="h3 my-3 font-weight-normal">BookmarkShareApp</h1>
+    <div class="image-area">
+      <img src="{% static 'image/logo_clear_bg.png' %}" alt="ロゴ画像" class="image">
+    </div>
+    <h2>Ochiba</h2>
   </div>
   <!-- {% include "socialaccount/snippets/provider_list.html" with process="login"%} -->
   <!-- http://127.0.0.1:8000/account/google/login/?process=login -->
@@ -23,24 +26,27 @@
 
 <div class="text-center">
   <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
-    <p class="alert alert-danger">ochibaの<a href="{% url 'terms' %}" target="_blank">利用規約</a>を読み、同意のうえご登録ください。</p>
+    <p style="color: grey;">ochibaの<a style="color: grey; text-decoration: underline;" href="{% url 'terms' %}" target="_blank">利用規約</a>を読み、同意のうえご登録ください。</p>
     {% csrf_token %}
-    {% for error in form.non_field_errors %}
-      <div class="error-message">
-        <h3>Error!</h3>
-        <p class="is-validate">{{ error }}</p>
-      </div>
-    {% endfor %} 
+    {% if form.errors %}
+    <div class="error-message">
+    {% for errors in form.errors.values %}
+      {% for error in errors %}
+         {{ error }}<br>
+      {% endfor %}
+    {% endfor %}
+    </div>
+    {% endif %}
     {% for field in form  %}
     <div class="form-group field my-2" >
       {{field}}
-      {% if field.errors %}
+      <!-- {% if field.errors %}
       <ul class="errorlist  non-padding">
         {% for error in field.errors %}
           <li class="alert alert-danger">{{error}}</li>
         {% endfor %}
       </ul>
-      {% endif %}
+      {% endif %} -->
       {% if redirect_field_value %}
       <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
       {% endif %}
@@ -53,7 +59,7 @@
 </div>
 
 
-<div class="text-center">
+<!-- <div class="text-center">
   <p class="text-muted my-2">または</p>
   {% get_providers as socialaccount_providers %}
   {% for provider in socialaccount_providers %}
@@ -74,7 +80,7 @@
     {% endif %}
   {% endfor %}
   </div>
-</div>
+</div> -->
 
 {% endblock %}
 {% block add_js %}
