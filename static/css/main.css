@@ -11,7 +11,7 @@
 * {
     margin: 0;
     padding: 0;
-    list-style: none;
+    /* list-style: none; */
 }
 
 /*　文字サイズ・色・フォントの設定*/
