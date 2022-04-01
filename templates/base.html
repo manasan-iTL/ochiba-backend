@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block body %}
-    <div class="new-container my-3" style="min-height: 100vh;">
+    <div class="new-container my-3" style="min-height: 100%;">
         <aside class="left-aside" >
             {% block left_aside %}
             {% endblock %}
@@ -24,6 +24,9 @@
 
     <footer class="footer">
         <p class="text-muted">Copyright &copy; BookmarkShareApp 2021</p>
+        <ul style="list-style: none;">
+            <li><a href="{% url 'terms' %}">利用規約</a></li>
+        </ul>
     </footer>
 {% endblock %}
 {% block add_js %}

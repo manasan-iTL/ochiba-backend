@@ -23,6 +23,7 @@
 
 <div class="text-center">
   <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+    <p class="alert alert-danger">ochibaの<a href="{% url 'terms' %}" target="_blank">利用規約</a>を読み、同意のうえご登録ください。</p>
     {% csrf_token %}
     {% for error in form.non_field_errors %}
       <div class="error-message">
