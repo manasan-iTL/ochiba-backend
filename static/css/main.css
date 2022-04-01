@@ -60,6 +60,15 @@ a {
     background-color: white;
 }
 
+.errorlist {
+    list-style: none;
+    margin-top: 5px;
+}
+
+.non-padding {
+    padding: 0;
+}
+
 /*  footer部分のレイアウト  　　*/
 /* .footer {
     height: 30px;

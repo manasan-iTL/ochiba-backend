@@ -35,9 +35,9 @@
     <div class="form-group field my-2" >
       {{field}}
       {% if field.errors %}
-      <ul class="errorlist">
+      <ul class="errorlist  non-padding">
         {% for error in field.errors %}
-          <li>{{error}}</li>
+          <li class="alert alert-danger">{{error}}</li>
         {% endfor %}
       </ul>
       {% endif %}
