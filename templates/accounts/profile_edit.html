@@ -1,6 +1,9 @@
 {% extends "base_login.html" %}
 {% load widget_tweaks %}
 
+{% block head_title %}{{ user_data.username }}のプロフィール編集 - Ochiba{% endblock %}
+
+
 {% block main %}
 <div class="proedit_body">
     <div class="text-center my-5">

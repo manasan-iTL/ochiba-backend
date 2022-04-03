@@ -1,6 +1,13 @@
 {% extends 'base_login.html' %}
 {% load static %}
 
+{% block ogp %}
+<meta property="og:description" content="{{ object.discription }}">
+<meta property="og:title" content="{{ post.title }} - Ochiba">
+{% endblock %}
+
+{% block head_title %}{{ post.title }} - Ochiba{% endblock %}
+
 {% block main %}
 <div class="article">
     <div class="mt-3">

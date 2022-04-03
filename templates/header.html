@@ -20,10 +20,19 @@
     <link rel="stylesheet" href="{% static 'css/profile_edit.css' %}">
 
     <link rel="stylesheet" href="{% static 'css/layout-index.css' %}"> 
+    <link rel="icon" type="image/png" href="{% static '/images/favicon.png' %}">
+    <title>{% block head_title %}{% endblock %}</title>
+    {% block ogp %}
+    <meta property="og:url" content="https://ochiba.app/">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="HOME | Ochiba">
+    <meta property="og:description" content="ブックマークを検索・共有できるアプリ お気に入りをシェアしよう!">
+    <meta property="og:site_name" content="ソーシャルブックマークアプリ Ochiba">
+    <meta property="og:image" content="{% static 'images/ogp_img_w.png' %}">
+    {% endblock %}
 
     {% block head %}
     {% endblock %}
-    <title>BookmarkShareApp</title>
 </head>
 <body>
     <header class="header">
