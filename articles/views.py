@@ -39,6 +39,11 @@ class IndexView(ListView):
 class TermsView(TemplateView):
     template_name = 'terms.html'
 
+'''
+プライバシーポリシーページ
+'''
+class PrivacyPolicyView(TemplateView):
+    template_name = 'privacy_policy.html'
 
 '''
 詳細画面用のView
