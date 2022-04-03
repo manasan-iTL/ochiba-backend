@@ -7,6 +7,8 @@ from articles import views
 
 urlpatterns = [
     path('', views.IndexView.as_view(), name="index"),
+    path('terms/', views.TermsView.as_view(), name="terms"),
+    path('privacy-policy/', views.PrivacyPolicyView.as_view(), name="privacy_policy"),
     path('<slug:slug>/<int:pk>', views.ArticleDetailView.as_view(), name="article_detail"),
     path('create-post/', views.CreatePostView.as_view(), name="create_post"),
     path('create-object/', views.CreateObjectView.as_view(), name="create_object"),

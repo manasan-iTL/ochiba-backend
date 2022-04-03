@@ -34,6 +34,18 @@ class IndexView(ListView):
 
 
 '''
+利用規約ページ
+'''
+class TermsView(TemplateView):
+    template_name = 'terms.html'
+
+'''
+プライバシーポリシーページ
+'''
+class PrivacyPolicyView(TemplateView):
+    template_name = 'privacy_policy.html'
+
+'''
 詳細画面用のView
 クラス汎用ベースビューのDetailViewを継承して作っている
 '''

@@ -5,68 +5,72 @@
 <link rel="stylesheet" href="{% static 'css/style_form.css' %}">
 {% endblock %}
 
+
 {% block main %}
-    <div class="edit-area form-mytop p-3 mx-3" style="background-color: white;">
-        <form action="" method="post" class="formset">
-                <div class="post-form form-mytop form-paddleft">
-                    <h2>新規記事</h2>
-                    {{ form.non_field_errors }}
-                    {% for field in form %}
-                        <div class="post-field item-mytop">
-                            {{ field.label_tag }}
-                            {{ field }}
-                            {% if field.help_text %}
-                                <span class="helptext">{{ field.help_text }}</span>
-                            {% endif %}
-                            {{ field.errors }}
-                        </div>
-                    {% endfor %}
+    <div class="container edit-area">
+        <form action="" method="post">
+                    
+            <h2 class="text-center mb-5">新規記事作成</h2>
+            {{ form.non_field_errors }}
+            {% for field in form %}
+                <div class="form-group">
+                    <dl class="row">
+                        <dt class="col-lg-2"><label for="{{ field.id_for_label }}">{{ field.label }}</label></dt>
+                        <dd class="col-lg-8">{{ field }}</dd>
+                    </dl>
+                    
+                    {% if field.help_text %}
+                    <div>
+                        <p class="helptext">{{ field.help_text }}</p>
+                    </div>
+                    {% endif %}
+                    {% if field.errors %}
+                    <div class="invalid-feedback">
+                        {% for error in field.errors %}
+                            {{ error }}<br>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
                     <div class="item-mytop">
                         <button class="btn btn-outline-danger" type="submit" name="postdelete">記事を削除</button>
                     </div> 
-                </div>
                 <hr>
-            
-            <!-- <div class="text-center my-5">
-                <h2>オブジェクト一覧</h2>
-            </div>
-            {{ formset.management_form }}
-            <div id="object-form">
-                {% for file_form in formset %}
-                <div class="form-group">
-                    <table class="table">
-                        <tr>
-                            <th style="width: 30%"></th>
-                            <td style="width: 70%"></td>
-                        </tr> -->
-                        <!-- {{ file_form.as_table }}
-                    </table>
-                    <div class="text-center">
-                        <button type="submit" class="btn btn-outline-danger">オブジェクトを削除</button>
-                    </div>
-                </div>
-                {% endfor %}
-            </div> -->
             
             
             {% for form in formset %}
+                <h2 class="text-center mt-4 mb-5">この記事にURLメモを追加する</h2>
                 <div class="object-form form-mytop form-paddleft">
                 {{ form.non_field_errors }}
                 {% for field in form.visible_fields %}
-                    <div class="object-field">
-                        <label for="{{ field.id_for_label }}">{{ field.label_tag }}</label>
-                        {{ field }}
-                        {{ field.errors }}
+                    <div class="form-group">
+                        <dl class="row">
+                            <dt class="col-lg-2"><label for="{{ field.id_for_label }}">{{ field.label }}</label></dt>
+                            <dd class="col-lg-8">{{ field }}</dd>
+                        </dl>
+                        {% if field.help_text %}
+                            <span class="helptext">{{ field.help_text }}</span>
+                        {% endif %}
+                        {% if field.errors %}
+                            <div class="invalid-feedback">
+                                {% for error in field.errors %}
+                                    {{ error }}<br>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                        
                     </div>
                 {% endfor %}
                 {% for field in form.hidden_fields %}
                     {{ field }}
                 {% endfor %}
+                <hr>
                 </div>
             {% endfor %}
             {{ formset.management_form }}
             {% csrf_token %}
-            <div class="edit-footer col text-center my-5">
+            <div class="edit-footer col text-center">
                 <button id="add" type="button" class="btn btn-outline-dark">オブジェクト追加</button>
                 <button type="submit" name="save" class="btn btn-outline-dark">保存</button> 
             </div>

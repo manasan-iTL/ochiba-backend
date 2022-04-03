@@ -84,6 +84,9 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         verbose_name_plural = _('users')
         # abstract = True
 
+    def save(self, *args, **kwargs):
+        self.username = self.username.replace('.','-')
+        return super(CustomUser, self).save(*args, **kwargs)
     def clean(self):
         super().clean()
         self.email = self.__class__.objects.normalize_email(self.email)

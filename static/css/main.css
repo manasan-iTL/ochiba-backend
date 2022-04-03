@@ -11,7 +11,7 @@
 * {
     margin: 0;
     padding: 0;
-    list-style: none;
+    /* list-style: none; */
 }
 
 /*　文字サイズ・色・フォントの設定*/
@@ -29,7 +29,7 @@ a {
     text-decoration: none;
 }
 
-.container {
+.new-container {
     display: flex;
     flex-direction: row;
     margin: 200px, 200px;
@@ -40,7 +40,7 @@ a {
     background-color: pink;
 } */
 
-.container .main {
+.new-container .main {
     flex: 1;
 	top: 0;
 	left: 0;
@@ -53,11 +53,28 @@ a {
     background-color: white;
 } */
 
-.container .sticky-sidebar {
+.new-container .sticky-sidebar {
     position: -webkit-sticky;
 	position: sticky;
 	top: 0;
     background-color: white;
+}
+
+.errorlist {
+    list-style: none;
+    margin-top: 5px;
+}
+
+.non-padding {
+    padding: 0;
+}
+
+.image-area {
+    height: 180px;
+}
+
+.image {
+    height: 100%;
 }
 
 /*  footer部分のレイアウト  　　*/
@@ -66,4 +83,6 @@ a {
     background-color: black;
     color: white;
 } */
+
+
 

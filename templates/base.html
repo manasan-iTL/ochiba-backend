@@ -1,12 +1,14 @@
 {% extends 'header.html' %}
 {% load static %}
 
+{% block head_title %}Ochiba （おちば）ブックマークを検索・共有できるアプリ{% endblock %}
+
 {% block head %}
 {% endblock %}
 
 {% block body %}
-    <div class="container my-3" style="min-height: 100vh;">
-        <aside class="left-aside" style="width: 150px;" >
+    <div class="new-container my-3" style="min-height: 100%;">
+        <aside class="left-aside" >
             {% block left_aside %}
             {% endblock %}
         </aside>
@@ -16,14 +18,18 @@
             {% endblock %}
         </main>
   
-        <aside class="right-aside my-3 p-2" style="width: 320px;">
+        <aside class="right-aside my-3 p-2">
             {% block right_aside %}
             {% endblock %}
         </aside>
     </div>
 
     <footer class="footer">
-        <p class="text-muted">Copyright &copy; BookmarkShareApp 2021</p>
+        <p class="text-muted text-center footer-container ">Copyright &copy; Ochiba 2021</p>
+        <ul class="footer-list">
+            <li><a class="footer-list-item" href="{% url 'terms' %}">利用規約</a></li>
+            <li><a class="footer-list-item" href="{% url 'privacy_policy' %}">プライバシーポリシー</a></li>
+        </ul>
     </footer>
 {% endblock %}
 {% block add_js %}
