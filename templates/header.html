@@ -14,9 +14,10 @@
     <link rel="stylesheet" href="{% static 'css/header.css' %}"> 
     <!-- <link rel="stylesheet" href="{% static 'css/dialog.css' %}">  -->
     <link rel="stylesheet" href="{% static 'css/articles.css' %}"> 
-    <link rel="stylesheet" href="{% static 'css/responsive_profile.css' %}">
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
     <link rel="stylesheet" href="{% static 'css/offcanvas.css' %}"> 
     <link rel="stylesheet" href="{% static 'css/style_index.css' %}">
+    <link rel="stylesheet" href="{% static 'css/profile_edit.css' %}">
 
     <link rel="stylesheet" href="{% static 'css/layout-index.css' %}"> 
 
@@ -37,7 +38,7 @@
                     <h3 class="app_title">Ochiba</h3>
                 </a>              
               </div>
-              <button class="navbar-toggler p-0 border-0 btn-outline-primary" type="button" data-bs-toggle="offcanvas" aria-label="Toggle navigation">
+              <button class="navbar-toggler p-0 border-0 btn-outline-warning" type="button" data-bs-toggle="offcanvas" aria-label="Toggle navigation">
                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
                   <path fill-rule="evenodd" d="M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
                 </svg>              
@@ -46,12 +47,12 @@
               <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
                 <form class="d-flex form-inline navbar-form" style="height: 40px;" method ="get" action="{% url 'search' %}" >
                   <input class="form-control" style="width: 300px;" type="text" name="keyword" placeholder="検索">
-                  <button class="btn btn-outline-primary btn-block mx-2"style="width: 60px;" type="submit">検索</button>
+                  <button class="btn btn-outline-warning btn-block mx-2"style="width: 60px;" type="submit">検索</button>
                 </form>
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                   {% if user.is_authenticated %}
                   <li class="nav-item dropdown">
-                    <a class="dropdown-toggle me-2 btn btn-outline-primary" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">記事作成</a>
+                    <a class="dropdown-toggle me-2 btn btn-outline-warning" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">記事作成</a>
                     <ul class="dropdown-menu">
                       <li><a class="dropdown-item" href="{% url 'create_post' %}">新規記事作成</a></li>
                       <!-- <li><a class="dropdown-item" href="{% url 'create_object' %}">新規URLメモ作成</a></li> -->
@@ -63,17 +64,17 @@
                     </ul>
                 </li>
                   <li class="nav-item me-2">
-                    <a class="btn btn-outline-primary" href="{% url 'accounts:profile' user.username %}">プロフィール</a>                  
+                    <a class="btn btn-outline-warning" href="{% url 'accounts:profile' user.username %}">プロフィール</a>                  
                   </li>
                   <li class="nav-item me-2">
-                    <a class="btn btn-outline-primary" href="{% url 'account_logout' %}">ログアウト</a>
+                    <a class="btn btn-outline-warning" href="{% url 'account_logout' %}">ログアウト</a>
                   </li>
                   {% else %}
                   <li class="nav-item me-2">
-                    <a class="btn btn-outline-primary" href="{% url 'account_login' %}">ログイン</a>
+                    <a class="btn btn-outline-warning" href="{% url 'account_login' %}">ログイン</a>
                   </li>
                   <li class="nav-item me-2">
-                    <a class="btn btn-outline-primary" href="{% url 'account_signup' %}">新規登録</a>
+                    <a class="btn btn-outline-warning" href="{% url 'account_signup' %}">新規登録</a>
                   </li>
                   {% endif %}
                 </ul>

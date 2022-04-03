@@ -1,0 +1,24 @@
+.proedit_body{
+  background-color: white;
+  max-width: 800px;
+  text-align: center;
+  margin: 0 auto;
+  padding: 30px 20px;
+  // display: flex;
+  @media screen and (max-width: 380px) {
+    .prof_usern{
+      display: flex;
+      flex-direction: column;
+      .header{
+        text-align: left;
+      }
+    }
+    .prof_intro{
+      display: flex;
+      flex-direction: column;
+      .header{
+        text-align: left;
+      }
+    }
+  }
+}

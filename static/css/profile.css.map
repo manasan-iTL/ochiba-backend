@@ -2,8 +2,8 @@
     "version": 3,
     "mappings": "AAAA,AAAA,MAAM,CAAC;EACL,UAAU,EAAE,MAAM;CACnB",
     "sources": [
-        "responsive_profile.scss"
+        "profile.scss"
     ],
     "names": [],
-    "file": "responsive_profile.css"
+    "file": "profile.css"
 }

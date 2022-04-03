@@ -35,7 +35,7 @@
             </a>
           </div>
           <div>
-            <p class="mb-0 font-weight-light"><a href="{% url 'accounts:profile' post.user.username %}">@{{post.user.username}}</a></p>
+            <a href="{% url 'accounts:profile' post.user.username %}">@{{post.user.username}}</a>
             <h2 class="mb-0 font-weight-bold"><a href="{% url 'article_detail' post.slug post.id %}">{{ post.title }}</a></h2>
             <!-- <p class="mb-0">ユーザー紹介</p> -->
           </div>
