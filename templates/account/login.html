@@ -15,11 +15,10 @@
 
 <div class="text-center">
   <div class="mt-5 mb-3">
-    <svg xmlns="http://www.w3.org/2000/svg" width="72" height="72" fill="currentColor" class="bi bi-bookmarks-fill" viewBox="0 0 16 16">
-      <path d="M2 4a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v11.5a.5.5 0 0 1-.777.416L7 13.101l-4.223 2.815A.5.5 0 0 1 2 15.5V4z"/>
-      <path d="M4.268 1A2 2 0 0 1 6 0h6a2 2 0 0 1 2 2v11.5a.5.5 0 0 1-.777.416L13 13.768V2a1 1 0 0 0-1-1H4.268z"/>
-    </svg>
-    <h1 class="h3 my-3 font-weight-normal">Ochiba</h1>
+    <div class="image-area">
+      <img src="{% static 'image/logo_clear_bg.png' %}" alt="ロゴ画像" class="image">
+    </div>
+    <h2>Ochiba</h2>
   </div>
   <!-- {% include "socialaccount/snippets/provider_list.html" with process="login"%} -->
   <!-- http://127.0.0.1:8000/account/google/login/?process=login -->
@@ -29,12 +28,13 @@
 <div class="text-center">
   <form class="loginform" method="POST" action="{% url 'account_login' %}">
     {% csrf_token %}
-    {% if form.non_field_errors %}
+    {% if form.errors %}
     <div class="error-message">
-      {% for error in form.non_field_errors %}
-        <h3>Error:</h3>
-        <p>{{ error }}</p>
+    {% for errors in form.errors.values %}
+      {% for error in errors %}
+         {{ error }}<br>
       {% endfor %}
+    {% endfor %}
     </div>
     {% endif %}
     {% for field in form %}
