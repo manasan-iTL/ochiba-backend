@@ -1,4 +1,3 @@
-from BookmarkShareApp.settings.development import DEBUG
 from .base import *
 import os
 import dj_database_url
