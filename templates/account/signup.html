@@ -26,7 +26,7 @@
 
 <div class="text-center">
   <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
-    <p style="color: grey;">ochibaの<a style="color: grey; text-decoration: underline;" href="{% url 'terms' %}" target="_blank">利用規約</a>を読み、同意のうえご登録ください。</p>
+    <p style="color: grey;">ochibaの<a style="color: grey; text-decoration: underline;" href="{% url 'terms' %}" target="_blank">利用規約</a>及び<a style="color: grey; text-decoration: underline;" href="{% url 'terms' %}" target="_blank">プライバシーポリシー</a>を読み、同意のうえご登録ください。</p>
     {% csrf_token %}
     {% if form.errors %}
     <div class="error-message">
