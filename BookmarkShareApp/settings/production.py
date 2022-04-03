@@ -8,6 +8,8 @@ SECRET_KEY = os.environ['SECRET_KEY']
 
 ALLOWED_HOSTS = ['*']
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 db_from_env = dj_database_url.config()
