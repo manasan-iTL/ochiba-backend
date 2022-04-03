@@ -60,6 +60,23 @@ a {
     background-color: white;
 }
 
+.errorlist {
+    list-style: none;
+    margin-top: 5px;
+}
+
+.non-padding {
+    padding: 0;
+}
+
+.image-area {
+    height: 180px;
+}
+
+.image {
+    height: 100%;
+}
+
 /*  footer部分のレイアウト  　　*/
 /* .footer {
     height: 30px;
