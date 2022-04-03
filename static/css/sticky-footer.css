@@ -8,11 +8,27 @@ body {
   margin-bottom: 200px;
 }
 .footer {
-  text-align: center;
+  /* text-align: center;
+  vertical-align: middle; */
   position: absolute;
   bottom: 0;
   width: 100%;
   /* line-height: 200px; */
-  min-height: 150px;
-  background-color: rgb(250, 199, 17);
+  height: 150px;
+  background-color: #52350f;
 }
+
+.footer-container {
+  margin-top: 30px;
+}
+
+.footer-list {
+  list-style: none;
+  text-decoration: grey;
+  text-align: center;
+}
+
+.footer-list-item {
+  color: grey;
+}
+
