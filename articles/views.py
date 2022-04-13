@@ -281,6 +281,9 @@ class SearchView(View):
             for word in keyword:
                 if not word in exclusion:
                     query_list += word
+            if len(query_list) == 0:
+                messages.error(request, "キーワードを入力してください")
+                return redirect('index')
             query = reduce(and_, [Q(title__icontains=q)|Q(discription__icontains=q) for q in query_list])
             post_list = post_list.filter(query)
             count_post = len(post_list)
