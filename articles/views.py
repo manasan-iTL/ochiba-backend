@@ -285,12 +285,14 @@ class SearchView(View):
             post_list = post_list.filter(query)
             count_post = len(post_list)
 
-        return render(request, 'articles/index.html', {
-            'post_list':post_list,
-            'keyword':keyword,
-            'count_post':count_post
-        })
-
+            return render(request, 'articles/index.html', {
+                'post_list':post_list,
+                'keyword':keyword,
+                'count_post':count_post
+            })
+        else:
+            messages.error(request, "キーワードを入力してください")
+            return redirect('index')
 
 #削除機能　編集画面以外で削除機能を使う場合に使用
 @method_decorator(require_POST, name='dispatch')

@@ -77,6 +77,11 @@ a {
     height: 100%;
 }
 
+.error-message {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
 /*  footer部分のレイアウト  　　*/
 /* .footer {
     height: 30px;
