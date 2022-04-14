@@ -56,6 +56,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 # 'django.template.context_processors.media',
+                'BookmarkShareApp.context_processors.google_analytics', 
             ],
         },
     },
@@ -153,6 +154,9 @@ ACCOUNT_EMAIL_SUBJECT_PREFIX = ''
 ACCOUNT_EMAIL_SUBJECT_PREFIX = '' # メールの件名のプレフィックス
 ACCOUNT_MAX_EMAIL_ADDRESSES = 2 # 登録できるメールアドレスの上限。1だと変更できない。 
 ACCOUNT_USERNAME_BLACKLIST = [] # usernameとして使えない文字
+
+# Google Analytics
+GOOGLE_ANALYTICS_PROPERTY_ID = 'G-K52EYC23EW'
 
 
 
