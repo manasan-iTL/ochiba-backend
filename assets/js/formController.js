@@ -11,7 +11,6 @@ $(function(){
 
     for (let i = 0; i < currentObjectCount; i++) {
         invisibleCheckbox.push('input#id_object_set-' + i + '-DELETE');
-        console.log(invisibleCheckbox);
         $('input#id_object_set-' + i + '-DELETE').css({
             'display':'none',
         }); 
@@ -26,7 +25,6 @@ $(function(){
             "type":"button",
         });
         createdeletebutton.appendTo(searchbuttonElement);
-        console.log(searchbuttonElement);
         // searchbuttonElement.attr('id','remove' + i);
         
     }
@@ -161,7 +159,6 @@ $(function(){
 
     /*削除ボタン（DBに保存されていないObject）を押したときの操作*/
     $(document).on('click','.addremove', function(){
-        console.log("click")
         $(this).parents('.object-form').remove();
     });
     
@@ -172,14 +169,8 @@ $(function(){
         $('.object-form').on('click', '#remove'+ j, function(){
             let confirm = window.confirm('本当に削除しても良いですか？')
             if(confirm) {
-                console.log('ok')
                 $(invisibleCheckbox[j]).prop('checked', true);
-                if ( $(invisibleCheckbox[j]).prop('checked') )
-                    console.debug('チェックされていますよ (prop)');
-                else
-                console.debug('チェックされていませんよ (prop)');
                 let tagetElement = $('#remove' + j).parents('.object-form');
-                console.log(tagetElement);
                 tagetElement.css('display', 'none'); 
             }
         });
