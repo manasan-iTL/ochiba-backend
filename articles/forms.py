@@ -15,7 +15,7 @@ from django.core.validators import FileExtensionValidator, validate_email #add
 class PostForm(forms.Form):
     title = forms.CharField(max_length=100, label='記事タイトル', required=True, widget = forms.TextInput(attrs={'placeholder':'ブックマークリストタイトル','class':'form-control'}))
     discription = forms.CharField(label='記事の概要', widget=forms.Textarea(attrs={'placeholder':'このブックマークリストについて','class':'form-control','rows':3}))
-    status = forms.BooleanField(label='公開する', required=False)
+    status = forms.BooleanField(label='公開する', required=False, initial=True)
 
 class ObjectForm(forms.ModelForm):
     class Meta:
