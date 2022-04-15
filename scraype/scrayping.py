@@ -13,8 +13,6 @@ def find_folders(path):
     soup = bs4(open(f'media/{path}', encoding='utf-8'), 'html.parser')
     folders = [tag.text for tag in soup.find_all('h3')]
     return folders
-# for folder in folders:
-#     print(folder)
 
 
 ### 個別の記事 ###

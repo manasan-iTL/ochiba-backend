@@ -1,7 +1,5 @@
 const textareas = document.getElementsByTagName('textarea');
 
-console.log("OK")
-console.log(textareas);
 
 function resizeHeight(e) {
     if (this.textarea.scrollHeight < 200) {
