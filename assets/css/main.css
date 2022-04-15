@@ -50,14 +50,12 @@ a {
 }
 
 /* .container .right-aside {
-    background-color: white;
 } */
 
 .new-container .sticky-sidebar {
     position: -webkit-sticky;
 	position: sticky;
 	top: 0;
-    background-color: white;
 }
 
 .errorlist {
