@@ -1,0 +1,14 @@
+@import url('base_color.css');
+p, h1, h2, h3, h5, .footer-list-item, li {
+  font-family: 'Kiwi Maru', serif;
+}
+
+.app_title {
+  font-family: 'Josefin Sans', sans-serif;
+}
+
+
+form, .btn, a.dropdown-item, a, td {
+  font-family: 'Kiwi Maru', serif;
+}
+

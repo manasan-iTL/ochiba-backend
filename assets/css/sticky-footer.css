@@ -1,3 +1,4 @@
+@import url('base_color.css');
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
@@ -15,7 +16,7 @@ body {
   width: 100%;
   /* line-height: 200px; */
   height: 150px;
-  background-color: #52350f;
+  background-color: var(--base-color);
 }
 
 .footer-container {

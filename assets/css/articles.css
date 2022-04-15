@@ -1,44 +1,42 @@
 @charset "UTF-8";
+@import url("base_color.css");
 .layout-index.p-3.mx-3 .table {
   margin-right: auto;
-  margin-left: auto;
-}
-
+  margin-left: auto; }
 .layout-index.p-3.mx-3 .form_body {
-  text-align: center;
-}
-
+  text-align: center; }
 .layout-index.p-3.mx-3 .form_label {
   width: 52vh;
-  text-align: center;
-}
-
+  text-align: center; }
 .layout-index.p-3.mx-3 .form-item {
-  width: 35vw;
-}
-
+  width: 35vw; }
 .layout-index.p-3.mx-3 .form_title {
-  text-align: left;
-}
-
+  text-align: left; }
 .layout-index.p-3.mx-3 .form_discription {
-  text-align: left;
-}
-
+  text-align: left; }
 .layout-index.p-3.mx-3 .form_status {
-  text-align: left;
-}
+  text-align: left; }
 
 .article {
   padding: 0.5em 1em;
   margin: 40px auto;
   color: #000000;
-  background: #ede8e2e2;
+  background: var(--card-bg-color);
   /*背景色*/
-  border-top: solid 6px #553e17;
-  -webkit-box-shadow: 0 3px 4px rgba(0, 0, 0, 0.32);
-          box-shadow: 0 3px 4px rgba(0, 0, 0, 0.32);
+  border-top: solid 6px var(--base-color);
+  border-bottom: solid 6px var(--base-color);
+  border-radius: 30px;
+  box-shadow: 0 3px 4px rgba(0, 0, 0, 0.32);
   /*影*/
-  max-width: 800px;
-}
+  max-width: 800px; }
+
+a {
+  color: var(--base-button-color); }
+
+a:hover {
+  color: black; }
+
+.card.border {
+  background-color: var(--title-bg-color」「＠」「＠); }
+
 /*# sourceMappingURL=articles.css.map */

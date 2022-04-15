@@ -1,0 +1,158 @@
+
+/*------------------------------------
+- COLOR color1
+------------------------------------*/
+
+$color1_t1: #400101;
+$color1_t2: #0d0000;
+$color1_t3: #db0303;
+$color1_t4: #f40303;
+$color1_t5: #000000;
+$color1_t6: #000000;
+$color1_t7: #1c0000;
+$color1_t8: #000000;
+$color1_t9: #fb1111;
+
+$color1_shadow: rgba(64, 1, 1, 0.5);
+$color1_text_color_dark_bright: #fff;
+
+
+.alert-color1 {
+  color: $color1_t5;
+  background-color: $color1_t9;
+  border-color: $color1_t4;
+}
+
+.alert-color1 hr {
+  border-top-color: $color1_t3;
+}
+
+.alert-color1 .alert-link {
+  color: $color1_t8;
+}
+
+.badge-color1 {
+  color: $color1_text_color_dark_bright;
+  background-color: $color1_t1;
+}
+
+.badge-color1[href]:hover, .badge-color1[href]:focus {
+  color: $color1_text_color_dark_bright;
+  background-color: $color1_t2;
+}
+
+.bg-color1 {
+  background-color: $color1_t1 !important;
+}
+
+a.bg-color1:hover, a.bg-color1:focus,
+button.bg-color1:hover,
+button.bg-color1:focus {
+  background-color: $color1_t2 !important;
+}
+
+.border-color1 {
+  border-color: $color1_t1 !important;
+}
+
+.btn-color1 {
+  color: $color1_text_color_dark_bright;
+  background-color: $color1_t1;
+  border-color: $color1_t1;
+}
+
+.btn-color1:hover {
+  color: $color1_text_color_dark_bright;
+  background-color: $color1_t7;
+  border-color: $color1_t2;
+}
+
+.btn-color1:focus, .btn-color1.focus {
+  box-shadow: 0 0 0 0.2rem $color1_shadow;
+}
+
+.btn-color1.disabled, .btn-color1:disabled {
+  color: $color1_text_color_dark_bright;
+  background-color: $color1_t1;
+  border-color: $color1_t1;
+}
+
+.btn-color1:not(:disabled):not(.disabled):active, .btn-color1:not(:disabled):not(.disabled).active, .show > .btn-color1.dropdown-toggle {
+  color: $color1_text_color_dark_bright;
+  background-color: $color1_t2;
+  border-color: $color1_t6;
+}
+
+.btn-color1:not(:disabled):not(.disabled):active:focus, .btn-color1:not(:disabled):not(.disabled).active:focus, .show > .btn-color1.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem $color1_shadow;
+}
+
+.btn-outline-color1 {
+  color: $color1_t1;
+  background-color: transparent;
+  border-color: $color1_t1;
+}
+
+.btn-outline-color1:hover {
+  color: $color1_text_color_dark_bright;
+  background-color: $color1_t1;
+  border-color: $color1_t1;
+}
+
+.btn-outline-color1:focus, .btn-outline-color1.focus {
+  box-shadow: 0 0 0 0.2rem $color1_shadow;
+}
+
+.btn-outline-color1.disabled, .btn-outline-color1:disabled {
+  color: $color1_t1;
+  background-color: transparent;
+}
+
+.btn-outline-color1:not(:disabled):not(.disabled):active, .btn-outline-color1:not(:disabled):not(.disabled).active, .show > .btn-outline-color1.dropdown-toggle {
+  color: $color1_text_color_dark_bright;
+  background-color: $color1_t1;
+  border-color: $color1_t1;
+}
+
+.btn-outline-color1:not(:disabled):not(.disabled):active:focus, .btn-outline-color1:not(:disabled):not(.disabled).active:focus, .show > .btn-outline-color1.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem $color1_shadow;
+}
+
+.list-group-item-color1 {
+  color: $color1_t5;
+  background-color: $color1_t4;
+}
+
+.list-group-item-color1.list-group-item-action:hover, .list-group-item-color1.list-group-item-action:focus {
+  color: $color1_t5;
+  background-color: $color1_t3;
+}
+
+.list-group-item-color1.list-group-item-action.active {
+  color: $color1_text_color_dark_bright;
+  background-color: $color1_t5;
+  border-color: $color1_t5;
+}
+
+.table-color1,
+.table-color1 > th,
+.table-color1 > td {
+  background-color: $color1_t4;
+}
+
+.table-hover .table-color1:hover {
+  background-color: $color1_t3;
+}
+
+.table-hover .table-color1:hover > td,
+.table-hover .table-color1:hover > th {
+  background-color: $color1_t3;
+}
+
+.text-color1 {
+  color: $color1_t1 !important;
+}
+
+a.text-color1:hover, a.text-color1:focus {
+  color: $color1_t2 !important;
+}
