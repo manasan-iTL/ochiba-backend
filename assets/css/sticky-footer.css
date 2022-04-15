@@ -15,7 +15,7 @@ body {
   bottom: 0;
   width: 100%;
   /* line-height: 200px; */
-  height: 150px;
+  height: 180px;
   background-color: var(--base-color);
 }
 
@@ -23,6 +23,7 @@ body {
   margin-top: 30px;
   text-align: center;
   color: var(--footer-font-color);
+  margin-bottom: 30px;
 }
 
 
