@@ -267,7 +267,7 @@ class FileEditView(LoginRequiredMixin,View):
 
 class SearchView(View):
     def get(self, request, *args, **kwargs):
-        post_list = Post.objects.order_by('-id')
+        post_list = Post.objects.filter(status=True).order_by('-id')
         keyword = request.GET.get('keyword')
 
         if keyword:
