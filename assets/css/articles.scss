@@ -35,8 +35,8 @@
   margin: 40px auto;
   color: #000000;
   background: var(--card-bg-color);/*背景色*/
-  border-top: solid 6px var(--base-color);
-  border-bottom: solid 6px var(--base-color);
+  // border-top: solid 6px var(--base-color);
+  // border-bottom: solid 6px var(--base-color);
   // border-radius: 10% 25%;
   border-radius: 30px;
   box-shadow: 0 3px 4px rgba(0, 0, 0, 0.32);/*影*/
@@ -52,5 +52,5 @@ a:hover {
 }
 
 .card.border {
-  background-color: var(--title-bg-color」「＠」「＠);
+  background-color: var(--title-bg-color);
 }

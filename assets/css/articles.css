@@ -23,8 +23,6 @@
   color: #000000;
   background: var(--card-bg-color);
   /*背景色*/
-  border-top: solid 6px var(--base-color);
-  border-bottom: solid 6px var(--base-color);
   border-radius: 30px;
   box-shadow: 0 3px 4px rgba(0, 0, 0, 0.32);
   /*影*/
@@ -37,6 +35,6 @@ a:hover {
   color: black; }
 
 .card.border {
-  background-color: var(--title-bg-color」「＠」「＠); }
+  background-color: var(--title-bg-color); }
 
 /*# sourceMappingURL=articles.css.map */

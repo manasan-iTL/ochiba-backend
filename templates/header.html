@@ -27,7 +27,7 @@
     <!-- google fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=BIZ+UDPGothic&family=Josefin+Sans:wght@700&family=Kiwi+Maru:wght@400;500&family=Noto+Sans+JP&family=Shippori+Mincho:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=BIZ+UDPGothic&family=Josefin+Sans:wght@700&family=Kiwi+Maru:wght@400;500&family=Noto+Sans+JP:wght@400;500&family=Noto+Serif+JP:wght@400&family=Shippori+Mincho:wght@700&family=Zen+Kaku+Gothic+New:wght@500&family=Zen+Maru+Gothic:wght@500&display=swap" rel="stylesheet">
 
     <title>{% block head_title %}{% endblock %}</title>
     {% block ogp %}
@@ -44,7 +44,7 @@
 </head>
 <body>
     <header class="header">
-        <nav class="navbar navbar-expand-lg fixed-top nav_color" aria-label="Main navigation">
+        <nav class="navbar navbar-expand-lg fixed-top nav_color" aria-label="Main navigation" style="height: 72px;">
             <div class="container-fluid">
               <div class="me-5">
                 <a class="app_logo" href="{%url 'index' %}">
@@ -52,7 +52,7 @@
                         <path d="M2 4a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v11.5a.5.5 0 0 1-.777.416L7 13.101l-4.223 2.815A.5.5 0 0 1 2 15.5V4z"/>
                         <path d="M4.268 1A2 2 0 0 1 6 0h6a2 2 0 0 1 2 2v11.5a.5.5 0 0 1-.777.416L13 13.768V2a1 1 0 0 0-1-1H4.268z"/>
                     </svg> -->
-                    <h2 class="app_title mb-0 pt-2">Ochiba</h2>
+                    <h2 class="app_title ms-2 mb-0 pt-2">Ochiba</h2>
                 </a>              
               </div>
               <button class="navbar-toggler p-0 border-0 btn-color1" type="button" data-bs-toggle="offcanvas" aria-label="Toggle navigation">
@@ -62,9 +62,9 @@
               </button>
           
               <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
-                <form class="d-flex form-inline navbar-form" style="height: 40px;" method ="get" action="{% url 'search' %}" >
-                  <input class="form-control header_search_form" style="width: 300px;" type="text" name="keyword" placeholder="キーワードを入力...">
-                  <button class="btn btn-color1 btn-block mx-2"style="width: 60px;" type="submit">検索</button>
+                <form class="d-flex form-inline-block navbar-form " style="height: 40px;" method ="get" action="{% url 'search' %}" >
+                  <input class="form-control header_search_form" type="text" name="keyword" placeholder="キーワードを入力...">
+                  <button class="btn btn-color1 search_btn mx-2"type="submit">検索</button>
                 </form>
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                   {% if user.is_authenticated %}

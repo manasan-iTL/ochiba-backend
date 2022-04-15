@@ -2,7 +2,7 @@
 
 
 .app_logo {
-  color: var(--base-button-color);
+  color: var(--title_font_color);
 }
 
 .nav_color {
@@ -11,13 +11,29 @@
 
 .header_search_form {
   background-color: var(--form-color);
+  height: 40px;
 }
 
 h2.app_title {
   background-color: var(--title-bg-color);
   border-radius: 10px;
+  font-size: 36px;
 }
 
 h2.app_title:hover {
   color: black;
+}
+
+.navbar-toggler {
+  height: 40px;
+  width: 40px;
+}
+
+.header_search_form {
+  width: 300px;
+}
+
+.form-inline-block {
+  width: 380px !important; 
+
 }

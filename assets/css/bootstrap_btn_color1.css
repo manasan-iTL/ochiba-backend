@@ -1,6 +1,7 @@
 /*------------------------------------
 - COLOR color1
 ------------------------------------*/
+@import url(base_color.css);
 .alert-color1 {
   color: #000000;
   background-color: #fb1111;
@@ -13,11 +14,11 @@
   color: #000000; }
 
 .badge-color1 {
-  color: #fff;
+  color: var(--button-font-color);
   background-color: #400101; }
 
 .badge-color1[href]:hover, .badge-color1[href]:focus {
-  color: #fff;
+  color: var(--button-font-color);
   background-color: #0d0000; }
 
 .bg-color1 {
@@ -32,12 +33,12 @@ button.bg-color1:focus {
   border-color: #400101 !important; }
 
 .btn-color1 {
-  color: #fff;
+  color: var(--button-font-color);
   background-color: #400101;
   border-color: #400101; }
 
 .btn-color1:hover {
-  color: #fff;
+  color: var(--button-font-color);
   background-color: #1c0000;
   border-color: #0d0000; }
 
@@ -45,12 +46,12 @@ button.bg-color1:focus {
   box-shadow: 0 0 0 0.2rem rgba(64, 1, 1, 0.5); }
 
 .btn-color1.disabled, .btn-color1:disabled {
-  color: #fff;
+  color: var(--button-font-color);
   background-color: #400101;
   border-color: #400101; }
 
 .btn-color1:not(:disabled):not(.disabled):active, .btn-color1:not(:disabled):not(.disabled).active, .show > .btn-color1.dropdown-toggle {
-  color: #fff;
+  color: var(--button-font-color);
   background-color: #0d0000;
   border-color: #000000; }
 
@@ -63,7 +64,7 @@ button.bg-color1:focus {
   border-color: #400101; }
 
 .btn-outline-color1:hover {
-  color: #fff;
+  color: var(--button-font-color);
   background-color: #400101;
   border-color: #400101; }
 
@@ -75,7 +76,7 @@ button.bg-color1:focus {
   background-color: transparent; }
 
 .btn-outline-color1:not(:disabled):not(.disabled):active, .btn-outline-color1:not(:disabled):not(.disabled).active, .show > .btn-outline-color1.dropdown-toggle {
-  color: #fff;
+  color: var(--button-font-color);
   background-color: #400101;
   border-color: #400101; }
 
@@ -91,7 +92,7 @@ button.bg-color1:focus {
   background-color: #db0303; }
 
 .list-group-item-color1.list-group-item-action.active {
-  color: #fff;
+  color: var(--button-font-color);
   background-color: #000000;
   border-color: #000000; }
 

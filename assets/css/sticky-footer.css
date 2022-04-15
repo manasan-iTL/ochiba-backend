@@ -21,14 +21,18 @@ body {
 
 .footer-container {
   margin-top: 30px;
+  text-align: center;
+  color: var(--footer-font-color);
 }
+
 
 .footer-list {
   list-style: none;
-  text-decoration: grey;
+  text-decoration: var(--footer-font-color);
   text-align: center;
+  padding : 0
 }
 
 .footer-list-item {
-  color: grey;
+  color: var(--footer-font-color);
 }

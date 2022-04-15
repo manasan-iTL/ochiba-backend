@@ -2,6 +2,7 @@
 /*------------------------------------
 - COLOR color1
 ------------------------------------*/
+@import url(base_color.css);
 
 $color1_t1: #400101;
 $color1_t2: #0d0000;
@@ -14,7 +15,8 @@ $color1_t8: #000000;
 $color1_t9: #fb1111;
 
 $color1_shadow: rgba(64, 1, 1, 0.5);
-$color1_text_color_dark_bright: #fff;
+// $color1_text_color_dark_bright: #fff;
+$color1_text_color_dark_bright: var(--button-font-color);
 
 
 .alert-color1 {
@@ -156,3 +158,4 @@ button.bg-color1:focus {
 a.text-color1:hover, a.text-color1:focus {
   color: $color1_t2 !important;
 }
+
