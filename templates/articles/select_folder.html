@@ -1,17 +1,20 @@
 {% extends 'base.html' %}
 
 {% block main %}
-<h2>フォルダ選択</h2>
-<p>URLメモを作りたいフォルダを1つ選択してください。</p>
-<form method="post" action="">
-    {% for folder in folders %}
-    <p>
-        <label for="folder_{{folder}}">{{folder}}</label>
-        <input type="radio" name="select_folder" id="folder_{{folder}}" value="{{folder}}">
-    </p>
-    {% endfor %}
-    {% csrf_token %}
-    <button type="submit" class="btn btn-outline-dark">選択</button>
-</form>
+<div class="container">
+    <h2 class="text-center">フォルダ選択</h2>
+    <p class="ms-5 fw-bold">URLメモを作りたいフォルダを1つ選択してください。</p>
+    <br>
+    <form class="ms-5" method="post" action="">
+        {% for folder in folders %}
+        <p>
+            <label for="folder_{{folder}}">{{folder}}</label>
+            <input type="radio" name="select_folder" id="folder_{{folder}}" value="{{folder}}" required>
+        </p>
+        {% endfor %}
+        {% csrf_token %}
+        <button type="submit" class="btn btn-outline-dark">選択</button>
+    </form>
+</div>
 
 {% endblock %}
