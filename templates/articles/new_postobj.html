@@ -34,7 +34,7 @@
                 </div>
             {% endfor %}
                     <div class="item-mytop">
-                        <button class="btn btn-outline-danger" type="submit" name="postdelete">記事を削除</button>
+                        <button class="btn btn-outline-danger" id="edit-delete" type="submit" name="postdelete">記事を削除</button>
                     </div> 
                 <hr>
             
@@ -79,6 +79,7 @@
 {% endblock %}
 
 {% block add_js %}
+    <script src="{% static 'js/alartDeleteEdit.js' %}"></script>
     <script src="{% static 'js/formController.js' %}"></script>
     <script src="{% static 'js/resizeTextarea.js' %}"></script>
 {% endblock %}
