@@ -282,7 +282,6 @@ class SearchView(View):
                 if not word in exclusion:
                     query_list += word
             if len(query_list) == 0:
-                messages.error(request, "キーワードを入力してください")
                 return redirect('index')
             query = reduce(and_, [Q(title__icontains=q)|Q(discription__icontains=q) for q in query_list])
             post_list = post_list.filter(query)
@@ -294,7 +293,6 @@ class SearchView(View):
                 'count_post':count_post
             })
         else:
-            messages.error(request, "キーワードを入力してください")
             return redirect('index')
 
 #削除機能　編集画面以外で削除機能を使う場合に使用
