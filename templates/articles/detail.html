@@ -37,24 +37,25 @@
                     </small>
                     {% endif %}
                 </div>
-            </a>
-                {% if user == post.user %}
-                <div class="text-center mb-2">
-                    <form action="{% url 'article_delete' post.id %}" method="post">
-                        <a class="btn btn-outline-dark btn-sm" href="{% url 'object_update' post.id %}">編集</a>
-                        <button class="btn btn-outline-danger btn-sm" type="submit">削除</button>
-                        {% csrf_token %}
-                    </form>
-                </div>
-                {% endif %}        
+            </a> 
                 <!-- <div class="card-footer text-muted">
         </div> -->
         </div>
-{% empty %}
-<div class="card border border-dark mb-3">
-    <h5 class="text-center my-2" style="font-weight: bold;">オブジェクトがまだありません。</h5>
-</div>
-{% endfor %}
+    {% empty %}
+    <div class="card border border-dark mb-3">
+        <h5 class="text-center my-2" style="font-weight: bold;">オブジェクトがまだありません。</h5>
+    </div>
+    {% endfor %}
+
+    {% if user == post.user %}
+        <div class="text-center mb-2">
+            <form action="{% url 'article_delete' post.id %}" method="post">
+                <a class="btn btn-outline-dark btn-sm" href="{% url 'object_update' post.id %}">編集</a>
+                <button class="btn btn-outline-danger btn-sm" type="submit">削除</button>
+                {% csrf_token %}
+            </form>
+        </div>
+    {% endif %}    
 </div>
 {% endblock %}
 
