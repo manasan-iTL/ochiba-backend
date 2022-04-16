@@ -136,7 +136,7 @@
             lastnumber = $(this).attr("id");
             let reg = lastnumber.replace(/[^0-9^\.]/g,"");
             tolink = $('a'+'#'+ 'detail' + reg).attr("href");
-            if (countwords >= 19){
+            if (countwords >= 50){
                 $(this).append('<a href="' + tolink + '">続きを読む</a>')
             } 
         });
