@@ -1,0 +1,23 @@
+:root {
+  --base-color: #971e02;
+  --base-button-color: #731600;
+  --form-color: #ffffff;
+  --bg-color: #efefef;
+  /* --title-bg-color: #f6f5f4ba; */
+  --title_font_color: #f6f5f4ba;
+  --card-bg-color: #ffffff;
+  --footer-font-color: #f6f5f4ba;
+  --card-font-color: #000;
+  --button-font-color: #f6f5f4ba;
+  overflow-wrap: break-word;
+}
+
+/* 
+button: #4c0404
+bg: #6e1111
+card: #d8a67d
+navbar: #971e02
+ohiba_logo_code: #7d4b28, #c9582c
+
+*/
+/* button_2 #731600 */

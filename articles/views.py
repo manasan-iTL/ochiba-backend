@@ -267,7 +267,7 @@ class FileEditView(LoginRequiredMixin,View):
 
 class SearchView(View):
     def get(self, request, *args, **kwargs):
-        post_list = Post.objects.order_by('-id')
+        post_list = Post.objects.filter(status=True).order_by('-id')
         keyword = request.GET.get('keyword')
 
         if keyword:
@@ -277,16 +277,19 @@ class SearchView(View):
             for word in keyword:
                 if not word in exclusion:
                     query_list += word
+            if len(query_list) == 0:
+                return redirect('index')
             query = reduce(and_, [Q(title__icontains=q)|Q(discription__icontains=q) for q in query_list])
             post_list = post_list.filter(query)
             count_post = len(post_list)
 
-        return render(request, 'articles/index.html', {
-            'post_list':post_list,
-            'keyword':keyword,
-            'count_post':count_post
-        })
-
+            return render(request, 'articles/index.html', {
+                'post_list':post_list,
+                'keyword':keyword,
+                'count_post':count_post
+            })
+        else:
+            return redirect('index')
 
 #削除機能　編集画面以外で削除機能を使う場合に使用
 @method_decorator(require_POST, name='dispatch')

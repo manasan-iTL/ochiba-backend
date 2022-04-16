@@ -95,7 +95,7 @@
             </div>
         </div>
             <div id="publist" style="display: block;">
-                <div class="layout-index p-3 mx-3 my-0" style="background-color: white;">
+                <div class="layout-index p-3 mx-3 my-0" style="background-color: none;">
                     {% for post in post_data %}
                     <div class="article">
                         <div class="card-object d-flex my-2">
@@ -120,7 +120,7 @@
                         </div>
                         </div>
                         <div class="card-post">
-                            <p class="mb-0" id='overflag{{ post.id }}'>概要：{{ post.discription|truncatechars:30 }}</p>
+                            <p class="mb-0" id='overflag{{ post.id }}'>概要：{{ post.discription|truncatechars:20 }}</p>
                             <small><p class="mb-0 ">更新：{{ post.created_at }}</p></small> 
                         </div>
                         <hr>
@@ -147,7 +147,7 @@
             </div>
 
             <div id="unpublist" style="display: none;">
-                <div class="layout-index p-3 mx-3 my-0" style="background-color: white;">
+                <div class="layout-index p-3 mx-3 my-0" style="background-color: none;">
                     {% for unpub in post_unpub_data %}
                     <div class="article">
                         <div class="card-object d-flex my-2">
@@ -173,7 +173,7 @@
                         </div>
                         </div>
                         <div class="card-post">
-                            <p class="mb-0" id='overflag{{ unpub.id }}'>概要：{{ unpub.discription|truncatechars:30 }}</p>
+                            <p class="mb-0" id='overflag{{ unpub.id }}'>概要：{{ unpub.discription|truncatechars:20 }}</p>
                             <small><p class="mb-0 ">更新：{{ unpub.created_at }}</p></small> 
                         </div>
                         <hr>
@@ -186,8 +186,7 @@
                         </div>
                 
                         <div class="card-object text-center">
-                        {% if user == post.user %}
-                            <!-- <a class="btn btn-outline-dark" href="{% url 'article_update' post.id %}">編集</a> -->
+                        {% if request.user == unpub.user %}
                             <a class="btn btn-outline-dark" href="{% url 'object_update' unpub.id %}">編集</a>
                         {% endif %}
                         <a class="btn btn-outline-dark" id='detail{{unpub.id}}' href="{% url 'article_detail' unpub.slug unpub.id %}" class="detail">詳細</a>
@@ -207,14 +206,18 @@
                 </div>
             </div>
             {% for post in post_data %}
-            <div class="layout-index p-3 mx-3 my-0" style="background-color: white;">
+            <div class="layout-index p-3 mx-3 my-0" style="background-color: none;">
                 {% for post in post_data %}
-                <div class="card mx-0">
+                <div class="article">
                     <div class="card-object d-flex my-2">
                     <div class="align-self-center mr-2">
                         <a href="{% url 'accounts:profile' post.user.username %}">
                         {% if post.user.image %}
-                            <img src='{{ post.user.image.url }}' width="60" height="60" style="border-radius: 50%;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="gray" class="bi bi-person-circle" viewBox="0 0 16 16">
+                                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                                <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                            </svg>
+                            <!-- <img src='{{ post.user.image.url }}' width="60" height="60" style="border-radius: 50%;"> -->
                         {% else %}
                         <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="gray" class="bi bi-person-circle" viewBox="0 0 16 16">
                             <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
@@ -229,7 +232,7 @@
                     </div>
                     </div>
                     <div class="card-post">
-                        <p class="mb-0" id='overflag{{ post.id }}'>概要：{{ post.discription|truncatechars:30 }}</p>
+                        <p class="mb-0" id='overflag{{ post.id }}'>概要：{{ post.discription|truncatechars:20 }}</p>
                         <small><p class="mb-0 ">更新：{{ post.created_at }}</p></small> 
                     </div>
                     <hr>
