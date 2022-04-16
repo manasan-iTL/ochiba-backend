@@ -14,6 +14,13 @@
 </div>
 {% endif %}
 
+{% if messages %}
+<div class="alert alert-warning text-center error-message" role="alert">
+  {% for message in messages %}
+    {{ message }}
+  {% endfor %}
+</div>
+{% endif %}
 <div class="layout-index p-3 mx-3 my-0">
     {% for post in post_list %}
     <div class="article"> 

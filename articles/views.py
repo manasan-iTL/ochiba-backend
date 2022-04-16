@@ -277,16 +277,21 @@ class SearchView(View):
             for word in keyword:
                 if not word in exclusion:
                     query_list += word
+            if len(query_list) == 0:
+                messages.error(request, "キーワードを入力してください")
+                return redirect('index')
             query = reduce(and_, [Q(title__icontains=q)|Q(discription__icontains=q) for q in query_list])
             post_list = post_list.filter(query)
             count_post = len(post_list)
 
-        return render(request, 'articles/index.html', {
-            'post_list':post_list,
-            'keyword':keyword,
-            'count_post':count_post
-        })
-
+            return render(request, 'articles/index.html', {
+                'post_list':post_list,
+                'keyword':keyword,
+                'count_post':count_post
+            })
+        else:
+            messages.error(request, "キーワードを入力してください")
+            return redirect('index')
 
 #削除機能　編集画面以外で削除機能を使う場合に使用
 @method_decorator(require_POST, name='dispatch')

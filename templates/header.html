@@ -67,7 +67,7 @@
           
               <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
                 <form class="d-flex form-inline-block navbar-form " style="height: 40px;" method ="get" action="{% url 'search' %}" >
-                  <input class="form-control header_search_form" type="text" name="keyword" placeholder="キーワードを入力...">
+                  <input class="form-control header_search_form" type="text" name="keyword" placeholder="キーワードを入力..." required>
                   <button class="btn btn-color1 search_btn mx-2"type="submit">検索</button>
                 </form>
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
@@ -115,7 +115,7 @@
     integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" 
     crossorigin="anonymous"></script> -->
     <script src="{% static 'js/offcanvas.js' %}"></script>
-    {% block add_js %}
+    {% block add_js %} 
     {% endblock %}
 </body>
 </html>
