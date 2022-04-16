@@ -66,7 +66,7 @@
   <div class="">
     {% if provider.name == "Google" %}
     <div class="my-2">
-      <a style="width: 180px;" class="btn btn-block btn-sm btn-outline-warning socialaccount_provider {{provider.id}}" href="{% provider_login_url provider.id process='login' scope=scope auth_params=auth_params %}"> Googleでサインアップ</a>
+      <a style="width: 180px;" class="btn btn-block btn-sm btn-outline-color1 socialaccount_provider {{provider.id}}" href="{% provider_login_url provider.id process='login' scope=scope auth_params=auth_params %}"> Googleでサインアップ</a>
     </div>
     {% elif provider.name == "Twitter" %}
     <div class="my-2">

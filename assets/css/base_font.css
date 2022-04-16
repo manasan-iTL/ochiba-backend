@@ -1,0 +1,14 @@
+@import url('base_color.css');
+.app_title {
+  font-family: 'Josefin Sans', sans-serif;
+}
+/* ------------------------------------- */
+
+p, h1, h2, h3, h5, .footer-list-item, li {
+  font-family: 'Zen Maru Gothic', sans-serif;
+}
+
+form, .btn, a.dropdown-item, a, td {
+  font-family: 'Zen Maru Gothic', sans-serif;
+}
+

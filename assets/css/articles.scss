@@ -1,3 +1,4 @@
+@import url("base_color.css");
 .layout-index.p-3.mx-3{
   // margin-right: auto;
   // margin-left: auto;
@@ -33,9 +34,23 @@
   padding: 0.5em 1em;
   margin: 40px auto;
   color: #000000;
-  background: #ede8e2e2;/*背景色*/
-  border-top: solid 6px rgb(85, 62, 23);
+  background: var(--card-bg-color);/*背景色*/
+  // border-top: solid 6px var(--base-color);
+  // border-bottom: solid 6px var(--base-color);
+  // border-radius: 10% 25%;
+  border-radius: 30px;
   box-shadow: 0 3px 4px rgba(0, 0, 0, 0.32);/*影*/
   max-width: 800px;
+}
 
+a {
+  color: var(--base-button-color);
+}
+
+a:hover {
+  color: black;
+}
+
+.card.border {
+  background-color: var(--title-bg-color);
 }

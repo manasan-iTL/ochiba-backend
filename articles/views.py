@@ -195,8 +195,6 @@ class FileUploadView(LoginRequiredMixin, View):
     
     def post(self, request, *args, **kwargs):
         form = UploadFileForm(request.POST, request.FILES)
-        print(request.POST)
-        print(request.FILES)
         if form.is_valid():
             file = UploadFile()
             file.user = request.user
@@ -210,7 +208,6 @@ class SelectFolderView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
         url = UploadFile.objects.filter(user=request.user).order_by('id').last()
         folders = find_folders(url.bukuma_file)
-        print(folders)
         return render(request, 'articles/select_folder.html', {'folders':folders})
 
     def post(self, request, *args, **kwargs):
@@ -235,7 +232,6 @@ class FileEditView(LoginRequiredMixin,View):
         )
         form = PostForm()
         formset = FileEditForm(initial = contents)
-        print(contents)
         return render(request, 'articles/new_postobj.html', {'form':form, 'formset':formset})
     
     def post(self, request, *args, **kwargs):
@@ -271,7 +267,7 @@ class FileEditView(LoginRequiredMixin,View):
 
 class SearchView(View):
     def get(self, request, *args, **kwargs):
-        post_list = Post.objects.order_by('-id')
+        post_list = Post.objects.filter(status=True).order_by('-id')
         keyword = request.GET.get('keyword')
 
         if keyword:
