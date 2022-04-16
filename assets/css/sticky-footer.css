@@ -26,6 +26,9 @@ body {
   list-style: none;
   text-decoration: grey;
   text-align: center;
+  margin-right: 37px;
+  /* text-align: right;
+  margin-right: 20px; */
 }
 
 .footer-list-item {
