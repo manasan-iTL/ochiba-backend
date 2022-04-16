@@ -18,7 +18,7 @@
     <div class="image-area">
       <img src="{% static 'image/logo_clear_bg.png' %}" alt="ロゴ画像" class="image">
     </div>
-    <h2>Ochiba</h2>
+    <h1 class="app_title">Ochiba</h1>
   </div>
   <!-- {% include "socialaccount/snippets/provider_list.html" with process="login"%} -->
   <!-- http://127.0.0.1:8000/account/google/login/?process=login -->
@@ -64,7 +64,7 @@
   <div class="">
     {% if provider.name == "Google" %}
     <div class="my-2">
-      <a style="width: 180px;" class="btn btn-block btn-sm btn-outline-warning socialaccount_provider {{provider.id}}" href="{% provider_login_url provider.id process='login' scope=scope auth_params=auth_params %}"> Googleでサインイン</a>
+      <a style="width: 180px;" class="btn btn-block btn-sm btn-outline-color1 socialaccount_provider {{provider.id}}" href="{% provider_login_url provider.id process='login' scope=scope auth_params=auth_params %}"> Googleでサインイン</a>
     </div>
     {% elif provider.name == "Twitter" %}
     <div class="my-2">

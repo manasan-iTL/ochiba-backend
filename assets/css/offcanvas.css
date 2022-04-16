@@ -1,3 +1,4 @@
+@import url("base_color.css");
 /* html, */
 body {
   overflow-x: hidden; /* Prevent scroll on narrow devices */
@@ -10,15 +11,15 @@ body {
 @media (max-width: 991.98px) {
   .offcanvas-collapse {
     position: fixed;
-    top: 54px; /* Height of navbar */
+    top: 74px; /* Height of navbar */
     bottom: 0;
     left: 100%;
-    width: 390px;
+    width: 300px;
     padding-right: 1rem;
     padding-left: 1rem;
     overflow-y: auto;
     visibility: hidden;
-    background-color:#52350f;
+    background-color: var(--base-color);
     transition: transform .3s ease-in-out, visibility .3s ease-in-out;
   }
   .offcanvas-collapse.open {
@@ -30,8 +31,12 @@ body {
     margin-bottom: 10px;
   }
 
-  .form-inline {
-    margin-top:  10px;
+  .form-inline-block {
+    margin-top:  20px;
     margin-bottom: 10px;
+  }
+
+  .header_search_form {
+    width: 200px;
   }
 }

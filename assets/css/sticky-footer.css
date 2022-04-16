@@ -1,3 +1,4 @@
+@import url('base_color.css');
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
@@ -14,20 +15,25 @@ body {
   bottom: 0;
   width: 100%;
   /* line-height: 200px; */
-  height: 150px;
-  background-color: #52350f;
+  height: 180px;
+  background-color: var(--base-color);
 }
 
 .footer-container {
   margin-top: 30px;
+  text-align: center;
+  color: var(--footer-font-color);
+  margin-bottom: 30px;
 }
+
 
 .footer-list {
   list-style: none;
-  text-decoration: grey;
+  text-decoration: var(--footer-font-color);
   text-align: center;
+  padding : 0
 }
 
 .footer-list-item {
-  color: grey;
+  color: var(--footer-font-color);
 }

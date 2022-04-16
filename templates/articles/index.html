@@ -14,7 +14,7 @@
 </div>
 {% endif %}
 
-<div class="layout-index p-3 mx-3 my-0" style="background-color: white;">
+<div class="layout-index p-3 mx-3 my-0">
     {% for post in post_list %}
     <div class="article"> 
         <div class="card-object d-flex my-2">
@@ -41,7 +41,7 @@
           </div>
         </div>
         <div class="card-post">
-            <p class="mb-0" id='overflag{{ post.id }}'>概要：{{ post.discription|truncatechars:30 }}</p>
+            <p class="mb-0" id='overflag{{ post.id }}'>概要：{{ post.discription|truncatechars:20 }}</p>
             <small><p class="mb-0 ">更新：{{ post.created_at }}</p></small> 
         </div>
         <hr>

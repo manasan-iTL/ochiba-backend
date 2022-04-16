@@ -1,3 +1,4 @@
+@import url('base_color.css');
 /*
 ・このCSSファイルをあてるHTMLファイル
     -base.html
@@ -22,7 +23,7 @@
 
 /*  main aside部分のレイアウト　　　　　　　*/
 body {
-    background-color: rgb(246, 246, 244);
+    background-color: var(--bg-color)
 }
 
 a {
@@ -44,20 +45,17 @@ a {
     flex: 1;
 	top: 0;
 	left: 0;
-    /* background-color: rgb(246, 246, 244); */
+    /* background-color: #none; */
     word-break: break-all;
-
 }
 
 /* .container .right-aside {
-    background-color: white;
 } */
 
 .new-container .sticky-sidebar {
     position: -webkit-sticky;
 	position: sticky;
 	top: 0;
-    background-color: white;
 }
 
 .errorlist {
