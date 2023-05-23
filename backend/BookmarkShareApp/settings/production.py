@@ -6,7 +6,8 @@ DEBUG = False
 
 SECRET_KEY = os.environ['SECRET_KEY']
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['ochiba.fly.dev']
+CSRF_TRUSTED_ORIGINS = ['https://ochiba.fly.dev', 'http://ochiba.fly.dev'] 
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
