@@ -14,13 +14,29 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.decorators import method_decorator
 from django.urls import reverse
 from django.views.decorators.http import require_POST
+from django.http import JsonResponse
 from .models import Post, Object, UploadFile
+from .serializers import PostSerializer
 from .forms import PostForm, ObjectForm, ObjectCreateForm, SamplePostForm, ObjectCreateModel, UploadFileForm
 from scraype.scrayping import find_folders, search_url_text
 from functools import reduce
 from operator import and_, le, pos
 from urllib.parse import urlencode
 # Create your views here.
+
+
+'''
+
+Restful API
+
+'''
+
+def post_list(request):
+
+    if request.method == "GET":
+        posts = Post.objects.all()
+        serializer = PostSerializer(posts, many=True)
+        return JsonResponse(serializer.data, safe=False)
 
 '''
 トップ画面用view
