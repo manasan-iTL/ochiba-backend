@@ -38,6 +38,14 @@ def post_list(request):
         serializer = PostSerializer(posts, many=True)
         return JsonResponse(serializer.data, safe=False)
 
+
+# class PostListWithObjects(View):
+
+#     def get(self, request, *args, **kwargs):
+#         posts = posts = Post.objects.all()
+#         serializer = 
+
+
 '''
 トップ画面用view
 '''
@@ -47,7 +55,6 @@ class IndexView(ListView):
     queryset = Post.objects.filter(status = True).order_by('-id')
     context_object_name = "post_list"
     template_name = "articles/index.html"
-
 
 '''
 利用規約ページ
