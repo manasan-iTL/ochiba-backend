@@ -29,7 +29,7 @@ class Object(models.Model):
     url = models.URLField(max_length=400)
     title = models.CharField("タイトル", max_length=100, blank=False, null=False)
     discription = models.TextField("概要", blank=True, null=True)
-    post_data = models.ForeignKey(Post, null=True, on_delete=models.SET_NULL)
+    post_data = models.ForeignKey(Post, null=True, on_delete=models.SET_NULL, related_name="post")
 
     def __str__(self):
         return self.title

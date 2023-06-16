@@ -14,13 +14,32 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.decorators import method_decorator
 from django.urls import reverse
 from django.views.decorators.http import require_POST
+from django.http import JsonResponse
+from rest_framework import views as RestApiViews
+from rest_framework.response import Response
 from .models import Post, Object, UploadFile
+from .serializers import PostSerializer
 from .forms import PostForm, ObjectForm, ObjectCreateForm, SamplePostForm, ObjectCreateModel, UploadFileForm
 from scraype.scrayping import find_folders, search_url_text
 from functools import reduce
 from operator import and_, le, pos
 from urllib.parse import urlencode
 # Create your views here.
+
+
+'''
+
+Restful API
+
+'''
+
+class ArticleWithObjectView(RestApiViews.APIView):
+
+    def get(self, request, format=None):
+        posts = Post.objects.all()
+        serializer = PostSerializer(posts, many=True)
+        return Response(serializer.data)
+
 
 '''
 トップ画面用view
@@ -31,7 +50,6 @@ class IndexView(ListView):
     queryset = Post.objects.filter(status = True).order_by('-id')
     context_object_name = "post_list"
     template_name = "articles/index.html"
-
 
 '''
 利用規約ページ
