@@ -15,6 +15,7 @@ from django.utils.decorators import method_decorator
 from django.urls import reverse
 from django.views.decorators.http import require_POST
 from django.http import JsonResponse
+from rest_framework import views as RestApiViews
 from .models import Post, Object, UploadFile
 from .serializers import PostSerializer
 from .forms import PostForm, ObjectForm, ObjectCreateForm, SamplePostForm, ObjectCreateModel, UploadFileForm
@@ -31,7 +32,7 @@ Restful API
 
 '''
 
-def post_list(request):
+class ArticleWithObjectView(RestApiViews.APIView):
 
     if request.method == "GET":
         posts = Post.objects.all()
