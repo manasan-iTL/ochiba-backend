@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.twitter',  #add
     'allauth.socialaccount.providers.google', #add
     'rest_framework', #add
+    'drf_spectacular' #add
 ]
 
 MIDDLEWARE = [
@@ -169,7 +170,18 @@ REST_FRAMEWORK = {
         'rest_framework.parsers.JSONParser',
         'rest_framework.parsers.FormParser',
         'rest_framework.parsers.MultiPartParser'
-    ]
+    ],
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema'
+}
+
+# DRF Spectacularの設定（メタデータの設定）
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Ochiba API Reference',
+    'DESCRIPTION': 'Your project description',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+    # OTHER SETTINGS
 }
 
 
