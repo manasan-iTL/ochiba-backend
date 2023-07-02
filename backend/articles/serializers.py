@@ -22,7 +22,7 @@ class PostSerializer(serializers.ModelSerializer):
     
     def get_objects(self, post):
         try:
-            objects_based_on_post = ObjectSerializer(Object.objects.filter(post_data = Post.objects.get(id=post.id)), many=True).data
+            objects_based_on_post = ObjectSerializer(Object.objects.filter(post_data = Post.objects.get(id=post.id))[:3], many=True).data
             return objects_based_on_post
         except:
             objects_based_on_post = None
