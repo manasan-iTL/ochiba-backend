@@ -18,7 +18,7 @@ from django.http import JsonResponse
 from rest_framework import views as RestApiViews
 from rest_framework.response import Response
 from .models import Post, Object, UploadFile
-from .serializers import PostSerializer
+from .serializers import PostsIndexSerializer, PostDetailSerializer 
 from .forms import PostForm, ObjectForm, ObjectCreateForm, SamplePostForm, ObjectCreateModel, UploadFileForm
 from scraype.scrayping import find_folders, search_url_text
 from functools import reduce
@@ -33,11 +33,12 @@ Restful API
 
 '''
 
-class ArticleWithObjectView(RestApiViews.APIView):
+class ArticleIndexAPIView(RestApiViews.APIView):
 
     def get(self, request, format=None):
         posts = Post.objects.all()
-        serializer = PostSerializer(posts, many=True)
+        serializer = PostsIndexSerializer(posts, many=True)
+        return Response(serializer.data)
         return Response(serializer.data)
 
 
