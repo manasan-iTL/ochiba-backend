@@ -20,5 +20,6 @@ urlpatterns = [
     path('select-folder/', views.SelectFolderView.as_view(), name="select_folder"),
     path('edit-file/', views.FileEditView.as_view(), name="file_edit"),
     path('search', views.SearchView.as_view(), name="search"),
-    path('api/articles/', views.ArticleWithObjectView.as_view(), name="api_articles_list")
+    path('api/articles/', views.ArticleIndexAPIView.as_view(), name="api_articles_list"),
+    path('api/articles/<int:post_id>/', views.ArticleDetailAPIView.as_view(), name="api_articles_list")
 ]
