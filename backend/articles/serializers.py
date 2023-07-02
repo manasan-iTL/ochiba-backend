@@ -2,7 +2,6 @@ from rest_framework import serializers
 from rest_framework.serializers import SerializerMethodField
 from .models import Post, Object
 
-class PostSerializer(serializers.ModelSerializer):
 
 """
     Postに関連するObjectsを検証するフィールドを追加する
@@ -37,12 +36,24 @@ class ObjectIndexSerializer(serializers.ModelSerializer):
         fields = ["id", "title", "url"]
 
 
+
+class PostDetailSerializer(serializers.ModelSerializer):
+
+    objects = SerializerMethodField()
+
+    class Meta:
+        model = Post
+        fields = ["id", "title", "discription", "status", "created_at", "updated_at", "user", "objects"]
+    
+    def get_objects(self, post):
+        try:
+            objects_based_on_post = ObjectDetailSerializer(Object.objects.filter(post_data = Post.objects.get(id=post.id)), many=True).data
             return objects_based_on_post
         except:
             objects_based_on_post = None
             return objects_based_on_post
 
-class ObjectSerializer(serializers.ModelSerializer):
+class ObjectDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Object
         fields = ["id", "title", "url", "discription", "post_data"]
