@@ -4,7 +4,7 @@ from .models import Post, Object
 
 class PostSerializer(serializers.ModelSerializer):
 
-    """
+"""
     Postに関連するObjectsを検証するフィールドを追加する
     →他のSerializerをフィールドとして扱うことが可能
     →SerializerMethodField()
@@ -13,7 +13,10 @@ class PostSerializer(serializers.ModelSerializer):
     追加処理として、get_[fields名]の関数を定義し、ObjectsのデータをSerializer内部で
     取得する
 
-    """
+"""
+
+class PostsIndexSerializer(serializers.ModelSerializer):
+
     objects = SerializerMethodField()
 
     class Meta:
