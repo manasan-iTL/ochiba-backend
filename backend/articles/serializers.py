@@ -44,9 +44,18 @@ class ObjectDetailSerializer(serializers.ModelSerializer):
         fields = ["id", "title", "url", "discription", "post_data"]
 
 
+class ArticleRequestDetailSerializer(serializers.ModelSerializer):
+
+    objects = ObjectDetailSerializer(many=True)
+
+    class Meta:
+        model = Post
+        fields = ["id", "title", "discription", "status", "created_at", "updated_at", "user", "objects"]
+    
 
 
-class ArticleDetailSerializer(serializers.ModelSerializer):
+
+class ArticleResponseDetailSerializer(serializers.ModelSerializer):
 
     user = UserSerializer()
     objects = SerializerMethodField()
@@ -54,7 +63,7 @@ class ArticleDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
         fields = ["id", "title", "discription", "status", "created_at", "updated_at", "user", "objects"]
-    
+
     def get_objects(self, post):
         try:
             objects_based_on_post = ObjectDetailSerializer(Object.objects.filter(post_data = Post.objects.get(id=post.id)), many=True).data
