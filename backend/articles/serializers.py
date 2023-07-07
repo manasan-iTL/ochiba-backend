@@ -14,7 +14,7 @@ from .models import Post, Object
 
 """
 
-class PostsIndexSerializer(serializers.ModelSerializer):
+class ArticlesIndexSerializer(serializers.ModelSerializer):
 
     objects = SerializerMethodField()
 
@@ -37,7 +37,7 @@ class ObjectIndexSerializer(serializers.ModelSerializer):
 
 
 
-class PostDetailSerializer(serializers.ModelSerializer):
+class ArticleDetailSerializer(serializers.ModelSerializer):
 
     objects = SerializerMethodField()
 
