@@ -43,10 +43,14 @@ class ArticleIndexAPIView(RestApiViews.APIView):
 class ArticleDetailAPIView(RestApiViews.APIView):
     
     def get(self, request, post_id, format=None):
-        post = Post.objects.get(id=self.kwargs['post_id'])
+        post = Post.objects.get(id=post_id)
         serializer = PostDetailSerializer(post)
         return Response(serializer.data)
 
+# class ArticleCreationAPIView(RestApiViews.APIView):
+
+#     def post(self, request, ):
+        
 
 
 '''
