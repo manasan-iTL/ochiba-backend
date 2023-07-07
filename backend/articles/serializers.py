@@ -52,7 +52,33 @@ class ArticleRequestDetailSerializer(serializers.ModelSerializer):
         model = Post
         fields = ["id", "title", "discription", "status", "created_at", "updated_at", "user", "objects"]
     
+    def create(self, validated_data):
 
+        list_objects = []
+        result_response = {}
+
+        # objectsだけ取り出す
+        objects = validated_data.pop("objects")
+
+        # Postを登録する
+        post = super().create(validated_data)
+        result_response["post_id"] = post.id
+
+        # Serializerを通すと、OrderDict型で返ってくるためdict()で普通の辞書型へ変換する
+        # 各要素にpost.idを追加する
+
+        for object in objects:
+            dictionary = dict(object)
+            dictionary["post_data"] = post.id
+            list_objects.append(dictionary)
+
+        # objectのSerializerを呼ぶ
+        objectSerializer = ObjectDetailSerializer(data=list_objects, many=True)
+
+        # Validation（例外処理がAPIView内でないと動かない可能性あり→呼ばれる）
+        if objectSerializer.is_valid(raise_exception=True):
+            objectSerializer.save()
+            return result_response
 
 
 class ArticleResponseDetailSerializer(serializers.ModelSerializer):
@@ -71,8 +97,3 @@ class ArticleResponseDetailSerializer(serializers.ModelSerializer):
         except:
             objects_based_on_post = None
             return objects_based_on_post
-
-class ObjectDetailSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Object
-        fields = ["id", "title", "url", "discription", "post_data"]
