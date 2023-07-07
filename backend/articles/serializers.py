@@ -15,6 +15,11 @@ from accounts.serializer import UserSerializer
 
 """
 
+class ObjectIndexSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Object
+        fields = ["id", "title", "url"]
+
 class ArticlesIndexSerializer(serializers.ModelSerializer):
 
     user = UserSerializer()
@@ -32,10 +37,12 @@ class ArticlesIndexSerializer(serializers.ModelSerializer):
             objects_based_on_post = None
             return objects_based_on_post
 
-class ObjectIndexSerializer(serializers.ModelSerializer):
+
+class ObjectDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Object
-        fields = ["id", "title", "url"]
+        fields = ["id", "title", "url", "discription", "post_data"]
+
 
 
 
