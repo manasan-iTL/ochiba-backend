@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from rest_framework.serializers import SerializerMethodField
 from .models import Post, Object
+from accounts.serializer import UserSerializer
 
 
 """
@@ -16,6 +17,7 @@ from .models import Post, Object
 
 class ArticlesIndexSerializer(serializers.ModelSerializer):
 
+    user = UserSerializer()
     objects = SerializerMethodField()
 
     class Meta:
@@ -39,6 +41,7 @@ class ObjectIndexSerializer(serializers.ModelSerializer):
 
 class ArticleDetailSerializer(serializers.ModelSerializer):
 
+    user = UserSerializer()
     objects = SerializerMethodField()
 
     class Meta:
